@@ -1,0 +1,2205 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>gestionTienda documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">gestionTienda documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  VideojuegosPage</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/videojuegos/videojuegos.page.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Página de catálogo paginado de videojuegos.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-videojuegos</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>IonButton</code>
+                            <code>IonButtons</code>
+                            <code>IonContent</code>
+                            <code>IonCol</code>
+                            <code>IonFab</code>
+                            <code>IonFabButton</code>
+                            <code>IonHeader</code>
+                            <code>IonIcon</code>
+                            <code>IonGrid</code>
+                            <code>IonMenuButton</code>
+                            <code>IonRow</code>
+                            <code>IonSpinner</code>
+                            <code>IonTitle</code>
+                            <code>IonToolbar</code>
+                                <code><a href="../components/DataTableComponent.html" target="_self" >DataTableComponent</a></code>
+                                <code><a href="../components/EstadoVacioComponent.html" target="_self" >EstadoVacioComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./videojuegos.page.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./videojuegos.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#alertController" >alertController</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cambiosBusqueda" >cambiosBusqueda</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cargando" >cargando</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#columnas" >columnas</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroyRef" >destroyRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#errorMensaje" >errorMensaje</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#esAdministrador" >esAdministrador</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#exportacionService" >exportacionService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#firestoreService" >firestoreService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#limitePagina" >limitePagina</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#offset" >offset</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#puedeAvanzar" >puedeAvanzar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#solicitudCatalogo" >solicitudCatalogo</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#terminoBusqueda" >terminoBusqueda</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuegos" >videojuegos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuegosService" >videojuegosService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#abrirDetalle" >abrirDetalle</a>
+                            </li>
+                            <li>
+                                <a href="#avanzarPagina" >avanzarPagina</a>
+                            </li>
+                            <li>
+                                <a href="#buscar" >buscar</a>
+                            </li>
+                            <li>
+                                <a href="#cargarVideojuegos" >cargarVideojuegos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#confirmarEliminacion" >confirmarEliminacion</a>
+                            </li>
+                            <li>
+                                <a href="#editarVideojuego" >editarVideojuego</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#eliminarVideojuego" >eliminarVideojuego</a>
+                            </li>
+                            <li>
+                                <a href="#exportarCSV" >exportarCSV</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#exportarPDF" >exportarPDF</a>
+                            </li>
+                            <li>
+                                <a href="#ionViewWillEnter" >ionViewWillEnter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#registrarActividad" >registrarActividad</a>
+                            </li>
+                            <li>
+                                <a href="#retrocederPagina" >retrocederPagina</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:89</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="abrirDetalle"></a>
+                    <span class="name">
+                        <span ><b>abrirDetalle</b></span>
+                        <a href="#abrirDetalle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>abrirDetalle(videojuego: <a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self">VideojuegoListado</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>videojuego</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self" >VideojuegoListado</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="avanzarPagina"></a>
+                    <span class="name">
+                        <span ><b>avanzarPagina</b></span>
+                        <a href="#avanzarPagina"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>avanzarPagina()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="161"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:161</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buscar"></a>
+                    <span class="name">
+                        <span ><b>buscar</b></span>
+                        <a href="#buscar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>buscar(termino: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza el término que será aplicado tras la pausa de escritura.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>termino</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarVideojuegos"></a>
+                    <span class="name">
+                        <span ><b>cargarVideojuegos</b></span>
+                        <a href="#cargarVideojuegos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarVideojuegos(offset: unknown, busqueda: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Solicita una página del catálogo.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offset</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>this.offset()</code>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>busqueda</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>this.terminoBusqueda()</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmarEliminacion"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>confirmarEliminacion</b></span>
+                        <a href="#confirmarEliminacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>confirmarEliminacion(videojuego: <a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self">VideojuegoListado</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Solicita confirmación antes de eliminar un videojuego.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>videojuego</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self" >VideojuegoListado</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editarVideojuego"></a>
+                    <span class="name">
+                        <span ><b>editarVideojuego</b></span>
+                        <a href="#editarVideojuego"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editarVideojuego(videojuego: <a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self">VideojuegoListado</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>videojuego</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self" >VideojuegoListado</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarVideojuego"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>eliminarVideojuego</b></span>
+                        <a href="#eliminarVideojuego"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>eliminarVideojuego(videojuego: <a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self">VideojuegoListado</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>videojuego</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#VideojuegoListado" target="_self" >VideojuegoListado</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportarCSV"></a>
+                    <span class="name">
+                        <span ><b>exportarCSV</b></span>
+                        <a href="#exportarCSV"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exportarCSV()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:195</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Exporta el catálogo visible a CSV.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportarPDF"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>exportarPDF</b></span>
+                        <a href="#exportarPDF"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>exportarPDF()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="209"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:209</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Genera un PDF con los videojuegos de la página actual.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ionViewWillEnter"></a>
+                    <span class="name">
+                        <span ><b>ionViewWillEnter</b></span>
+                        <a href="#ionViewWillEnter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ionViewWillEnter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registrarActividad"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>registrarActividad</b></span>
+                        <a href="#registrarActividad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registrarActividad(tipo: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, detalle: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:246</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tipo</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>detalle</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="retrocederPagina"></a>
+                    <span class="name">
+                        <span ><b>retrocederPagina</b></span>
+                        <a href="#retrocederPagina"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>retrocederPagina()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alertController"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>alertController</b></span>
+                        <a href="#alertController"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AlertController)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiosBusqueda"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cambiosBusqueda</b></span>
+                        <a href="#cambiosBusqueda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargando"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cargando</b></span>
+                        <a href="#cargando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="columnas"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>columnas</b></span>
+                        <a href="#columnas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { clave: &#x27;titulo&#x27;, etiqueta: &#x27;Título&#x27;, ordenable: true },
+    { clave: &#x27;precio&#x27;, etiqueta: &#x27;Precio (€)&#x27;, ordenable: true },
+    { clave: &#x27;stock&#x27;, etiqueta: &#x27;Stock&#x27;, ordenable: true },
+    { clave: &#x27;plataforma&#x27;, etiqueta: &#x27;Plataforma&#x27;, ordenable: true },
+    { clave: &#x27;genero&#x27;, etiqueta: &#x27;Género&#x27;, ordenable: true },
+    { clave: &#x27;disponible&#x27;, etiqueta: &#x27;Disponible&#x27;, ordenable: true }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroyRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroyRef</b></span>
+                        <a href="#destroyRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DestroyRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMensaje"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>errorMensaje</b></span>
+                        <a href="#errorMensaje"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="esAdministrador"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>esAdministrador</b></span>
+                        <a href="#esAdministrador"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.authService.esAdministrador</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportacionService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>exportacionService</b></span>
+                        <a href="#exportacionService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ExportacionService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firestoreService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>firestoreService</b></span>
+                        <a href="#firestoreService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FirestoreService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="limitePagina"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>limitePagina</b></span>
+                        <a href="#limitePagina"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>50</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="offset"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>offset</b></span>
+                        <a href="#offset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="puedeAvanzar"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>puedeAvanzar</b></span>
+                        <a href="#puedeAvanzar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="solicitudCatalogo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>solicitudCatalogo</b></span>
+                        <a href="#solicitudCatalogo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="terminoBusqueda"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>terminoBusqueda</b></span>
+                        <a href="#terminoBusqueda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuegos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuegos</b></span>
+                        <a href="#videojuegos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;VideojuegoListado[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuegosService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuegosService</b></span>
+                        <a href="#videojuegosService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(VideojuegosService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/pages/videojuegos/videojuegos.page.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from &#x27;@angular/core&#x27;;
+import { takeUntilDestroyed } from &#x27;@angular/core/rxjs-interop&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import {
+  AlertController,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonCol,
+  IonFab,
+  IonFabButton,
+  IonHeader,
+  IonIcon,
+  IonGrid,
+  IonMenuButton,
+  IonRow,
+  IonSpinner,
+  IonTitle,
+  IonToolbar
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import { add } from &#x27;ionicons/icons&#x27;;
+import { Subject, debounceTime, distinctUntilChanged } from &#x27;rxjs&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { ExportacionService } from &#x27;../../core/services/exportacion.service&#x27;;
+import { FirestoreService } from &#x27;../../core/services/firestore.service&#x27;;
+import { VideojuegosService } from &#x27;../../core/services/videojuegos.service&#x27;;
+import { VideojuegoListado } from &#x27;../../core/models/videojuego.model&#x27;;
+import {
+  ColumnaTabla,
+  DataTableComponent
+} from &#x27;../../shared/components/data-table/data-table.component&#x27;;
+import { EstadoVacioComponent } from &#x27;../../shared/components/estado-vacio/estado-vacio.component&#x27;;
+
+/**
+ * Página de catálogo paginado de videojuegos.
+ */
+@Component({
+  selector: &#x27;app-videojuegos&#x27;,
+  standalone: true,
+  imports: [
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonCol,
+    IonFab,
+    IonFabButton,
+    IonHeader,
+    IonIcon,
+    IonGrid,
+    IonMenuButton,
+    IonRow,
+    IonSpinner,
+    IonTitle,
+    IonToolbar,
+    DataTableComponent,
+    EstadoVacioComponent
+  ],
+  templateUrl: &#x27;./videojuegos.page.html&#x27;,
+  styleUrls: [&#x27;./videojuegos.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VideojuegosPage {
+  private readonly videojuegosService &#x3D; inject(VideojuegosService);
+  private readonly exportacionService &#x3D; inject(ExportacionService);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly firestoreService &#x3D; inject(FirestoreService);
+  private readonly alertController &#x3D; inject(AlertController);
+  private readonly destroyRef &#x3D; inject(DestroyRef);
+  private readonly router &#x3D; inject(Router);
+  private readonly cambiosBusqueda &#x3D; new Subject&lt;string&gt;();
+  private readonly limitePagina &#x3D; 50;
+  private solicitudCatalogo &#x3D; 0;
+
+  readonly columnas: readonly ColumnaTabla[] &#x3D; [
+    { clave: &#x27;titulo&#x27;, etiqueta: &#x27;Título&#x27;, ordenable: true },
+    { clave: &#x27;precio&#x27;, etiqueta: &#x27;Precio (€)&#x27;, ordenable: true },
+    { clave: &#x27;stock&#x27;, etiqueta: &#x27;Stock&#x27;, ordenable: true },
+    { clave: &#x27;plataforma&#x27;, etiqueta: &#x27;Plataforma&#x27;, ordenable: true },
+    { clave: &#x27;genero&#x27;, etiqueta: &#x27;Género&#x27;, ordenable: true },
+    { clave: &#x27;disponible&#x27;, etiqueta: &#x27;Disponible&#x27;, ordenable: true }
+  ];
+  readonly videojuegos &#x3D; signal&lt;VideojuegoListado[]&gt;([]);
+  readonly cargando &#x3D; signal(false);
+  readonly errorMensaje &#x3D; signal&lt;string | null&gt;(null);
+  readonly terminoBusqueda &#x3D; signal(&#x27;&#x27;);
+  readonly offset &#x3D; signal(0);
+  readonly esAdministrador &#x3D; this.authService.esAdministrador;
+  readonly puedeAvanzar &#x3D; signal(false);
+
+  constructor() {
+    addIcons({ add });
+    this.cambiosBusqueda
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+      .subscribe((termino) &#x3D;&gt; {
+        this.cargarVideojuegos(0, termino);
+      });
+  }
+
+  ionViewWillEnter(): void {
+    this.cargarVideojuegos(0);
+  }
+
+  /**
+   * Solicita una página del catálogo.
+   */
+  cargarVideojuegos(offset &#x3D; this.offset(), busqueda &#x3D; this.terminoBusqueda()): void {
+    const solicitud &#x3D; ++this.solicitudCatalogo;
+    this.cargando.set(true);
+    this.errorMensaje.set(null);
+    this.videojuegosService
+      .obtenerTodos(offset, this.limitePagina, busqueda)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (datos) &#x3D;&gt; {
+          if (solicitud !&#x3D;&#x3D; this.solicitudCatalogo) {
+            return;
+          }
+          this.videojuegos.set(datos);
+          this.offset.set(offset);
+          this.puedeAvanzar.set(datos.length &#x3D;&#x3D;&#x3D; this.limitePagina);
+          this.cargando.set(false);
+        },
+        error: (error: unknown) &#x3D;&gt; {
+          if (solicitud !&#x3D;&#x3D; this.solicitudCatalogo) {
+            return;
+          }
+          this.errorMensaje.set(
+            error instanceof Error ? error.message : &#x27;No se pudo cargar el catálogo.&#x27;
+          );
+          this.cargando.set(false);
+        }
+      });
+  }
+
+  /**
+   * Actualiza el término que será aplicado tras la pausa de escritura.
+   */
+  buscar(termino: string): void {
+    const busqueda &#x3D; termino.trim();
+    if (busqueda &#x3D;&#x3D;&#x3D; this.terminoBusqueda()) {
+      return;
+    }
+    this.terminoBusqueda.set(busqueda);
+    this.cargando.set(true);
+    this.cambiosBusqueda.next(busqueda);
+  }
+
+  abrirDetalle(videojuego: VideojuegoListado): void {
+    if (videojuego.id !&#x3D;&#x3D; undefined) {
+      void this.router.navigate([&#x27;/videojuegos&#x27;, videojuego.id]);
+    }
+  }
+
+  editarVideojuego(videojuego: VideojuegoListado): void {
+    if (videojuego.id !&#x3D;&#x3D; undefined) {
+      void this.router.navigate([&#x27;/videojuegos/editar&#x27;, videojuego.id]);
+    }
+  }
+
+  avanzarPagina(): void {
+    if (this.puedeAvanzar()) {
+      this.cargarVideojuegos(this.offset() + this.limitePagina);
+    }
+  }
+
+  retrocederPagina(): void {
+    if (this.offset() &gt; 0) {
+      this.cargarVideojuegos(Math.max(0, this.offset() - this.limitePagina));
+    }
+  }
+
+  /**
+   * Solicita confirmación antes de eliminar un videojuego.
+   */
+  async confirmarEliminacion(videojuego: VideojuegoListado): Promise&lt;void&gt; {
+    const alerta &#x3D; await this.alertController.create({
+      header: &#x27;Eliminar videojuego&#x27;,
+      message: &#x60;¿Quieres eliminar «${videojuego.titulo}»? Esta acción no se puede deshacer.&#x60;,
+      buttons: [
+        { text: &#x27;Cancelar&#x27;, role: &#x27;cancel&#x27; },
+        {
+          text: &#x27;Eliminar&#x27;,
+          role: &#x27;destructive&#x27;,
+          handler: () &#x3D;&gt; this.eliminarVideojuego(videojuego)
+        }
+      ]
+    });
+    await alerta.present();
+  }
+
+  /**
+   * Exporta el catálogo visible a CSV.
+   */
+  exportarCSV(): void {
+    try {
+      this.exportacionService.exportarCSV(this.videojuegos());
+    } catch (error: unknown) {
+      console.error(&#x27;No se pudo exportar el catálogo a CSV.&#x27;, error);
+      this.errorMensaje.set(&#x27;No se pudo generar el archivo CSV.&#x27;);
+      return;
+    }
+    this.registrarActividad(&#x27;exportar&#x27;, &#x27;Exportación del catálogo a CSV&#x27;);
+  }
+
+  /**
+   * Genera un PDF con los videojuegos de la página actual.
+   */
+  async exportarPDF(): Promise&lt;void&gt; {
+    try {
+      await this.exportacionService.exportarPDF(this.videojuegos());
+    } catch (error: unknown) {
+      console.error(&#x27;No se pudo exportar el catálogo a PDF.&#x27;, error);
+      this.errorMensaje.set(&#x27;No se pudo generar el archivo PDF.&#x27;);
+      return;
+    }
+    this.registrarActividad(&#x27;exportar&#x27;, &#x27;Exportación de la página del catálogo a PDF&#x27;);
+  }
+
+  private eliminarVideojuego(videojuego: VideojuegoListado): void {
+    if (videojuego.id &#x3D;&#x3D;&#x3D; undefined) {
+      this.errorMensaje.set(&#x27;No se puede eliminar un videojuego sin identificador.&#x27;);
+      return;
+    }
+    this.errorMensaje.set(null);
+    this.videojuegosService
+      .eliminar(videojuego.id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () &#x3D;&gt; {
+          this.videojuegosService.invalidarCatalogo();
+          this.cargarVideojuegos();
+          this.registrarActividad(
+            &#x27;eliminar&#x27;,
+            &#x60;Eliminación del videojuego ${videojuego.titulo}&#x60;
+          );
+        },
+        error: (error: unknown) &#x3D;&gt; {
+          this.errorMensaje.set(
+            error instanceof Error ? error.message : &#x27;No se pudo eliminar el videojuego.&#x27;
+          );
+        }
+      });
+  }
+
+  private registrarActividad(tipo: string, detalle: string): void {
+    const usuario &#x3D; this.authService.usuarioActual()?.email;
+    void this.firestoreService
+      .registrarActividad({ tipo, usuario: usuario ?? &#x27;desconocido&#x27;, detalle, fecha: new Date() })
+      .catch((error: unknown) &#x3D;&gt; {
+        console.error(&#x27;La acción se completó, pero falló el registro de auditoría.&#x27;, error);
+        this.errorMensaje.set(&#x27;La operación terminó, pero no se pudo registrar la actividad.&#x27;);
+      });
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot;&gt;&lt;/ion-menu-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;Videojuegos&lt;/ion-title&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content role&#x3D;&quot;region&quot; aria-label&#x3D;&quot;Catálogo de videojuegos&quot;&gt;
+  &lt;ion-grid&gt;
+    &lt;ion-row&gt;
+      &lt;ion-col size&#x3D;&quot;12&quot;&gt;
+        &lt;div class&#x3D;&quot;ion-padding acciones-exportacion&quot;&gt;
+          &lt;ion-button size&#x3D;&quot;small&quot; (click)&#x3D;&quot;exportarCSV()&quot; [disabled]&#x3D;&quot;cargando()&quot;&gt;Exportar CSV&lt;/ion-button&gt;
+          &lt;ion-button size&#x3D;&quot;small&quot; (click)&#x3D;&quot;exportarPDF()&quot; [disabled]&#x3D;&quot;cargando()&quot;&gt;Exportar PDF&lt;/ion-button&gt;
+        &lt;/div&gt;
+
+        @if (cargando()) {
+          &lt;div class&#x3D;&quot;ion-text-center ion-padding&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+            &lt;ion-spinner name&#x3D;&quot;crescent&quot; aria-label&#x3D;&quot;Cargando videojuegos&quot;&gt;&lt;/ion-spinner&gt;
+            &lt;p&gt;Cargando videojuegos…&lt;/p&gt;
+          &lt;/div&gt;
+        } @else if (errorMensaje(); as mensaje) {
+          &lt;div role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+            &lt;app-estado-vacio
+              [mensaje]&#x3D;&quot;mensaje&quot;
+              textoAccion&#x3D;&quot;Reintentar&quot;
+              (accion)&#x3D;&quot;cargarVideojuegos()&quot;
+            /&gt;
+          &lt;/div&gt;
+        } @else {
+          @defer (on idle) {
+            &lt;app-data-table
+              [columnas]&#x3D;&quot;columnas&quot;
+              [datos]&#x3D;&quot;videojuegos()&quot;
+              [cargando]&#x3D;&quot;cargando()&quot;
+              [mostrarAcciones]&#x3D;&quot;esAdministrador()&quot;
+              textoVacio&#x3D;&quot;No hay videojuegos que mostrar.&quot;
+              [tamanoPagina]&#x3D;&quot;10&quot;
+              (busquedaCambiada)&#x3D;&quot;buscar($event)&quot;
+              (filaSeleccionada)&#x3D;&quot;abrirDetalle($event)&quot;
+              (editar)&#x3D;&quot;editarVideojuego($event)&quot;
+              (eliminar)&#x3D;&quot;confirmarEliminacion($event)&quot;
+            /&gt;
+          } @placeholder {
+            &lt;div class&#x3D;&quot;ion-padding ion-text-center&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+              Preparando el catálogo…
+            &lt;/div&gt;
+          }
+
+          &lt;div class&#x3D;&quot;ion-padding ion-text-center paginacion-servidor&quot;&gt;
+            &lt;ion-button fill&#x3D;&quot;outline&quot; (click)&#x3D;&quot;retrocederPagina()&quot; [disabled]&#x3D;&quot;offset() &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+              Anterior
+            &lt;/ion-button&gt;
+            &lt;ion-button fill&#x3D;&quot;outline&quot; (click)&#x3D;&quot;avanzarPagina()&quot; [disabled]&#x3D;&quot;!puedeAvanzar()&quot;&gt;
+              Siguiente
+            &lt;/ion-button&gt;
+          &lt;/div&gt;
+        }
+      &lt;/ion-col&gt;
+    &lt;/ion-row&gt;
+  &lt;/ion-grid&gt;
+
+  @if (esAdministrador()) {
+    &lt;ion-fab vertical&#x3D;&quot;bottom&quot; horizontal&#x3D;&quot;end&quot; slot&#x3D;&quot;fixed&quot;&gt;
+      &lt;ion-fab-button routerLink&#x3D;&quot;/videojuegos/nuevo&quot; aria-label&#x3D;&quot;Crear videojuego&quot;&gt;
+        &lt;ion-icon name&#x3D;&quot;add&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/ion-fab-button&gt;
+    &lt;/ion-fab&gt;
+  }
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./videojuegos.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">ion-thumbnail img {
+  object-fit: cover;
+}
+
+ion-grid,
+ion-col {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.paginacion-servidor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.acciones-exportacion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Videojuegos</ion-title>  </ion-toolbar></ion-header><ion-content role="region" aria-label="Catálogo de videojuegos">  <ion-grid>    <ion-row>      <ion-col size="12">        <div class="ion-padding acciones-exportacion">          <ion-button size="small" (click)="exportarCSV()" [disabled]="cargando()">Exportar CSV</ion-button>          <ion-button size="small" (click)="exportarPDF()" [disabled]="cargando()">Exportar PDF</ion-button>        </div>        @if (cargando()) {          <div class="ion-text-center ion-padding" role="status" aria-live="polite">            <ion-spinner name="crescent" aria-label="Cargando videojuegos"></ion-spinner>            <p>Cargando videojuegos…</p>          </div>        } @else if (errorMensaje(); as mensaje) {          <div role="status" aria-live="polite">            <app-estado-vacio              [mensaje]="mensaje"              textoAccion="Reintentar"              (accion)="cargarVideojuegos()"            />          </div>        } @else {          @defer (on idle) {            <app-data-table              [columnas]="columnas"              [datos]="videojuegos()"              [cargando]="cargando()"              [mostrarAcciones]="esAdministrador()"              textoVacio="No hay videojuegos que mostrar."              [tamanoPagina]="10"              (busquedaCambiada)="buscar($event)"              (filaSeleccionada)="abrirDetalle($event)"              (editar)="editarVideojuego($event)"              (eliminar)="confirmarEliminacion($event)"            />          } @placeholder {            <div class="ion-padding ion-text-center" role="status" aria-live="polite">              Preparando el catálogo…            </div>          }          <div class="ion-padding ion-text-center paginacion-servidor">            <ion-button fill="outline" (click)="retrocederPagina()" [disabled]="offset() === 0">              Anterior            </ion-button>            <ion-button fill="outline" (click)="avanzarPagina()" [disabled]="!puedeAvanzar()">              Siguiente            </ion-button>          </div>        }      </ion-col>    </ion-row>  </ion-grid>  @if (esAdministrador()) {    <ion-fab vertical="bottom" horizontal="end" slot="fixed">      <ion-fab-button routerLink="/videojuegos/nuevo" aria-label="Crear videojuego">        <ion-icon name="add" aria-hidden="true"></ion-icon>      </ion-fab-button>    </ion-fab>  }</ion-content></div>'
+    var COMPONENTS = [{'name': 'AcercaPage', 'selector': 'app-acerca'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AyudaPage', 'selector': 'app-ayuda'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'EstadoVacioComponent', 'selector': 'app-estado-vacio'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'InformeGraficosComponent', 'selector': 'app-informe-graficos'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'StatCardComponent', 'selector': 'app-stat-card'},{'name': 'VideojuegoDetallePage', 'selector': 'app-videojuego-detalle'},{'name': 'VideojuegoFormPage', 'selector': 'app-videojuego-form'},{'name': 'VideojuegosPage', 'selector': 'app-videojuegos'}];
+    var DIRECTIVES = [{'name': 'ResaltarDirective', 'selector': '[appResaltar]'}];
+    var ACTUAL_COMPONENT = {'name': 'VideojuegosPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'VideojuegosPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

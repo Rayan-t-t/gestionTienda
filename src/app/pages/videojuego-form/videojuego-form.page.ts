@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-  AsyncValidatorFn,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -29,7 +28,7 @@ import {
   IonRow,
   IonToolbar
 } from '@ionic/angular';
-import { catchError, map, of, switchMap, timer } from 'rxjs';
+import { crearValidadorSku } from '../../core/validators/sku-disponible.validator';
 import { AuthService } from '../../core/services/auth.service';
 import { FirestoreService } from '../../core/services/firestore.service';
 import { Requisitos, Videojuego } from '../../core/models/videojuego.model';
@@ -117,7 +116,9 @@ export class VideojuegoFormPage implements OnInit {
       {
         nonNullable: true,
         validators: [Validators.required],
-        asyncValidators: [this.validadorSku()],
+        asyncValidators: [
+          crearValidadorSku(this.videojuegosService, () => this.idVideojuego())
+        ],
         updateOn: 'change'
       }
     ),
@@ -206,21 +207,6 @@ export class VideojuegoFormPage implements OnInit {
         this.guardando.set(false);
       }
     });
-  }
-
-  private validadorSku(): AsyncValidatorFn {
-    return (control) => {
-      const sku = typeof control.value === 'string' ? control.value.trim() : '';
-      if (!sku) {
-        return of(null);
-      }
-
-      return timer(400).pipe(
-        switchMap(() => this.videojuegosService.existeSku(sku, this.idVideojuego() ?? undefined)),
-        map((existe) => (existe ? { skuDuplicado: true } : null)),
-        catchError(() => of({ errorComprobandoSku: true }))
-      );
-    };
   }
 
   private cargarVideojuego(id: number): void {

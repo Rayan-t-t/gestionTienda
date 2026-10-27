@@ -1,0 +1,1090 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>gestionTienda documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">gestionTienda documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  VideojuegoDetallePage</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/videojuego-detalle/videojuego-detalle.page.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Página de detalle de un videojuego.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-videojuego-detalle</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>NgOptimizedImage</code>
+                                <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                            <code>IonBackButton</code>
+                            <code>IonButton</code>
+                            <code>IonButtons</code>
+                            <code>IonCard</code>
+                            <code>IonCardContent</code>
+                            <code>IonCardHeader</code>
+                            <code>IonCardSubtitle</code>
+                            <code>IonCardTitle</code>
+                            <code>IonCol</code>
+                            <code>IonContent</code>
+                            <code>IonGrid</code>
+                            <code>IonHeader</code>
+                            <code>IonSpinner</code>
+                            <code>IonText</code>
+                            <code>IonTitle</code>
+                            <code>IonRow</code>
+                            <code>IonToolbar</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./videojuego-detalle.page.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./videojuego-detalle.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cargando" >cargando</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroyRef" >destroyRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#errorMensaje" >errorMensaje</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#esAdministrador" >esAdministrador</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#requisitos" >requisitos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuego" >videojuego</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuegosService" >videojuegosService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cargarVideojuego" >cargarVideojuego</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarVideojuego"></a>
+                    <span class="name">
+                        <span ><b>cargarVideojuego</b></span>
+                        <a href="#cargarVideojuego"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarVideojuego(id: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>Number(this.route.snapshot.paramMap.get(&#x27;id&#x27;))</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargando"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cargando</b></span>
+                        <a href="#cargando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroyRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroyRef</b></span>
+                        <a href="#destroyRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DestroyRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMensaje"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>errorMensaje</b></span>
+                        <a href="#errorMensaje"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="esAdministrador"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>esAdministrador</b></span>
+                        <a href="#esAdministrador"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.authService.esAdministrador</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requisitos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>requisitos</b></span>
+                        <a href="#requisitos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const requisitos &#x3D; this.videojuego()?.requisitos;
+    return requisitos
+      ? Object.entries(requisitos).filter(([, valor]) &#x3D;&gt; Boolean(valor))
+      : [];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuego"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuego</b></span>
+                        <a href="#videojuego"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Videojuego | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuegosService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuegosService</b></span>
+                        <a href="#videojuegosService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(VideojuegosService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/videojuego-detalle/videojuego-detalle.page.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal } from &#x27;@angular/core&#x27;;
+import { NgOptimizedImage } from &#x27;@angular/common&#x27;;
+import { takeUntilDestroyed } from &#x27;@angular/core/rxjs-interop&#x27;;
+import { ActivatedRoute, RouterLink } from &#x27;@angular/router&#x27;;
+import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonSpinner,
+  IonText,
+  IonTitle,
+  IonRow,
+  IonToolbar
+} from &#x27;@ionic/angular&#x27;;
+import { Videojuego } from &#x27;../../core/models/videojuego.model&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { VideojuegosService } from &#x27;../../core/services/videojuegos.service&#x27;;
+
+/**
+ * Página de detalle de un videojuego.
+ */
+@Component({
+  selector: &#x27;app-videojuego-detalle&#x27;,
+  standalone: true,
+  imports: [
+    NgOptimizedImage,
+    RouterLink,
+    IonBackButton,
+    IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonSpinner,
+    IonText,
+    IonTitle,
+    IonRow,
+    IonToolbar
+  ],
+  templateUrl: &#x27;./videojuego-detalle.page.html&#x27;,
+  styleUrls: [&#x27;./videojuego-detalle.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VideojuegoDetallePage implements OnInit {
+  private readonly route &#x3D; inject(ActivatedRoute);
+  private readonly videojuegosService &#x3D; inject(VideojuegosService);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly destroyRef &#x3D; inject(DestroyRef);
+
+  readonly videojuego &#x3D; signal&lt;Videojuego | null&gt;(null);
+  readonly cargando &#x3D; signal(false);
+  readonly errorMensaje &#x3D; signal&lt;string | null&gt;(null);
+  readonly esAdministrador &#x3D; this.authService.esAdministrador;
+  readonly requisitos &#x3D; computed(() &#x3D;&gt; {
+    const requisitos &#x3D; this.videojuego()?.requisitos;
+    return requisitos
+      ? Object.entries(requisitos).filter(([, valor]) &#x3D;&gt; Boolean(valor))
+      : [];
+  });
+
+  ngOnInit(): void {
+    const parametro &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    const id &#x3D; Number(parametro);
+    if (parametro &#x3D;&#x3D;&#x3D; null || !Number.isInteger(id) || id &lt; 1) {
+      this.errorMensaje.set(&#x27;El identificador del videojuego no es válido.&#x27;);
+      return;
+    }
+    this.cargarVideojuego(id);
+  }
+
+  cargarVideojuego(id &#x3D; Number(this.route.snapshot.paramMap.get(&#x27;id&#x27;))): void {
+    this.cargando.set(true);
+    this.errorMensaje.set(null);
+    this.videojuegosService
+      .obtenerPorId(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (registros) &#x3D;&gt; {
+          const videojuego &#x3D; registros[0];
+          this.videojuego.set(videojuego ?? null);
+          if (!videojuego) {
+            this.errorMensaje.set(&#x27;No se encontró el videojuego solicitado.&#x27;);
+          }
+          this.cargando.set(false);
+        },
+        error: (error: unknown) &#x3D;&gt; {
+          this.errorMensaje.set(
+            error instanceof Error ? error.message : &#x27;No se pudo cargar el videojuego.&#x27;
+          );
+          this.cargando.set(false);
+        }
+      });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-back-button defaultHref&#x3D;&quot;/videojuegos&quot; text&#x3D;&quot;Volver al catálogo&quot; aria-label&#x3D;&quot;Volver al catálogo&quot;&gt;&lt;/ion-back-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;Detalle del videojuego&lt;/ion-title&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content class&#x3D;&quot;ion-padding&quot; role&#x3D;&quot;region&quot; aria-label&#x3D;&quot;Detalle del videojuego&quot;&gt;
+  &lt;ion-grid&gt;
+    &lt;ion-row&gt;
+      &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;10&quot; offset-md&#x3D;&quot;1&quot; size-lg&#x3D;&quot;8&quot; offset-lg&#x3D;&quot;2&quot;&gt;
+  @if (cargando()) {
+    &lt;div class&#x3D;&quot;ion-text-center ion-padding&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+      &lt;ion-spinner name&#x3D;&quot;crescent&quot; aria-label&#x3D;&quot;Cargando detalles&quot;&gt;&lt;/ion-spinner&gt;
+      &lt;p&gt;Cargando videojuego…&lt;/p&gt;
+    &lt;/div&gt;
+  } @else if (errorMensaje(); as mensaje) {
+    &lt;div class&#x3D;&quot;ion-text-center&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+      &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p&gt;{{ mensaje }}&lt;/p&gt;&lt;/ion-text&gt;
+      &lt;ion-button (click)&#x3D;&quot;cargarVideojuego()&quot;&gt;Reintentar&lt;/ion-button&gt;
+    &lt;/div&gt;
+  } @else if (videojuego(); as juego) {
+    &lt;ion-card&gt;
+      &lt;img
+        [ngSrc]&#x3D;&quot;juego.portada_url || &#x27;assets/shapes.svg&#x27;&quot;
+        [alt]&#x3D;&quot;&#x27;Portada de &#x27; + juego.titulo&quot;
+        width&#x3D;&quot;640&quot;
+        height&#x3D;&quot;360&quot;
+        loading&#x3D;&quot;lazy&quot;
+      /&gt;
+      &lt;ion-card-header&gt;
+        &lt;ion-card-title&gt;{{ juego.titulo }}&lt;/ion-card-title&gt;
+        &lt;ion-card-subtitle&gt;{{ juego.plataforma }} — {{ juego.genero }}&lt;/ion-card-subtitle&gt;
+      &lt;/ion-card-header&gt;
+      &lt;ion-card-content&gt;
+        @if (juego.id !&#x3D;&#x3D; undefined) {
+          &lt;p&gt;&lt;strong&gt;ID:&lt;/strong&gt; {{ juego.id }}&lt;/p&gt;
+        }
+        @if (juego.created_at) {
+          &lt;p&gt;&lt;strong&gt;Fecha de creación:&lt;/strong&gt; {{ juego.created_at }}&lt;/p&gt;
+        }
+        &lt;p&gt;&lt;strong&gt;Código SKU:&lt;/strong&gt; {{ juego.codigo_sku }}&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Precio:&lt;/strong&gt; {{ juego.precio }} €&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Stock:&lt;/strong&gt; {{ juego.stock }} unidades&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Disponible:&lt;/strong&gt; {{ juego.disponible ? &#x27;Sí&#x27; : &#x27;No&#x27; }}&lt;/p&gt;
+        @if (juego.valoracion !&#x3D;&#x3D; null &amp;&amp; juego.valoracion !&#x3D;&#x3D; undefined) {
+          &lt;p&gt;&lt;strong&gt;Valoración:&lt;/strong&gt; {{ juego.valoracion }}/10&lt;/p&gt;
+        }
+        @if (juego.fecha_lanzamiento) {
+          &lt;p&gt;&lt;strong&gt;Fecha de lanzamiento:&lt;/strong&gt; {{ juego.fecha_lanzamiento }}&lt;/p&gt;
+        }
+        @if (juego.descripcion) {
+          &lt;p&gt;&lt;strong&gt;Descripción:&lt;/strong&gt;&lt;/p&gt;
+          &lt;p&gt;{{ juego.descripcion }}&lt;/p&gt;
+        }
+        @if (juego.etiquetas?.length) {
+          &lt;p&gt;&lt;strong&gt;Etiquetas:&lt;/strong&gt; {{ juego.etiquetas.join(&#x27;, &#x27;) }}&lt;/p&gt;
+        }
+        @if (requisitos().length &gt; 0) {
+          &lt;p&gt;&lt;strong&gt;Requisitos:&lt;/strong&gt;&lt;/p&gt;
+          &lt;ul&gt;
+            @for (requisito of requisitos(); track requisito[0]) {
+              &lt;li&gt;{{ requisito[0] }}: {{ requisito[1] }}&lt;/li&gt;
+            }
+          &lt;/ul&gt;
+        }
+        @if (esAdministrador()) {
+          &lt;ion-button
+            [routerLink]&#x3D;&quot;[&#x27;/videojuegos/editar&#x27;, juego.id]&quot;
+            expand&#x3D;&quot;block&quot;
+            class&#x3D;&quot;ion-margin-top&quot;
+          &gt;
+            Editar videojuego
+          &lt;/ion-button&gt;
+        }
+        &lt;ion-button routerLink&#x3D;&quot;/videojuegos&quot; expand&#x3D;&quot;block&quot; fill&#x3D;&quot;outline&quot;&gt;
+          Volver al listado
+        &lt;/ion-button&gt;
+      &lt;/ion-card-content&gt;
+    &lt;/ion-card&gt;
+  }
+      &lt;/ion-col&gt;
+    &lt;/ion-row&gt;
+  &lt;/ion-grid&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./videojuego-detalle.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">ion-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+ion-grid,
+ion-col,
+ion-card {
+  max-width: 100%;
+  min-width: 0;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-back-button defaultHref="/videojuegos" text="Volver al catálogo" aria-label="Volver al catálogo"></ion-back-button>    </ion-buttons>    <ion-title>Detalle del videojuego</ion-title>  </ion-toolbar></ion-header><ion-content class="ion-padding" role="region" aria-label="Detalle del videojuego">  <ion-grid>    <ion-row>      <ion-col size="12" size-md="10" offset-md="1" size-lg="8" offset-lg="2">  @if (cargando()) {    <div class="ion-text-center ion-padding" role="status" aria-live="polite">      <ion-spinner name="crescent" aria-label="Cargando detalles"></ion-spinner>      <p>Cargando videojuego…</p>    </div>  } @else if (errorMensaje(); as mensaje) {    <div class="ion-text-center" role="status" aria-live="polite">      <ion-text color="danger"><p>{{ mensaje }}</p></ion-text>      <ion-button (click)="cargarVideojuego()">Reintentar</ion-button>    </div>  } @else if (videojuego(); as juego) {    <ion-card>      <img        [ngSrc]="juego.portada_url || \'assets/shapes.svg\'"        [alt]="\'Portada de \' + juego.titulo"        width="640"        height="360"        loading="lazy"      />      <ion-card-header>        <ion-card-title>{{ juego.titulo }}</ion-card-title>        <ion-card-subtitle>{{ juego.plataforma }} — {{ juego.genero }}</ion-card-subtitle>      </ion-card-header>      <ion-card-content>        @if (juego.id !== undefined) {          <p><strong>ID:</strong> {{ juego.id }}</p>        }        @if (juego.created_at) {          <p><strong>Fecha de creación:</strong> {{ juego.created_at }}</p>        }        <p><strong>Código SKU:</strong> {{ juego.codigo_sku }}</p>        <p><strong>Precio:</strong> {{ juego.precio }} €</p>        <p><strong>Stock:</strong> {{ juego.stock }} unidades</p>        <p><strong>Disponible:</strong> {{ juego.disponible ? \'Sí\' : \'No\' }}</p>        @if (juego.valoracion !== null && juego.valoracion !== undefined) {          <p><strong>Valoración:</strong> {{ juego.valoracion }}/10</p>        }        @if (juego.fecha_lanzamiento) {          <p><strong>Fecha de lanzamiento:</strong> {{ juego.fecha_lanzamiento }}</p>        }        @if (juego.descripcion) {          <p><strong>Descripción:</strong></p>          <p>{{ juego.descripcion }}</p>        }        @if (juego.etiquetas?.length) {          <p><strong>Etiquetas:</strong> {{ juego.etiquetas.join(\', \') }}</p>        }        @if (requisitos().length > 0) {          <p><strong>Requisitos:</strong></p>          <ul>            @for (requisito of requisitos(); track requisito[0]) {              <li>{{ requisito[0] }}: {{ requisito[1] }}</li>            }          </ul>        }        @if (esAdministrador()) {          <ion-button            [routerLink]="[\'/videojuegos/editar\', juego.id]"            expand="block"            class="ion-margin-top"          >            Editar videojuego          </ion-button>        }        <ion-button routerLink="/videojuegos" expand="block" fill="outline">          Volver al listado        </ion-button>      </ion-card-content>    </ion-card>  }      </ion-col>    </ion-row>  </ion-grid></ion-content></div>'
+    var COMPONENTS = [{'name': 'AcercaPage', 'selector': 'app-acerca'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AyudaPage', 'selector': 'app-ayuda'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'EstadoVacioComponent', 'selector': 'app-estado-vacio'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'InformeGraficosComponent', 'selector': 'app-informe-graficos'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'StatCardComponent', 'selector': 'app-stat-card'},{'name': 'VideojuegoDetallePage', 'selector': 'app-videojuego-detalle'},{'name': 'VideojuegoFormPage', 'selector': 'app-videojuego-form'},{'name': 'VideojuegosPage', 'selector': 'app-videojuegos'}];
+    var DIRECTIVES = [{'name': 'ResaltarDirective', 'selector': '[appResaltar]'}];
+    var ACTUAL_COMPONENT = {'name': 'VideojuegoDetallePage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'VideojuegoDetallePage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
