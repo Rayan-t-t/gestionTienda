@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NgOptimizedImage } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   AlertController,
   IonButton,
@@ -11,26 +10,23 @@ import {
   IonFabButton,
   IonHeader,
   IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
   IonMenuButton,
-  IonSearchbar,
   IonSpinner,
-  IonText,
-  IonThumbnail,
   IonTitle,
   IonToolbar
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { add, create, eye, trash } from 'ionicons/icons';
+import { add } from 'ionicons/icons';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 import { FirestoreService } from '../../core/services/firestore.service';
 import { VideojuegosService } from '../../core/services/videojuegos.service';
-import { FiltroVideojuegosPipe } from '../../shared/pipes/filtro-videojuegos.pipe';
-import { ResaltarDirective } from '../../shared/directives/resaltar.directive';
 import { VideojuegoListado } from '../../core/models/videojuego.model';
+import {
+  ColumnaTabla,
+  DataTableComponent
+} from '../../shared/components/data-table/data-table.component';
+import { EstadoVacioComponent } from '../../shared/components/estado-vacio/estado-vacio.component';
 
 /**
  * Página de catálogo paginado de videojuegos.
@@ -39,8 +35,6 @@ import { VideojuegoListado } from '../../core/models/videojuego.model';
   selector: 'app-videojuegos',
   standalone: true,
   imports: [
-    NgOptimizedImage,
-    RouterLink,
     IonButton,
     IonButtons,
     IonContent,
@@ -48,18 +42,12 @@ import { VideojuegoListado } from '../../core/models/videojuego.model';
     IonFabButton,
     IonHeader,
     IonIcon,
-    IonItem,
-    IonLabel,
-    IonList,
     IonMenuButton,
-    IonSearchbar,
     IonSpinner,
-    IonText,
-    IonThumbnail,
     IonTitle,
     IonToolbar,
-    FiltroVideojuegosPipe,
-    ResaltarDirective
+    DataTableComponent,
+    EstadoVacioComponent
   ],
   templateUrl: './videojuegos.page.html',
   styleUrls: ['./videojuegos.page.scss'],
@@ -71,9 +59,19 @@ export class VideojuegosPage {
   private readonly firestoreService = inject(FirestoreService);
   private readonly alertController = inject(AlertController);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
   private readonly cambiosBusqueda = new Subject<string>();
   private readonly limitePagina = 50;
+  private solicitudCatalogo = 0;
 
+  readonly columnas: readonly ColumnaTabla[] = [
+    { clave: 'titulo', etiqueta: 'Título', ordenable: true },
+    { clave: 'precio', etiqueta: 'Precio (€)', ordenable: true },
+    { clave: 'stock', etiqueta: 'Stock', ordenable: true },
+    { clave: 'plataforma', etiqueta: 'Plataforma', ordenable: true },
+    { clave: 'genero', etiqueta: 'Género', ordenable: true },
+    { clave: 'disponible', etiqueta: 'Disponible', ordenable: true }
+  ];
   readonly videojuegos = signal<VideojuegoListado[]>([]);
   readonly cargando = signal(false);
   readonly errorMensaje = signal<string | null>(null);
@@ -83,10 +81,13 @@ export class VideojuegosPage {
   readonly puedeAvanzar = signal(false);
 
   constructor() {
-    addIcons({ add, create, eye, trash });
+    addIcons({ add });
     this.cambiosBusqueda
       .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
-      .subscribe((termino) => this.terminoBusqueda.set(termino));
+      .subscribe((termino) => {
+        this.terminoBusqueda.set(termino);
+        this.cargarVideojuegos(0, termino);
+      });
   }
 
   ionViewWillEnter(): void {
@@ -96,20 +97,27 @@ export class VideojuegosPage {
   /**
    * Solicita una página del catálogo.
    */
-  cargarVideojuegos(offset = this.offset()): void {
+  cargarVideojuegos(offset = this.offset(), busqueda = this.terminoBusqueda()): void {
+    const solicitud = ++this.solicitudCatalogo;
     this.cargando.set(true);
     this.errorMensaje.set(null);
     this.videojuegosService
-      .obtenerTodos(offset, this.limitePagina)
+      .obtenerTodos(offset, this.limitePagina, busqueda)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (datos) => {
+          if (solicitud !== this.solicitudCatalogo) {
+            return;
+          }
           this.videojuegos.set(datos);
           this.offset.set(offset);
           this.puedeAvanzar.set(datos.length === this.limitePagina);
           this.cargando.set(false);
         },
         error: (error: unknown) => {
+          if (solicitud !== this.solicitudCatalogo) {
+            return;
+          }
           this.errorMensaje.set(
             error instanceof Error ? error.message : 'No se pudo cargar el catálogo.'
           );
@@ -121,8 +129,20 @@ export class VideojuegosPage {
   /**
    * Actualiza el término que será aplicado tras la pausa de escritura.
    */
-  buscar(evento: CustomEvent<{ value?: string | null }>): void {
-    this.cambiosBusqueda.next(evento.detail.value?.trim() ?? '');
+  buscar(termino: string): void {
+    this.cambiosBusqueda.next(termino.trim());
+  }
+
+  abrirDetalle(videojuego: VideojuegoListado): void {
+    if (videojuego.id !== undefined) {
+      void this.router.navigate(['/videojuegos', videojuego.id]);
+    }
+  }
+
+  editarVideojuego(videojuego: VideojuegoListado): void {
+    if (videojuego.id !== undefined) {
+      void this.router.navigate(['/videojuegos/editar', videojuego.id]);
+    }
   }
 
   avanzarPagina(): void {

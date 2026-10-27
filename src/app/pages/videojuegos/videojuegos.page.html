@@ -8,12 +8,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar
-    placeholder="Buscar por título, plataforma o género"
-    (ionInput)="buscar($event)"
-    aria-label="Buscar videojuegos"
-  ></ion-searchbar>
-
   <div class="ion-padding">
     <ion-button size="small" (click)="exportarCSV()">Exportar CSV</ion-button>
     <ion-button size="small" (click)="exportarPDF()">Exportar PDF</ion-button>
@@ -25,72 +19,28 @@
       <p>Cargando videojuegos…</p>
     </div>
   } @else if (errorMensaje(); as mensaje) {
-    <div class="ion-text-center ion-padding" role="alert">
-      <ion-text color="danger"><p>{{ mensaje }}</p></ion-text>
-      <ion-button (click)="cargarVideojuegos()">Reintentar</ion-button>
-    </div>
+    <app-estado-vacio
+      [mensaje]="mensaje"
+      textoAccion="Reintentar"
+      (accion)="cargarVideojuegos()"
+    />
   } @else {
-    <ion-list>
-      @for (
-        videojuego of videojuegos() | filtroVideojuegos: terminoBusqueda();
-        track videojuego.id
-      ) {
-        <ion-item
-          [routerLink]="['/videojuegos', videojuego.id]"
-          appResaltar
-          button
-          [attr.aria-label]="'Ver detalles de ' + videojuego.titulo"
-        >
-          <ion-thumbnail slot="start">
-            <img
-              [ngSrc]="'assets/shapes.svg'"
-              [alt]="'Portada de ' + videojuego.titulo"
-              width="80"
-              height="80"
-              loading="lazy"
-            />
-          </ion-thumbnail>
-          <ion-label>
-            <h2>{{ videojuego.titulo }}</h2>
-            <p>{{ videojuego.plataforma }} | {{ videojuego.genero }}</p>
-            <p>Precio: {{ videojuego.precio }} € | Stock: {{ videojuego.stock }}</p>
-          </ion-label>
-          <ion-button
-            slot="end"
-            fill="clear"
-            [routerLink]="['/videojuegos', videojuego.id]"
-            [attr.aria-label]="'Ver ' + videojuego.titulo"
-            (click)="$event.stopPropagation()"
-          >
-            <ion-icon name="eye" slot="icon-only" aria-hidden="true"></ion-icon>
-          </ion-button>
-          @if (esAdministrador()) {
-            <ion-button
-              slot="end"
-              fill="clear"
-              [routerLink]="['/videojuegos/editar', videojuego.id]"
-              [attr.aria-label]="'Editar ' + videojuego.titulo"
-              (click)="$event.stopPropagation()"
-            >
-              <ion-icon name="create" slot="icon-only" aria-hidden="true"></ion-icon>
-            </ion-button>
-            <ion-button
-              slot="end"
-              fill="clear"
-              color="danger"
-              [attr.aria-label]="'Eliminar ' + videojuego.titulo"
-              (click)="$event.stopPropagation(); confirmarEliminacion(videojuego)"
-            >
-              <ion-icon name="trash" slot="icon-only" aria-hidden="true"></ion-icon>
-            </ion-button>
-          }
-        </ion-item>
-      } @empty {
-        <ion-item>
-          <ion-label>No hay videojuegos que mostrar.</ion-label>
-        </ion-item>
-      }
-    </ion-list>
+    @defer (on idle) {
+      <app-data-table
+        [columnas]="columnas"
+        [datos]="videojuegos()"
+        [cargando]="cargando()"
+        [mostrarAcciones]="esAdministrador()"
+        textoVacio="No hay videojuegos que mostrar."
+        [tamanoPagina]="10"
+        (busquedaCambiada)="buscar($event)"
+        (filaSeleccionada)="abrirDetalle($event)"
+        (editar)="editarVideojuego($event)"
+        (eliminar)="confirmarEliminacion($event)"
+      />
+    } @placeholder {
+      <div class="ion-padding ion-text-center">Preparando el catálogo…</div>
+    }
 
     <div class="ion-padding ion-text-center">
       <ion-button fill="outline" (click)="retrocederPagina()" [disabled]="offset() === 0">

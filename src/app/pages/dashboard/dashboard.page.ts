@@ -2,6 +2,7 @@ import { UpperCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   effect,
@@ -29,6 +30,9 @@ import {
   IonToolbar
 } from '@ionic/angular';
 import { Actividad, FirestoreService } from '../../core/services/firestore.service';
+import { addIcons } from 'ionicons';
+import { refresh } from 'ionicons/icons';
+import { StatCardComponent } from '../../shared/components/stat-card/stat-card.component';
 
 /**
  * Dashboard administrativo con resumen gráfico e historial de auditoría.
@@ -52,7 +56,8 @@ import { Actividad, FirestoreService } from '../../core/services/firestore.servi
     IonSpinner,
     IonText,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    StatCardComponent
   ],
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
@@ -66,10 +71,12 @@ export class DashboardPage implements OnInit {
   private revisionGrafico = 0;
 
   readonly actividades = signal<Actividad[]>([]);
+  readonly totalActividades = computed(() => this.actividades().length);
   readonly cargando = signal(false);
   readonly errorMensaje = signal<string | null>(null);
 
   constructor() {
+    addIcons({ refresh });
     effect(() => {
       const canvas = this.canvas()?.nativeElement;
       const actividades = this.actividades();
@@ -82,6 +89,13 @@ export class DashboardPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargarActividades();
+  }
+
+  /**
+   * Vuelve a cargar el historial desde la tarjeta de estadísticas.
+   */
+  recargarActividades(): void {
     this.cargarActividades();
   }
 
