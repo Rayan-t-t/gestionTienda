@@ -1,0 +1,36 @@
+:host {
+  display: block;
+}
+
+.graficos {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+}
+
+article {
+  background: var(--ion-card-background, var(--ion-background-color, #fff));
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+  padding: 1rem;
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.lienzo {
+  height: 16rem;
+  position: relative;
+}
+
+.visualmente-oculto {
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

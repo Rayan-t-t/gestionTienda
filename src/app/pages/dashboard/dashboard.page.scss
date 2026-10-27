@@ -2,3 +2,26 @@ canvas {
   max-width: 100%;
   height: auto;
 }
+
+.filtros,
+.tarjetas {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  margin-bottom: 1rem;
+}
+
+.filtros label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.filtros select {
+  background: var(--ion-background-color, #fff);
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 0.4rem;
+  color: var(--ion-text-color);
+  font: inherit;
+  min-height: 2.75rem;
+  padding: 0.5rem;
+}

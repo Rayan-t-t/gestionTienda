@@ -19,6 +19,7 @@ import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
+import { ExportacionService } from '../../core/services/exportacion.service';
 import { FirestoreService } from '../../core/services/firestore.service';
 import { VideojuegosService } from '../../core/services/videojuegos.service';
 import { VideojuegoListado } from '../../core/models/videojuego.model';
@@ -55,6 +56,7 @@ import { EstadoVacioComponent } from '../../shared/components/estado-vacio/estad
 })
 export class VideojuegosPage {
   private readonly videojuegosService = inject(VideojuegosService);
+  private readonly exportacionService = inject(ExportacionService);
   private readonly authService = inject(AuthService);
   private readonly firestoreService = inject(FirestoreService);
   private readonly alertController = inject(AlertController);
@@ -85,7 +87,6 @@ export class VideojuegosPage {
     this.cambiosBusqueda
       .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
       .subscribe((termino) => {
-        this.terminoBusqueda.set(termino);
         this.cargarVideojuegos(0, termino);
       });
   }
@@ -130,7 +131,13 @@ export class VideojuegosPage {
    * Actualiza el término que será aplicado tras la pausa de escritura.
    */
   buscar(termino: string): void {
-    this.cambiosBusqueda.next(termino.trim());
+    const busqueda = termino.trim();
+    if (busqueda === this.terminoBusqueda()) {
+      return;
+    }
+    this.terminoBusqueda.set(busqueda);
+    this.cargando.set(true);
+    this.cambiosBusqueda.next(busqueda);
   }
 
   abrirDetalle(videojuego: VideojuegoListado): void {
@@ -180,19 +187,13 @@ export class VideojuegosPage {
    * Exporta el catálogo visible a CSV.
    */
   exportarCSV(): void {
-    const cabecera = 'id,titulo,precio,stock,plataforma,genero,disponible';
-    const filas = this.videojuegos().map((videojuego) =>
-      [
-        videojuego.id,
-        this.escaparCSV(videojuego.titulo),
-        videojuego.precio,
-        videojuego.stock,
-        videojuego.plataforma,
-        videojuego.genero,
-        videojuego.disponible
-      ].join(',')
-    );
-    this.descargarArchivo([cabecera, ...filas].join('\n'), 'videojuegos.csv', 'text/csv');
+    try {
+      this.exportacionService.exportarCSV(this.videojuegos());
+    } catch (error: unknown) {
+      console.error('No se pudo exportar el catálogo a CSV.', error);
+      this.errorMensaje.set('No se pudo generar el archivo CSV.');
+      return;
+    }
     this.registrarActividad('exportar', 'Exportación del catálogo a CSV');
   }
 
@@ -200,26 +201,13 @@ export class VideojuegosPage {
    * Genera un PDF con los videojuegos de la página actual.
    */
   async exportarPDF(): Promise<void> {
-    const [{ default: JsPDF }, { default: autoTable }] = await Promise.all([
-      import('jspdf'),
-      import('jspdf-autotable')
-    ]);
-    const documento = new JsPDF();
-    documento.text('Listado de videojuegos', 14, 15);
-    autoTable(documento, {
-      head: [['ID', 'Título', 'Precio', 'Stock', 'Plataforma', 'Género', 'Disponible']],
-      body: this.videojuegos().map((videojuego) => [
-        String(videojuego.id ?? ''),
-        videojuego.titulo,
-        `${videojuego.precio} €`,
-        String(videojuego.stock),
-        videojuego.plataforma,
-        videojuego.genero,
-        videojuego.disponible ? 'Sí' : 'No'
-      ]),
-      startY: 25
-    });
-    documento.save('videojuegos.pdf');
+    try {
+      await this.exportacionService.exportarPDF(this.videojuegos());
+    } catch (error: unknown) {
+      console.error('No se pudo exportar el catálogo a PDF.', error);
+      this.errorMensaje.set('No se pudo generar el archivo PDF.');
+      return;
+    }
     this.registrarActividad('exportar', 'Exportación de la página del catálogo a PDF');
   }
 
@@ -259,16 +247,4 @@ export class VideojuegosPage {
       });
   }
 
-  private escaparCSV(valor: string): string {
-    return `"${valor.replace(/"/g, '""')}"`;
-  }
-
-  private descargarArchivo(contenido: string, nombre: string, tipo: string): void {
-    const enlace = document.createElement('a');
-    const url = URL.createObjectURL(new Blob([contenido], { type: `${tipo};charset=utf-8` }));
-    enlace.href = url;
-    enlace.download = nombre;
-    enlace.click();
-    URL.revokeObjectURL(url);
-  }
 }
