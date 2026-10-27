@@ -1,0 +1,334 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>gestionTienda documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">gestionTienda documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content readme">
+                   <div class="content-data">
+
+
+<h1>Gestor de videojuegos</h1>
+<p>Aplicación Ionic + Angular standalone para gestionar el catálogo de una tienda de videojuegos. Proyecto de Desarrollo de Interfaces (DAM).</p>
+<h2>Stack</h2>
+<ul>
+<li>Ionic con Angular standalone y TypeScript estricto.</li>
+<li>Angular Signals, componentes <code>OnPush</code> y rutas lazy.</li>
+<li>Supabase Auth REST y PostgREST para autenticación y catálogo.</li>
+<li>Firebase Firestore para auditoría de actividad.</li>
+<li>Vitest mediante el runner integrado en Angular CLI.</li>
+<li>Compodoc para documentación técnica.</li>
+<li>Vercel para el despliegue de la SPA.</li>
+</ul>
+<h2>Requisitos</h2>
+<ul>
+<li>Node.js 22 o superior y npm.</li>
+<li>Un proyecto Supabase y un proyecto Firebase configurados.</li>
+</ul>
+<h2>Instalación y configuración</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm ci
+Copy-Item src/environments/environment.example.ts src/environments/environment.ts</code></pre></div><p>Completa <code>src/environments/environment.ts</code> con la URL y la clave <strong>anon/public</strong> de Supabase y la configuración de Firebase. El archivo está ignorado por Git; no añadas claves <code>service_role</code>, secretos ni credenciales privadas al cliente.</p>
+<p>Para generar el archivo desde variables de entorno, define:</p>
+<ul>
+<li><code>SUPABASE_URL</code></li>
+<li><code>SUPABASE_ANON_KEY</code></li>
+<li><code>FIREBASE_API_KEY</code></li>
+<li><code>FIREBASE_AUTH_DOMAIN</code></li>
+<li><code>FIREBASE_PROJECT_ID</code></li>
+<li><code>FIREBASE_STORAGE_BUCKET</code></li>
+<li><code>FIREBASE_MESSAGING_SENDER_ID</code></li>
+<li><code>FIREBASE_APP_ID</code></li>
+</ul>
+<p><code>npm run build</code> genera <code>environment.ts</code> antes del build. Si ya existe un archivo local y no se han definido variables, el script lo conserva. Si se configura alguna variable, deben estar definidas todas para generar un archivo completo. En GitHub Actions se usan valores de ejemplo; en Vercel configura los valores reales como variables de entorno del proyecto.</p>
+<h2>Base de datos Supabase</h2>
+<p>El siguiente SQL crea la tabla <code>public.video-juegos</code>, habilita RLS y concede lectura a usuarios autenticados y escritura únicamente a administradores. Ejecútalo en el SQL Editor de Supabase sobre un proyecto nuevo. Si ya existe la tabla, revisa y adapta las columnas/constraints antes de aplicar los grants y políticas.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-sql">create table if not exists public.&quot;video-juegos&quot; (
+  id integer generated by default as identity primary key,
+  created_at timestamptz not null default now(),
+  titulo text not null,
+  codigo_sku text not null unique,
+  descripcion text,
+  precio numeric(10, 2) not null default 0 check (precio &gt;= 0),
+  stock integer not null default 0 check (stock &gt;= 0),
+  valoracion numeric(3, 1) check (valoracion between 0 and 10),
+  fecha_lanzamiento date,
+  disponible boolean not null default true,
+  plataforma text not null check (plataforma in (&#39;PC&#39;, &#39;PS5&#39;, &#39;Xbox&#39;, &#39;Switch&#39;)),
+  genero text not null check (genero in (&#39;RPG&#39;, &#39;Accion&#39;, &#39;Deportes&#39;, &#39;Estrategia&#39;, &#39;Aventura&#39;)),
+  etiquetas text[] not null default &#39;{}&#39;,
+  requisitos jsonb not null default &#39;{}&#39;::jsonb,
+  portada_url text
+);
+
+alter table public.&quot;video-juegos&quot; enable row level security;
+revoke all on table public.&quot;video-juegos&quot; from anon, authenticated;
+grant select, insert, update, delete on table public.&quot;video-juegos&quot; to authenticated;
+
+create policy &quot;Usuarios autenticados pueden consultar videojuegos&quot;
+on public.&quot;video-juegos&quot;
+for select to authenticated
+using (true);
+
+create policy &quot;Solo administradores pueden crear videojuegos&quot;
+on public.&quot;video-juegos&quot;
+for insert to authenticated
+with check ((select auth.jwt() -&gt; &#39;app_metadata&#39; -&gt;&gt; &#39;role&#39;) = &#39;admin&#39;);
+
+create policy &quot;Solo administradores pueden actualizar videojuegos&quot;
+on public.&quot;video-juegos&quot;
+for update to authenticated
+using ((select auth.jwt() -&gt; &#39;app_metadata&#39; -&gt;&gt; &#39;role&#39;) = &#39;admin&#39;)
+with check ((select auth.jwt() -&gt; &#39;app_metadata&#39; -&gt;&gt; &#39;role&#39;) = &#39;admin&#39;);
+
+create policy &quot;Solo administradores pueden eliminar videojuegos&quot;
+on public.&quot;video-juegos&quot;
+for delete to authenticated
+using ((select auth.jwt() -&gt; &#39;app_metadata&#39; -&gt;&gt; &#39;role&#39;) = &#39;admin&#39;);</code></pre></div><p>Las políticas RLS aplican también cuando se llama directamente al Data API; ocultar botones o proteger rutas en Angular no sustituye esta autorización. Revisa además los grants efectivos y que <code>public</code> esté expuesto al Data API. La clave <code>service_role</code> omite RLS y nunca debe incluirse en la aplicación.</p>
+<h3>Promocionar un usuario a administrador</h3>
+<p>En un entorno administrativo confiable, actualiza <code>app_metadata</code> del usuario (no <code>user_metadata</code>, que puede modificar el propio usuario). Por ejemplo, desde el SQL Editor:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-sql">update auth.users
+set raw_app_meta_data =
+  coalesce(raw_app_meta_data, &#39;{}&#39;::jsonb) || &#39;{&quot;role&quot;:&quot;admin&quot;}&#39;::jsonb
+where email = &#39;admin&#64;example.com&#39;;</code></pre></div><p>Verifica que se haya actualizado exactamente una cuenta. El usuario debe volver a iniciar sesión o renovar el token para recibir el claim actualizado. No ejecutes esta operación desde el frontend.</p>
+<h2>Scripts</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>Comando</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm start</code></td>
+<td>Servidor de desarrollo</td>
+</tr>
+<tr>
+<td><code>npm run lint</code></td>
+<td>Lint de TypeScript y plantillas</td>
+</tr>
+<tr>
+<td><code>npm test</code></td>
+<td>Tests unitarios no interactivos</td>
+</tr>
+<tr>
+<td><code>npm run build</code></td>
+<td>Build de producción en <code>www/</code></td>
+</tr>
+<tr>
+<td><code>npm run docs</code></td>
+<td>Genera documentación en <code>documentation/</code></td>
+</tr>
+<tr>
+<td><code>npm run docs:serve</code></td>
+<td>Sirve la documentación generada</td>
+</tr>
+</tbody>
+</table>
+<h2>Estructura principal</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">src/app/core/                 Modelos, servicios, guards, interceptores y validadores
+src/app/pages/                Pantallas lazy de la aplicación
+src/app/shared/components/    Componentes standalone reutilizables
+src/app/shared/pipes/         Pipes compartidos
+src/environments/             Ejemplo versionado y configuración local ignorada
+docs/manual-usuario.md        Manual de usuario
+documentation/                Documentación técnica generada por Compodoc
+.github/workflows/ci.yml      Validación automatizada</code></pre></div><h2>CI y flujo Git</h2>
+<p>GitHub Actions ejecuta <code>npm ci</code>, lint, tests, build de producción y Compodoc en cada push o pull request dirigido a <code>develop</code> o <code>main</code>. El flujo no despliega: Vercel ejecuta el comando de build configurado y no genera una salida desplegable si fallan los tests, el lint o el build.</p>
+<p>Trabaja en ramas <code>feature/*</code>, abre pull requests a <code>develop</code> y fusiona con <code>--no-ff</code>. La rama <code>main</code> contiene las entregas estables.</p>
+<h2>Despliegue en Vercel</h2>
+<ol>
+<li>Importa el repositorio desde el panel de Vercel y selecciona el framework <strong>Other</strong>.</li>
+<li>Deja <code>vercel.json</code> como configuración: ejecuta tests, lint, build y documentación; publica <code>www/</code> y aplica rewrite SPA a <code>index.html</code>.</li>
+<li>En <strong>Settings → Environment Variables</strong>, añade los ocho valores listados en <a href="#instalaci%C3%B3n-y-configuraci%C3%B3n">Instalación y configuración</a> para Production, Preview y Development según corresponda.</li>
+<li>Conecta <code>main</code> como rama de producción; las demás ramas pueden generar previews. Vercel no podrá completar un build si falla la etapa de tests.</li>
+</ol>
+<p>La URL de Supabase y las claves anon/public de Supabase y Firebase son configuración pública del cliente; la seguridad debe descansar en RLS y las reglas de Firestore, nunca en ocultar los valores ni incluir claves administrativas.</p>
+<h2>Credenciales de prueba</h2>
+<p>No se incluyen cuentas reales ni contraseñas en el repositorio. Para probar, crea un usuario de Supabase Auth, por ejemplo <code>usuario-prueba@example.test</code>, con la contraseña local <code>&lt;CONTRASEÑA_DE_PRUEBA&gt;</code>. Asigna <code>app_metadata.role = &#39;user&#39;</code> o <code>admin</code> desde un entorno confiable para verificar ambos permisos.</p>
+<h2>Manual de usuario</h2>
+<p>Consulta el <a href="docs/manual-usuario.md">manual de usuario</a>, con las mismas secciones disponibles en la página Ayuda de la aplicación.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

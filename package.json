@@ -6,10 +6,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node scripts/generate-environment.mjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "pretest": "node scripts/generate-environment.mjs",
+    "test": "ng test --configuration ci --watch=false",
+    "lint": "ng lint",
+    "docs": "compodoc -p tsconfig.doc.json -d documentation",
+    "docs:serve": "compodoc -s -d documentation",
+    "vercel-build": "npm run test && npm run lint && npm run build && npm run docs"
   },
   "private": true,
   "dependencies": {

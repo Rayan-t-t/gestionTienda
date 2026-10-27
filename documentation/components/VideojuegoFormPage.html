@@ -1,0 +1,1864 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>gestionTienda documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">gestionTienda documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  VideojuegoFormPage</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/videojuego-form/videojuego-form.page.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Formulario de alta y edición de videojuegos.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-videojuego-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                            <code>IonBackButton</code>
+                            <code>IonButton</code>
+                            <code>IonButtons</code>
+                            <code>IonCol</code>
+                            <code>IonContent</code>
+                            <code>IonGrid</code>
+                            <code>IonHeader</code>
+                            <code>IonInput</code>
+                            <code>IonItem</code>
+                            <code>IonLabel</code>
+                            <code>IonSelect</code>
+                            <code>IonSelectOption</code>
+                            <code>IonSpinner</code>
+                            <code>IonText</code>
+                            <code>IonTextarea</code>
+                            <code>IonTitle</code>
+                            <code>IonToggle</code>
+                            <code>IonRow</code>
+                            <code>IonToolbar</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./videojuego-form.page.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./videojuego-form.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cargando" >cargando</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroyRef" >destroyRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#errorMensaje" >errorMensaje</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fechaCreacion" >fechaCreacion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#firestoreService" >firestoreService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#formulario" >formulario</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#generos" >generos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#guardando" >guardando</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#idVideojuego" >idVideojuego</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#modoEdicion" >modoEdicion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#plataformas" >plataformas</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuegosService" >videojuegosService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cargarVideojuego" >cargarVideojuego</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#convertirFormulario" >convertirFormulario</a>
+                            </li>
+                            <li>
+                                <a href="#guardar" >guardar</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#registrarActividad" >registrarActividad</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarVideojuego"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cargarVideojuego</b></span>
+                        <a href="#cargarVideojuego"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cargarVideojuego(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertirFormulario"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>convertirFormulario</b></span>
+                        <a href="#convertirFormulario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>convertirFormulario(valores: ReturnType<unknown>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:257</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>valores</td>
+                                            <td>
+                                                        <code>ReturnType&lt;unknown&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Videojuego.html" target="_self" >Videojuego</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardar"></a>
+                    <span class="name">
+                        <span ><b>guardar</b></span>
+                        <a href="#guardar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>guardar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Guarda el registro validado, creando uno nuevo o actualizando el existente.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registrarActividad"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>registrarActividad</b></span>
+                        <a href="#registrarActividad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registrarActividad(tipo: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, detalle: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="289"
+                                    class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:289</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tipo</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>detalle</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargando"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cargando</b></span>
+                        <a href="#cargando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroyRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroyRef</b></span>
+                        <a href="#destroyRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DestroyRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMensaje"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>errorMensaje</b></span>
+                        <a href="#errorMensaje"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fechaCreacion"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fechaCreacion</b></span>
+                        <a href="#fechaCreacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firestoreService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>firestoreService</b></span>
+                        <a href="#firestoreService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FirestoreService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formulario"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>formulario</b></span>
+                        <a href="#formulario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup&lt;VideojuegoFormControls&gt;({
+    titulo: new FormControl(&#x27;&#x27;, { nonNullable: true, validators: [Validators.required] }),
+    codigo_sku: new FormControl(
+      &#x27;&#x27;,
+      {
+        nonNullable: true,
+        validators: [Validators.required],
+        asyncValidators: [
+          crearValidadorSku(this.videojuegosService, () &#x3D;&gt; this.idVideojuego())
+        ],
+        updateOn: &#x27;change&#x27;
+      }
+    ),
+    descripcion: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    precio: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0)]
+    }),
+    stock: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]
+    }),
+    valoracion: new FormControl&lt;number | null&gt;(null, [
+      Validators.min(0),
+      Validators.max(10)
+    ]),
+    fecha_lanzamiento: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    disponible: new FormControl(true, { nonNullable: true }),
+    plataforma: new FormControl&lt;Videojuego[&#x27;plataforma&#x27;]&gt;(&#x27;PC&#x27;, {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    genero: new FormControl&lt;Videojuego[&#x27;genero&#x27;]&gt;(&#x27;RPG&#x27;, {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    etiquetas: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    portada_url: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    so: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    procesador: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    ram: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    gpu: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    almacenamiento: new FormControl(&#x27;&#x27;, { nonNullable: true })
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>generos</b></span>
+                        <a href="#generos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    &#x27;RPG&#x27;,
+    &#x27;Accion&#x27;,
+    &#x27;Deportes&#x27;,
+    &#x27;Estrategia&#x27;,
+    &#x27;Aventura&#x27;
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardando"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>guardando</b></span>
+                        <a href="#guardando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="idVideojuego"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>idVideojuego</b></span>
+                        <a href="#idVideojuego"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;number | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modoEdicion"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>modoEdicion</b></span>
+                        <a href="#modoEdicion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="plataformas"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>plataformas</b></span>
+                        <a href="#plataformas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[&#x27;PC&#x27;, &#x27;PS5&#x27;, &#x27;Xbox&#x27;, &#x27;Switch&#x27;]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuegosService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuegosService</b></span>
+                        <a href="#videojuegosService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(VideojuegosService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/pages/videojuego-form/videojuego-form.page.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from &#x27;@angular/core&#x27;;
+import { takeUntilDestroyed } from &#x27;@angular/core/rxjs-interop&#x27;;
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators
+} from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
+  IonSpinner,
+  IonText,
+  IonTextarea,
+  IonTitle,
+  IonToggle,
+  IonRow,
+  IonToolbar
+} from &#x27;@ionic/angular&#x27;;
+import { crearValidadorSku } from &#x27;../../core/validators/sku-disponible.validator&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { FirestoreService } from &#x27;../../core/services/firestore.service&#x27;;
+import { Requisitos, Videojuego } from &#x27;../../core/models/videojuego.model&#x27;;
+import { VideojuegosService } from &#x27;../../core/services/videojuegos.service&#x27;;
+
+type VideojuegoFormControls &#x3D; {
+  titulo: FormControl&lt;string&gt;;
+  codigo_sku: FormControl&lt;string&gt;;
+  descripcion: FormControl&lt;string&gt;;
+  precio: FormControl&lt;number&gt;;
+  stock: FormControl&lt;number&gt;;
+  valoracion: FormControl&lt;number | null&gt;;
+  fecha_lanzamiento: FormControl&lt;string&gt;;
+  disponible: FormControl&lt;boolean&gt;;
+  plataforma: FormControl&lt;Videojuego[&#x27;plataforma&#x27;]&gt;;
+  genero: FormControl&lt;Videojuego[&#x27;genero&#x27;]&gt;;
+  etiquetas: FormControl&lt;string&gt;;
+  portada_url: FormControl&lt;string&gt;;
+  so: FormControl&lt;string&gt;;
+  procesador: FormControl&lt;string&gt;;
+  ram: FormControl&lt;string&gt;;
+  gpu: FormControl&lt;string&gt;;
+  almacenamiento: FormControl&lt;string&gt;;
+};
+
+/**
+ * Formulario de alta y edición de videojuegos.
+ */
+@Component({
+  selector: &#x27;app-videojuego-form&#x27;,
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    IonBackButton,
+    IonButton,
+    IonButtons,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonSelect,
+    IonSelectOption,
+    IonSpinner,
+    IonText,
+    IonTextarea,
+    IonTitle,
+    IonToggle,
+    IonRow,
+    IonToolbar
+  ],
+  templateUrl: &#x27;./videojuego-form.page.html&#x27;,
+  styleUrls: [&#x27;./videojuego-form.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class VideojuegoFormPage implements OnInit {
+  private readonly route &#x3D; inject(ActivatedRoute);
+  private readonly router &#x3D; inject(Router);
+  private readonly videojuegosService &#x3D; inject(VideojuegosService);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly firestoreService &#x3D; inject(FirestoreService);
+  private readonly destroyRef &#x3D; inject(DestroyRef);
+
+  readonly idVideojuego &#x3D; signal&lt;number | null&gt;(null);
+  readonly fechaCreacion &#x3D; signal&lt;string | null&gt;(null);
+  readonly modoEdicion &#x3D; signal(false);
+  readonly cargando &#x3D; signal(false);
+  readonly guardando &#x3D; signal(false);
+  readonly errorMensaje &#x3D; signal&lt;string | null&gt;(null);
+  readonly plataformas: Videojuego[&#x27;plataforma&#x27;][] &#x3D; [&#x27;PC&#x27;, &#x27;PS5&#x27;, &#x27;Xbox&#x27;, &#x27;Switch&#x27;];
+  readonly generos: Videojuego[&#x27;genero&#x27;][] &#x3D; [
+    &#x27;RPG&#x27;,
+    &#x27;Accion&#x27;,
+    &#x27;Deportes&#x27;,
+    &#x27;Estrategia&#x27;,
+    &#x27;Aventura&#x27;
+  ];
+
+  readonly formulario &#x3D; new FormGroup&lt;VideojuegoFormControls&gt;({
+    titulo: new FormControl(&#x27;&#x27;, { nonNullable: true, validators: [Validators.required] }),
+    codigo_sku: new FormControl(
+      &#x27;&#x27;,
+      {
+        nonNullable: true,
+        validators: [Validators.required],
+        asyncValidators: [
+          crearValidadorSku(this.videojuegosService, () &#x3D;&gt; this.idVideojuego())
+        ],
+        updateOn: &#x27;change&#x27;
+      }
+    ),
+    descripcion: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    precio: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0)]
+    }),
+    stock: new FormControl(0, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(0), Validators.pattern(/^\d+$/)]
+    }),
+    valoracion: new FormControl&lt;number | null&gt;(null, [
+      Validators.min(0),
+      Validators.max(10)
+    ]),
+    fecha_lanzamiento: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    disponible: new FormControl(true, { nonNullable: true }),
+    plataforma: new FormControl&lt;Videojuego[&#x27;plataforma&#x27;]&gt;(&#x27;PC&#x27;, {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    genero: new FormControl&lt;Videojuego[&#x27;genero&#x27;]&gt;(&#x27;RPG&#x27;, {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    etiquetas: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    portada_url: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    so: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    procesador: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    ram: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    gpu: new FormControl(&#x27;&#x27;, { nonNullable: true }),
+    almacenamiento: new FormControl(&#x27;&#x27;, { nonNullable: true })
+  });
+
+  ngOnInit(): void {
+    const parametro &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    if (parametro &#x3D;&#x3D;&#x3D; null) {
+      return;
+    }
+
+    const id &#x3D; Number(parametro);
+    if (!Number.isInteger(id) || id &lt; 1) {
+      this.errorMensaje.set(&#x27;El identificador del videojuego no es válido.&#x27;);
+      return;
+    }
+
+    this.idVideojuego.set(id);
+    this.modoEdicion.set(true);
+    this.cargarVideojuego(id);
+  }
+
+  /**
+   * Guarda el registro validado, creando uno nuevo o actualizando el existente.
+   */
+  guardar(): void {
+    if (this.formulario.pending || this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
+      return;
+    }
+
+    const valores &#x3D; this.formulario.getRawValue();
+    const videojuego &#x3D; this.convertirFormulario(valores);
+    this.guardando.set(true);
+    this.errorMensaje.set(null);
+
+    const id &#x3D; this.idVideojuego();
+    const operacion &#x3D; id &#x3D;&#x3D;&#x3D; null
+      ? this.videojuegosService.crear(videojuego)
+      : this.videojuegosService.actualizar(id, videojuego);
+
+    operacion.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () &#x3D;&gt; {
+        const accion &#x3D; id &#x3D;&#x3D;&#x3D; null ? &#x27;crear&#x27; : &#x27;actualizar&#x27;;
+        void this.registrarActividad(
+          accion,
+          &#x60;${id &#x3D;&#x3D;&#x3D; null ? &#x27;Creación&#x27; : &#x27;Actualización&#x27;} del videojuego ${videojuego.titulo}&#x60;
+        );
+        this.guardando.set(false);
+        void this.router.navigateByUrl(&#x27;/videojuegos&#x27;);
+      },
+      error: (error: unknown) &#x3D;&gt; {
+        this.errorMensaje.set(
+          error instanceof Error ? error.message : &#x27;No se pudo guardar el videojuego.&#x27;
+        );
+        this.guardando.set(false);
+      }
+    });
+  }
+
+  private cargarVideojuego(id: number): void {
+    this.cargando.set(true);
+    this.videojuegosService
+      .obtenerPorId(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (registros) &#x3D;&gt; {
+          const videojuego &#x3D; registros[0];
+          if (!videojuego) {
+            this.errorMensaje.set(&#x27;No se encontró el videojuego solicitado.&#x27;);
+            this.cargando.set(false);
+            return;
+          }
+
+          this.fechaCreacion.set(videojuego.created_at ?? null);
+          this.formulario.patchValue({
+            titulo: videojuego.titulo,
+            codigo_sku: videojuego.codigo_sku,
+            descripcion: videojuego.descripcion ?? &#x27;&#x27;,
+            precio: videojuego.precio,
+            stock: videojuego.stock,
+            valoracion: videojuego.valoracion ?? null,
+            fecha_lanzamiento: videojuego.fecha_lanzamiento ?? &#x27;&#x27;,
+            disponible: videojuego.disponible,
+            plataforma: videojuego.plataforma,
+            genero: videojuego.genero,
+            etiquetas: videojuego.etiquetas?.join(&#x27;, &#x27;) ?? &#x27;&#x27;,
+            portada_url: videojuego.portada_url ?? &#x27;&#x27;,
+            so: videojuego.requisitos?.so ?? &#x27;&#x27;,
+            procesador: videojuego.requisitos?.procesador ?? &#x27;&#x27;,
+            ram: videojuego.requisitos?.ram ?? &#x27;&#x27;,
+            gpu: videojuego.requisitos?.gpu ?? &#x27;&#x27;,
+            almacenamiento: videojuego.requisitos?.almacenamiento ?? &#x27;&#x27;
+          });
+          this.cargando.set(false);
+        },
+        error: (error: unknown) &#x3D;&gt; {
+          this.errorMensaje.set(
+            error instanceof Error ? error.message : &#x27;No se pudo cargar el videojuego.&#x27;
+          );
+          this.cargando.set(false);
+        }
+      });
+  }
+
+  private convertirFormulario(
+    valores: ReturnType&lt;typeof this.formulario.getRawValue&gt;
+  ): Videojuego {
+    const requisitos: Requisitos &#x3D; {
+      so: valores.so.trim(),
+      procesador: valores.procesador.trim(),
+      ram: valores.ram.trim(),
+      gpu: valores.gpu.trim(),
+      almacenamiento: valores.almacenamiento.trim()
+    };
+    const hayRequisitos &#x3D; Object.values(requisitos).some((valor) &#x3D;&gt; valor.length &gt; 0);
+
+    return {
+      titulo: valores.titulo.trim(),
+      codigo_sku: valores.codigo_sku.trim(),
+      descripcion: valores.descripcion.trim() || null,
+      precio: Number(valores.precio),
+      stock: Number(valores.stock),
+      valoracion: valores.valoracion &#x3D;&#x3D;&#x3D; null ? null : Number(valores.valoracion),
+      fecha_lanzamiento: valores.fecha_lanzamiento || null,
+      disponible: valores.disponible,
+      plataforma: valores.plataforma,
+      genero: valores.genero,
+      etiquetas: valores.etiquetas
+        .split(&#x27;,&#x27;)
+        .map((etiqueta) &#x3D;&gt; etiqueta.trim())
+        .filter((etiqueta) &#x3D;&gt; etiqueta.length &gt; 0),
+      requisitos: hayRequisitos ? requisitos : null,
+      portada_url: valores.portada_url.trim() || null
+    };
+  }
+
+  private async registrarActividad(tipo: string, detalle: string): Promise&lt;void&gt; {
+    try {
+      await this.firestoreService.registrarActividad({
+        tipo,
+        usuario: this.authService.usuarioActual()?.email ?? &#x27;desconocido&#x27;,
+        detalle,
+        fecha: new Date()
+      });
+    } catch (error) {
+      console.error(&#x27;El videojuego se guardó, pero falló el registro de auditoría.&#x27;, error);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-back-button defaultHref&#x3D;&quot;/videojuegos&quot; text&#x3D;&quot;Volver al catálogo&quot; aria-label&#x3D;&quot;Volver al catálogo&quot;&gt;&lt;/ion-back-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;{{ modoEdicion() ? &#x27;Editar videojuego&#x27; : &#x27;Nuevo videojuego&#x27; }}&lt;/ion-title&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content class&#x3D;&quot;ion-padding&quot; role&#x3D;&quot;region&quot; aria-label&#x3D;&quot;Formulario de videojuego&quot;&gt;
+  @if (cargando()) {
+    &lt;div class&#x3D;&quot;ion-text-center ion-padding&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+      &lt;ion-spinner name&#x3D;&quot;crescent&quot; aria-label&#x3D;&quot;Cargando videojuego&quot;&gt;&lt;/ion-spinner&gt;
+      &lt;p&gt;Cargando videojuego…&lt;/p&gt;
+    &lt;/div&gt;
+  } @else {
+    &lt;ion-grid&gt;
+      &lt;ion-row&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;10&quot; offset-md&#x3D;&quot;1&quot; size-lg&#x3D;&quot;8&quot; offset-lg&#x3D;&quot;2&quot;&gt;
+    &lt;div aria-live&#x3D;&quot;polite&quot; aria-atomic&#x3D;&quot;true&quot;&gt;
+      @if (errorMensaje(); as mensaje) {
+        &lt;ion-text color&#x3D;&quot;danger&quot; role&#x3D;&quot;status&quot;&gt;&lt;p&gt;{{ mensaje }}&lt;/p&gt;&lt;/ion-text&gt;
+      }
+    &lt;/div&gt;
+
+    @if (modoEdicion()) {
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;id-videojuego&quot;&gt;ID&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;id-videojuego&quot; [value]&#x3D;&quot;idVideojuego()&quot; readonly&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      @if (fechaCreacion(); as fecha) {
+        &lt;ion-item&gt;
+          &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;fecha-creacion&quot;&gt;Fecha de creación&lt;/ion-label&gt;
+          &lt;ion-input id&#x3D;&quot;fecha-creacion&quot; [value]&#x3D;&quot;fecha&quot; readonly&gt;&lt;/ion-input&gt;
+        &lt;/ion-item&gt;
+      }
+    }
+
+    &lt;form [formGroup]&#x3D;&quot;formulario&quot; (ngSubmit)&#x3D;&quot;guardar()&quot; novalidate&gt;
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;titulo&quot;&gt;Título *&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;titulo&quot; formControlName&#x3D;&quot;titulo&quot; required [attr.aria-invalid]&#x3D;&quot;formulario.controls.titulo.touched &amp;&amp; formulario.controls.titulo.invalid&quot; aria-describedby&#x3D;&quot;titulo-error&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;div id&#x3D;&quot;titulo-error&quot; aria-live&#x3D;&quot;polite&quot; aria-atomic&#x3D;&quot;true&quot;&gt;
+        @if (formulario.controls.titulo.touched &amp;&amp; formulario.controls.titulo.hasError(&#x27;required&#x27;)) {
+          &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;El título es obligatorio.&lt;/p&gt;&lt;/ion-text&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;codigo-sku&quot;&gt;Código SKU *&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;codigo-sku&quot; formControlName&#x3D;&quot;codigo_sku&quot; required [attr.aria-invalid]&#x3D;&quot;formulario.controls.codigo_sku.touched &amp;&amp; formulario.controls.codigo_sku.invalid&quot; aria-describedby&#x3D;&quot;sku-error&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;div id&#x3D;&quot;sku-error&quot; aria-live&#x3D;&quot;polite&quot; aria-atomic&#x3D;&quot;true&quot;&gt;
+        @if (formulario.controls.codigo_sku.pending) {
+          &lt;ion-text color&#x3D;&quot;medium&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;Comprobando código SKU…&lt;/p&gt;&lt;/ion-text&gt;
+        }
+        @if (formulario.controls.codigo_sku.touched &amp;&amp; formulario.controls.codigo_sku.hasError(&#x27;required&#x27;)) {
+          &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;El código SKU es obligatorio.&lt;/p&gt;&lt;/ion-text&gt;
+        }
+        @if (formulario.controls.codigo_sku.touched &amp;&amp; formulario.controls.codigo_sku.hasError(&#x27;skuDuplicado&#x27;)) {
+          &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;Ese código SKU ya está en uso.&lt;/p&gt;&lt;/ion-text&gt;
+        }
+        @if (formulario.controls.codigo_sku.hasError(&#x27;errorComprobandoSku&#x27;)) {
+          &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;No se pudo comprobar el SKU. Revisa la conexión e inténtalo de nuevo.&lt;/p&gt;&lt;/ion-text&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;descripcion&quot;&gt;Descripción&lt;/ion-label&gt;
+        &lt;ion-textarea id&#x3D;&quot;descripcion&quot; formControlName&#x3D;&quot;descripcion&quot; autoGrow&gt;&lt;/ion-textarea&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;precio&quot;&gt;Precio (€) *&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;precio&quot; type&#x3D;&quot;number&quot; min&#x3D;&quot;0&quot; step&#x3D;&quot;0.01&quot; formControlName&#x3D;&quot;precio&quot; required [attr.aria-invalid]&#x3D;&quot;formulario.controls.precio.touched &amp;&amp; formulario.controls.precio.invalid&quot; aria-describedby&#x3D;&quot;precio-error&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;div id&#x3D;&quot;precio-error&quot; aria-live&#x3D;&quot;polite&quot; aria-atomic&#x3D;&quot;true&quot;&gt;
+        @if (formulario.controls.precio.touched &amp;&amp; formulario.controls.precio.invalid) {
+          &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;El precio debe ser mayor o igual a 0.&lt;/p&gt;&lt;/ion-text&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;stock&quot;&gt;Stock *&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;stock&quot; type&#x3D;&quot;number&quot; min&#x3D;&quot;0&quot; step&#x3D;&quot;1&quot; formControlName&#x3D;&quot;stock&quot; required [attr.aria-invalid]&#x3D;&quot;formulario.controls.stock.touched &amp;&amp; formulario.controls.stock.invalid&quot; aria-describedby&#x3D;&quot;stock-error&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;div id&#x3D;&quot;stock-error&quot; aria-live&#x3D;&quot;polite&quot; aria-atomic&#x3D;&quot;true&quot;&gt;
+        @if (formulario.controls.stock.touched &amp;&amp; formulario.controls.stock.invalid) {
+          &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;El stock debe ser un entero mayor o igual a 0.&lt;/p&gt;&lt;/ion-text&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;valoracion&quot;&gt;Valoración (0–10)&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;valoracion&quot; type&#x3D;&quot;number&quot; min&#x3D;&quot;0&quot; max&#x3D;&quot;10&quot; step&#x3D;&quot;0.1&quot; formControlName&#x3D;&quot;valoracion&quot; [attr.aria-invalid]&#x3D;&quot;formulario.controls.valoracion.touched &amp;&amp; formulario.controls.valoracion.invalid&quot; aria-describedby&#x3D;&quot;valoracion-error&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;div id&#x3D;&quot;valoracion-error&quot; aria-live&#x3D;&quot;polite&quot; aria-atomic&#x3D;&quot;true&quot;&gt;
+        @if (formulario.controls.valoracion.touched &amp;&amp; formulario.controls.valoracion.invalid) {
+          &lt;ion-text color&#x3D;&quot;danger&quot;&gt;&lt;p class&#x3D;&quot;ion-padding-start&quot;&gt;La valoración debe estar entre 0 y 10.&lt;/p&gt;&lt;/ion-text&gt;
+        }
+      &lt;/div&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;fecha-lanzamiento&quot;&gt;Fecha de lanzamiento&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;fecha-lanzamiento&quot; type&#x3D;&quot;date&quot; formControlName&#x3D;&quot;fecha_lanzamiento&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label for&#x3D;&quot;disponible&quot;&gt;Disponible&lt;/ion-label&gt;
+        &lt;ion-toggle id&#x3D;&quot;disponible&quot; formControlName&#x3D;&quot;disponible&quot; slot&#x3D;&quot;end&quot; aria-label&#x3D;&quot;Disponible&quot;&gt;&lt;/ion-toggle&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;plataforma&quot;&gt;Plataforma *&lt;/ion-label&gt;
+        &lt;ion-select id&#x3D;&quot;plataforma&quot; formControlName&#x3D;&quot;plataforma&quot; interface&#x3D;&quot;popover&quot;&gt;
+          @for (plataforma of plataformas; track plataforma) {
+            &lt;ion-select-option [value]&#x3D;&quot;plataforma&quot;&gt;{{ plataforma }}&lt;/ion-select-option&gt;
+          }
+        &lt;/ion-select&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;genero&quot;&gt;Género *&lt;/ion-label&gt;
+        &lt;ion-select id&#x3D;&quot;genero&quot; formControlName&#x3D;&quot;genero&quot; interface&#x3D;&quot;popover&quot;&gt;
+          @for (genero of generos; track genero) {
+            &lt;ion-select-option [value]&#x3D;&quot;genero&quot;&gt;{{ genero }}&lt;/ion-select-option&gt;
+          }
+        &lt;/ion-select&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;etiquetas&quot;&gt;Etiquetas (separadas por comas)&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;etiquetas&quot; formControlName&#x3D;&quot;etiquetas&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;portada-url&quot;&gt;URL de portada&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;portada-url&quot; type&#x3D;&quot;url&quot; formControlName&#x3D;&quot;portada_url&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-item lines&#x3D;&quot;none&quot;&gt;&lt;ion-label&gt;&lt;h2&gt;Requisitos&lt;/h2&gt;&lt;/ion-label&gt;&lt;/ion-item&gt;
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;so&quot;&gt;Sistema operativo&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;so&quot; formControlName&#x3D;&quot;so&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;procesador&quot;&gt;Procesador&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;procesador&quot; formControlName&#x3D;&quot;procesador&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;ram&quot;&gt;RAM&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;ram&quot; formControlName&#x3D;&quot;ram&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;gpu&quot;&gt;GPU&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;gpu&quot; formControlName&#x3D;&quot;gpu&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+      &lt;ion-item&gt;
+        &lt;ion-label position&#x3D;&quot;stacked&quot; for&#x3D;&quot;almacenamiento&quot;&gt;Almacenamiento&lt;/ion-label&gt;
+        &lt;ion-input id&#x3D;&quot;almacenamiento&quot; formControlName&#x3D;&quot;almacenamiento&quot;&gt;&lt;/ion-input&gt;
+      &lt;/ion-item&gt;
+
+      &lt;ion-button
+        expand&#x3D;&quot;block&quot;
+        type&#x3D;&quot;submit&quot;
+        class&#x3D;&quot;ion-margin-top&quot;
+        [disabled]&#x3D;&quot;guardando() || formulario.pending&quot;
+        [attr.aria-busy]&#x3D;&quot;guardando()&quot;
+      &gt;
+        @if (guardando()) {
+          &lt;ion-spinner name&#x3D;&quot;crescent&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;/ion-spinner&gt;
+          &lt;span class&#x3D;&quot;ion-margin-start&quot;&gt;Guardando…&lt;/span&gt;
+        } @else {
+          &lt;span&gt;Guardar videojuego&lt;/span&gt;
+        }
+      &lt;/ion-button&gt;
+    &lt;/form&gt;
+        &lt;/ion-col&gt;
+      &lt;/ion-row&gt;
+    &lt;/ion-grid&gt;
+  }
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./videojuego-form.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">form {
+  display: grid;
+  gap: 0.25rem 0.75rem;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0 auto;
+  max-width: 64rem;
+  width: 100%;
+}
+
+ion-grid,
+ion-col {
+  max-width: 100%;
+  min-width: 0;
+}
+
+ion-text,
+form &gt; ion-button {
+  grid-column: 1 / -1;
+}
+
+form &gt; div[id$&#x3D;&quot;-error&quot;] {
+  grid-column: 1 / -1;
+}
+
+ion-item:has(h2) {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 48rem) {
+  form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-back-button defaultHref="/videojuegos" text="Volver al catálogo" aria-label="Volver al catálogo"></ion-back-button>    </ion-buttons>    <ion-title>{{ modoEdicion() ? \'Editar videojuego\' : \'Nuevo videojuego\' }}</ion-title>  </ion-toolbar></ion-header><ion-content class="ion-padding" role="region" aria-label="Formulario de videojuego">  @if (cargando()) {    <div class="ion-text-center ion-padding" role="status" aria-live="polite">      <ion-spinner name="crescent" aria-label="Cargando videojuego"></ion-spinner>      <p>Cargando videojuego…</p>    </div>  } @else {    <ion-grid>      <ion-row>        <ion-col size="12" size-md="10" offset-md="1" size-lg="8" offset-lg="2">    <div aria-live="polite" aria-atomic="true">      @if (errorMensaje(); as mensaje) {        <ion-text color="danger" role="status"><p>{{ mensaje }}</p></ion-text>      }    </div>    @if (modoEdicion()) {      <ion-item>        <ion-label position="stacked" for="id-videojuego">ID</ion-label>        <ion-input id="id-videojuego" [value]="idVideojuego()" readonly></ion-input>      </ion-item>      @if (fechaCreacion(); as fecha) {        <ion-item>          <ion-label position="stacked" for="fecha-creacion">Fecha de creación</ion-label>          <ion-input id="fecha-creacion" [value]="fecha" readonly></ion-input>        </ion-item>      }    }    <form [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>      <ion-item>        <ion-label position="stacked" for="titulo">Título *</ion-label>        <ion-input id="titulo" formControlName="titulo" required [attr.aria-invalid]="formulario.controls.titulo.touched && formulario.controls.titulo.invalid" aria-describedby="titulo-error"></ion-input>      </ion-item>      <div id="titulo-error" aria-live="polite" aria-atomic="true">        @if (formulario.controls.titulo.touched && formulario.controls.titulo.hasError(\'required\')) {          <ion-text color="danger"><p class="ion-padding-start">El título es obligatorio.</p></ion-text>        }      </div>      <ion-item>        <ion-label position="stacked" for="codigo-sku">Código SKU *</ion-label>        <ion-input id="codigo-sku" formControlName="codigo_sku" required [attr.aria-invalid]="formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.invalid" aria-describedby="sku-error"></ion-input>      </ion-item>      <div id="sku-error" aria-live="polite" aria-atomic="true">        @if (formulario.controls.codigo_sku.pending) {          <ion-text color="medium"><p class="ion-padding-start">Comprobando código SKU…</p></ion-text>        }        @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError(\'required\')) {          <ion-text color="danger"><p class="ion-padding-start">El código SKU es obligatorio.</p></ion-text>        }        @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError(\'skuDuplicado\')) {          <ion-text color="danger"><p class="ion-padding-start">Ese código SKU ya está en uso.</p></ion-text>        }        @if (formulario.controls.codigo_sku.hasError(\'errorComprobandoSku\')) {          <ion-text color="danger"><p class="ion-padding-start">No se pudo comprobar el SKU. Revisa la conexión e inténtalo de nuevo.</p></ion-text>        }      </div>      <ion-item>        <ion-label position="stacked" for="descripcion">Descripción</ion-label>        <ion-textarea id="descripcion" formControlName="descripcion" autoGrow></ion-textarea>      </ion-item>      <ion-item>        <ion-label position="stacked" for="precio">Precio (€) *</ion-label>        <ion-input id="precio" type="number" min="0" step="0.01" formControlName="precio" required [attr.aria-invalid]="formulario.controls.precio.touched && formulario.controls.precio.invalid" aria-describedby="precio-error"></ion-input>      </ion-item>      <div id="precio-error" aria-live="polite" aria-atomic="true">        @if (formulario.controls.precio.touched && formulario.controls.precio.invalid) {          <ion-text color="danger"><p class="ion-padding-start">El precio debe ser mayor o igual a 0.</p></ion-text>        }      </div>      <ion-item>        <ion-label position="stacked" for="stock">Stock *</ion-label>        <ion-input id="stock" type="number" min="0" step="1" formControlName="stock" required [attr.aria-invalid]="formulario.controls.stock.touched && formulario.controls.stock.invalid" aria-describedby="stock-error"></ion-input>      </ion-item>      <div id="stock-error" aria-live="polite" aria-atomic="true">        @if (formulario.controls.stock.touched && formulario.controls.stock.invalid) {          <ion-text color="danger"><p class="ion-padding-start">El stock debe ser un entero mayor o igual a 0.</p></ion-text>        }      </div>      <ion-item>        <ion-label position="stacked" for="valoracion">Valoración (0–10)</ion-label>        <ion-input id="valoracion" type="number" min="0" max="10" step="0.1" formControlName="valoracion" [attr.aria-invalid]="formulario.controls.valoracion.touched && formulario.controls.valoracion.invalid" aria-describedby="valoracion-error"></ion-input>      </ion-item>      <div id="valoracion-error" aria-live="polite" aria-atomic="true">        @if (formulario.controls.valoracion.touched && formulario.controls.valoracion.invalid) {          <ion-text color="danger"><p class="ion-padding-start">La valoración debe estar entre 0 y 10.</p></ion-text>        }      </div>      <ion-item>        <ion-label position="stacked" for="fecha-lanzamiento">Fecha de lanzamiento</ion-label>        <ion-input id="fecha-lanzamiento" type="date" formControlName="fecha_lanzamiento"></ion-input>      </ion-item>      <ion-item>        <ion-label for="disponible">Disponible</ion-label>        <ion-toggle id="disponible" formControlName="disponible" slot="end" aria-label="Disponible"></ion-toggle>      </ion-item>      <ion-item>        <ion-label position="stacked" for="plataforma">Plataforma *</ion-label>        <ion-select id="plataforma" formControlName="plataforma" interface="popover">          @for (plataforma of plataformas; track plataforma) {            <ion-select-option [value]="plataforma">{{ plataforma }}</ion-select-option>          }        </ion-select>      </ion-item>      <ion-item>        <ion-label position="stacked" for="genero">Género *</ion-label>        <ion-select id="genero" formControlName="genero" interface="popover">          @for (genero of generos; track genero) {            <ion-select-option [value]="genero">{{ genero }}</ion-select-option>          }        </ion-select>      </ion-item>      <ion-item>        <ion-label position="stacked" for="etiquetas">Etiquetas (separadas por comas)</ion-label>        <ion-input id="etiquetas" formControlName="etiquetas"></ion-input>      </ion-item>      <ion-item>        <ion-label position="stacked" for="portada-url">URL de portada</ion-label>        <ion-input id="portada-url" type="url" formControlName="portada_url"></ion-input>      </ion-item>      <ion-item lines="none"><ion-label><h2>Requisitos</h2></ion-label></ion-item>      <ion-item>        <ion-label position="stacked" for="so">Sistema operativo</ion-label>        <ion-input id="so" formControlName="so"></ion-input>      </ion-item>      <ion-item>        <ion-label position="stacked" for="procesador">Procesador</ion-label>        <ion-input id="procesador" formControlName="procesador"></ion-input>      </ion-item>      <ion-item>        <ion-label position="stacked" for="ram">RAM</ion-label>        <ion-input id="ram" formControlName="ram"></ion-input>      </ion-item>      <ion-item>        <ion-label position="stacked" for="gpu">GPU</ion-label>        <ion-input id="gpu" formControlName="gpu"></ion-input>      </ion-item>      <ion-item>        <ion-label position="stacked" for="almacenamiento">Almacenamiento</ion-label>        <ion-input id="almacenamiento" formControlName="almacenamiento"></ion-input>      </ion-item>      <ion-button        expand="block"        type="submit"        class="ion-margin-top"        [disabled]="guardando() || formulario.pending"        [attr.aria-busy]="guardando()"      >        @if (guardando()) {          <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>          <span class="ion-margin-start">Guardando…</span>        } @else {          <span>Guardar videojuego</span>        }      </ion-button>    </form>        </ion-col>      </ion-row>    </ion-grid>  }</ion-content></div>'
+    var COMPONENTS = [{'name': 'AcercaPage', 'selector': 'app-acerca'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AyudaPage', 'selector': 'app-ayuda'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'EstadoVacioComponent', 'selector': 'app-estado-vacio'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'InformeGraficosComponent', 'selector': 'app-informe-graficos'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'StatCardComponent', 'selector': 'app-stat-card'},{'name': 'VideojuegoDetallePage', 'selector': 'app-videojuego-detalle'},{'name': 'VideojuegoFormPage', 'selector': 'app-videojuego-form'},{'name': 'VideojuegosPage', 'selector': 'app-videojuegos'}];
+    var DIRECTIVES = [{'name': 'ResaltarDirective', 'selector': '[appResaltar]'}];
+    var ACTUAL_COMPONENT = {'name': 'VideojuegoFormPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'VideojuegoFormPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
