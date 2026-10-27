@@ -20,7 +20,7 @@ export class FirestoreService {
   private db: Firestore;
 
   constructor() {
-    const app = initializeApp(environment.firebase);
+    const app = initializeApp(environment.firebaseConfig);
     this.db = getFirestore(app);
   }
 

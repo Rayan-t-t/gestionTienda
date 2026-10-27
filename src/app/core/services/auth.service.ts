@@ -11,8 +11,8 @@ import { map, Observable, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly authUrl = environment.supabase.authUrl || `${environment.supabase.url}/auth/v1`;
-  private readonly apiKey = environment.supabase.anonKey;
+  private readonly authUrl = `${environment.supabaseUrl}/auth/v1`;
+  private readonly apiKey = environment.supabaseAnonKey;
 
   /** Usuario autenticado actual. */
   readonly usuarioActual = signal<Usuario | null>(this.getUsuarioGuardado());
