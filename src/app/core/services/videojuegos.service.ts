@@ -13,8 +13,8 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class VideojuegosService {
-  private readonly baseUrl = `${environment.supabase.url}/rest/v1/video-juegos`;
-  private readonly apiKey = environment.supabase.anonKey;
+  private readonly baseUrl = `${environment.supabaseUrl}/rest/v1/video-juegos`;
+  private readonly apiKey = environment.supabaseAnonKey;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
