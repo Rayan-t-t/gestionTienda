@@ -1,3 +1,22 @@
 ion-thumbnail img {
   object-fit: cover;
 }
+
+ion-grid,
+ion-col {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.paginacion-servidor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.acciones-exportacion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

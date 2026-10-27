@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonMenu,
   IonHeader,
@@ -30,6 +30,7 @@ import { AuthService } from '../../../core/services/auth.service';
   standalone: true,
   imports: [
     RouterLink,
+    RouterLinkActive,
     IonMenu,
     IonHeader,
     IonToolbar,
