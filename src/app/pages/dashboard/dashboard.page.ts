@@ -1,100 +1,145 @@
-import { Component, ChangeDetectionStrategy, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  effect,
+  inject,
+  OnInit,
+  signal,
+  viewChild
+} from '@angular/core';
+import type { Chart as ChartInstance } from 'chart.js';
+import {
   IonButtons,
-  IonMenuButton,
   IonCard,
+  IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent,
-  IonList,
+  IonContent,
+  IonHeader,
   IonItem,
   IonLabel,
-  IonSpinner
+  IonList,
+  IonMenuButton,
+  IonSpinner,
+  IonText,
+  IonTitle,
+  IonToolbar
 } from '@ionic/angular';
-import { FirestoreService } from '../../core/services/firestore.service';
-import { Chart, registerables } from 'chart.js';
-
-Chart.register(...registerables);
+import { Actividad, FirestoreService } from '../../core/services/firestore.service';
 
 /**
- * Página de dashboard para administradores con gráficos y actividades.
+ * Dashboard administrativo con resumen gráfico e historial de auditoría.
  */
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
+    UpperCasePipe,
     IonButtons,
-    IonMenuButton,
     IonCard,
+    IonCardContent,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent,
-    IonList,
+    IonContent,
+    IonHeader,
     IonItem,
     IonLabel,
-    IonSpinner
+    IonList,
+    IonMenuButton,
+    IonSpinner,
+    IonText,
+    IonTitle,
+    IonToolbar
   ],
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardPage implements OnInit {
-  readonly actividades = signal<any[]>([]);
+  private readonly firestoreService = inject(FirestoreService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly canvas = viewChild<ElementRef<HTMLCanvasElement>>('graficoActividades');
+  private chart: ChartInstance<'bar', number[], string> | null = null;
+  private revisionGrafico = 0;
+
+  readonly actividades = signal<Actividad[]>([]);
   readonly cargando = signal(false);
+  readonly errorMensaje = signal<string | null>(null);
 
-  constructor(private firestoreService: FirestoreService) {}
-
-  async ngOnInit(): Promise<void> {
-    this.cargando.set(true);
-    const datos = await this.firestoreService.obtenerActividades();
-    this.actividades.set(datos);
-    this.cargando.set(false);
-    this.crearGrafico();
+  constructor() {
+    effect(() => {
+      const canvas = this.canvas()?.nativeElement;
+      const actividades = this.actividades();
+      const cargando = this.cargando();
+      if (canvas && !cargando) {
+        void this.crearGrafico(canvas, actividades, ++this.revisionGrafico);
+      }
+    });
+    this.destroyRef.onDestroy(() => this.chart?.destroy());
   }
 
-  private crearGrafico(): void {
-    setTimeout(() => {
-      const canvas = document.getElementById('graficoActividades') as HTMLCanvasElement;
-      if (!canvas) {
-        return;
-      }
-      const actividades = this.actividades();
-      const conteo = actividades.reduce((acc: any, act) => {
-        acc[act.tipo] = (acc[act.tipo] || 0) + 1;
-        return acc;
-      }, {});
+  ngOnInit(): void {
+    this.cargarActividades();
+  }
 
-      new Chart(canvas, {
-        type: 'bar',
-        data: {
-          labels: Object.keys(conteo),
-          datasets: [
-            {
-              label: 'Número de actividades',
-              data: Object.values(conteo),
-              backgroundColor: ['#3880ff', '#10dc60', '#ffce00', '#f04141']
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true
-            }
+  private cargarActividades(): void {
+    this.cargando.set(true);
+    this.errorMensaje.set(null);
+    this.firestoreService
+      .obtenerActividades()
+      .then((actividades) => this.actividades.set(actividades))
+      .catch((error: unknown) => {
+        console.error('No se pudo cargar el historial de actividades.', error);
+        this.errorMensaje.set('No se pudo cargar el historial de actividades.');
+      })
+      .finally(() => this.cargando.set(false));
+  }
+
+  private async crearGrafico(
+    canvas: HTMLCanvasElement,
+    actividades: Actividad[],
+    revision: number
+  ): Promise<void> {
+    const chartJs = await import('chart.js');
+    if (revision !== this.revisionGrafico || !canvas.isConnected) {
+      return;
+    }
+
+    chartJs.Chart.register(
+      chartJs.BarController,
+      chartJs.BarElement,
+      chartJs.CategoryScale,
+      chartJs.LinearScale,
+      chartJs.Tooltip,
+      chartJs.Legend
+    );
+    const conteo: Record<string, number> = {};
+    for (const actividad of actividades) {
+      conteo[actividad.tipo] = (conteo[actividad.tipo] ?? 0) + 1;
+    }
+
+    this.chart?.destroy();
+    this.chart = new chartJs.Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(conteo),
+        datasets: [
+          {
+            label: 'Número de actividades',
+            data: Object.values(conteo),
+            backgroundColor: ['#3880ff', '#10dc60', '#ffce00', '#f04141']
           }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
         }
-      });
-    }, 100);
+      }
+    });
   }
 }

@@ -1,26 +1,26 @@
-import { Component, ChangeDetectionStrategy, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonButtons,
   IonBackButton,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
   IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonContent,
+  IonHeader,
   IonSpinner,
-  IonText
+  IonText,
+  IonTitle,
+  IonToolbar
 } from '@ionic/angular';
-import { VideojuegosService } from '../../core/services/videojuegos.service';
 import { Videojuego } from '../../core/models/videojuego.model';
 import { AuthService } from '../../core/services/auth.service';
-import { computed } from '@angular/core';
+import { VideojuegosService } from '../../core/services/videojuegos.service';
 
 /**
  * Página de detalle de un videojuego.
@@ -29,63 +29,75 @@ import { computed } from '@angular/core';
   selector: 'app-videojuego-detalle',
   standalone: true,
   imports: [
-    CommonModule,
+    NgOptimizedImage,
     RouterLink,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButtons,
     IonBackButton,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
     IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonContent,
+    IonHeader,
     IonSpinner,
-    IonText
+    IonText,
+    IonTitle,
+    IonToolbar
   ],
   templateUrl: './videojuego-detalle.page.html',
   styleUrls: ['./videojuego-detalle.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VideojuegoDetallePage implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  private readonly videojuegosService = inject(VideojuegosService);
+  private readonly authService = inject(AuthService);
+  private readonly destroyRef = inject(DestroyRef);
+
   readonly videojuego = signal<Videojuego | null>(null);
   readonly cargando = signal(false);
   readonly errorMensaje = signal<string | null>(null);
-  readonly esAdmin = computed(() => this.authService.esAdministrador());
-
-  constructor(
-    private route: ActivatedRoute,
-    private videojuegosService: VideojuegosService,
-    private authService: AuthService
-  ) {}
+  readonly esAdministrador = this.authService.esAdministrador;
+  readonly requisitos = computed(() => {
+    const requisitos = this.videojuego()?.requisitos;
+    return requisitos
+      ? Object.entries(requisitos).filter(([, valor]) => Boolean(valor))
+      : [];
+  });
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.cargarVideojuego(parseInt(id, 10));
+    const parametro = this.route.snapshot.paramMap.get('id');
+    const id = Number(parametro);
+    if (parametro === null || !Number.isInteger(id) || id < 1) {
+      this.errorMensaje.set('El identificador del videojuego no es válido.');
+      return;
     }
+    this.cargarVideojuego(id);
   }
 
-  private cargarVideojuego(id: number): void {
+  cargarVideojuego(id = Number(this.route.snapshot.paramMap.get('id'))): void {
     this.cargando.set(true);
     this.errorMensaje.set(null);
-    this.videojuegosService.obtenerPorId(id).subscribe({
-      next: (datos) => {
-        if (datos && datos.length > 0) {
-          this.videojuego.set(datos[0]);
-        } else {
-          this.errorMensaje.set('Videojuego no encontrado');
+    this.videojuegosService
+      .obtenerPorId(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (registros) => {
+          const videojuego = registros[0];
+          this.videojuego.set(videojuego ?? null);
+          if (!videojuego) {
+            this.errorMensaje.set('No se encontró el videojuego solicitado.');
+          }
+          this.cargando.set(false);
+        },
+        error: (error: unknown) => {
+          this.errorMensaje.set(
+            error instanceof Error ? error.message : 'No se pudo cargar el videojuego.'
+          );
+          this.cargando.set(false);
         }
-        this.cargando.set(false);
-      },
-      error: (error) => {
-        this.cargando.set(false);
-        this.errorMensaje.set('Error al cargar el videojuego');
-        console.error('Error:', error);
-      }
-    });
+      });
   }
 }

@@ -24,7 +24,17 @@ export interface Videojuego {
  * Requisitos mínimos del videojuego.
  */
 export interface Requisitos {
+  so?: string;
+  procesador?: string;
   ram?: string;
   gpu?: string;
   almacenamiento?: string;
 }
+
+/**
+ * Campos mostrados en el listado resumido del catálogo.
+ */
+export type VideojuegoListado = Pick<
+  Videojuego,
+  'id' | 'titulo' | 'precio' | 'stock' | 'plataforma' | 'genero' | 'disponible'
+>;
