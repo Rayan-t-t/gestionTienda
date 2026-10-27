@@ -14,44 +14,86 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-stat-card
-    titulo="Actividades registradas"
-    [valor]="totalActividades()"
-    icono="refresh"
-    tendencia="Toca para actualizar el historial"
-    (pulsado)="recargarActividades()"
-  />
+  @if (cargando()) {
+    <div class="ion-text-center ion-padding" role="status" aria-live="polite">
+      <ion-spinner name="crescent" aria-label="Cargando informes"></ion-spinner>
+      <p>Cargando videojuegos y actividades…</p>
+    </div>
+  }
 
-  @defer (on idle) {
+  @if (errorVideojuegos(); as mensajeVideojuegos) {
     <ion-card>
-      <ion-card-header>
-        <ion-card-title>Estadísticas de actividades</ion-card-title>
-      </ion-card-header>
       <ion-card-content>
-        <canvas
-          #graficoActividades
-          aria-label="Gráfico de actividades"
-          role="img"
-        ></canvas>
+        <ion-text color="danger" role="alert">
+          <p>Error al cargar los videojuegos: {{ mensajeVideojuegos }}</p>
+        </ion-text>
+        <ion-button (click)="cargarDatos()">Reintentar</ion-button>
       </ion-card-content>
     </ion-card>
-  } @placeholder {
-    <ion-card><ion-card-content>Cargando el gráfico…</ion-card-content></ion-card>
+  }
+
+  @if (errorActividades(); as mensajeActividades) {
+    <ion-card>
+      <ion-card-content>
+        <ion-text color="danger" role="alert">
+          <p>Error al cargar las actividades: {{ mensajeActividades }}</p>
+        </ion-text>
+        <ion-button (click)="cargarDatos()">Reintentar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (!cargando() && !errorVideojuegos()) {
+    <section class="filtros" aria-label="Filtros de informes">
+      <label>
+        Plataforma
+        <select [value]="filtroPlataforma()" (change)="cambiarPlataforma($event)">
+          <option value="">Todas las plataformas</option>
+          @for (plataforma of plataformas; track plataforma) {
+            <option [value]="plataforma">{{ plataforma }}</option>
+          }
+        </select>
+      </label>
+      <label>
+        Género
+        <select [value]="filtroGenero()" (change)="cambiarGenero($event)">
+          <option value="">Todos los géneros</option>
+          @for (genero of generos; track genero) {
+            <option [value]="genero">{{ genero }}</option>
+          }
+        </select>
+      </label>
+    </section>
+
+    <section class="tarjetas" aria-label="Resumen del catálogo">
+      <app-stat-card titulo="Total de juegos" [valor]="totalJuegos()" icono="game-controller" />
+      <app-stat-card titulo="Stock total" [valor]="stockTotal()" icono="cube" />
+      <app-stat-card titulo="Valor del inventario" [valor]="valorInventario()" icono="cash" />
+      <app-stat-card titulo="Valoración media" [valor]="valoracionMedia()" icono="star" />
+    </section>
+
+    @defer (on idle) {
+      <app-informe-graficos
+        [videojuegos]="videojuegosFiltrados()"
+        [actividades]="actividades()"
+      />
+    } @placeholder {
+      <ion-card><ion-card-content>Preparando los gráficos…</ion-card-content></ion-card>
+    }
   }
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Historial de Actividades</ion-card-title>
+      <ion-card-title>Historial de actividades</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       @if (cargando()) {
         <div class="ion-text-center">
           <ion-spinner name="crescent" aria-label="Cargando actividades"></ion-spinner>
         </div>
+      } @else if (errorActividades()) {
+        <p>El historial no está disponible hasta que se resuelva el error de Firestore.</p>
       } @else {
-        @if (errorMensaje(); as mensaje) {
-          <ion-text color="danger" role="alert"><p>{{ mensaje }}</p></ion-text>
-        } @else {
         <ion-list>
           @for (actividad of actividades(); track actividad.id) {
             <ion-item>
@@ -63,9 +105,10 @@
                 }
               </ion-label>
             </ion-item>
+          } @empty {
+            <ion-item><ion-label>No hay actividades registradas.</ion-label></ion-item>
           }
         </ion-list>
-        }
       }
     </ion-card-content>
   </ion-card>

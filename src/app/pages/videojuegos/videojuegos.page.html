@@ -9,8 +9,8 @@
 
 <ion-content>
   <div class="ion-padding">
-    <ion-button size="small" (click)="exportarCSV()">Exportar CSV</ion-button>
-    <ion-button size="small" (click)="exportarPDF()">Exportar PDF</ion-button>
+    <ion-button size="small" (click)="exportarCSV()" [disabled]="cargando()">Exportar CSV</ion-button>
+    <ion-button size="small" (click)="exportarPDF()" [disabled]="cargando()">Exportar PDF</ion-button>
   </div>
 
   @if (cargando()) {

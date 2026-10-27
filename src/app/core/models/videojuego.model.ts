@@ -38,3 +38,11 @@ export type VideojuegoListado = Pick<
   Videojuego,
   'id' | 'titulo' | 'precio' | 'stock' | 'plataforma' | 'genero' | 'disponible'
 >;
+
+/**
+ * Campos necesarios para los cálculos del dashboard.
+ */
+export type VideojuegoInforme = Pick<
+  Videojuego,
+  'precio' | 'stock' | 'valoracion' | 'plataforma' | 'genero'
+>;

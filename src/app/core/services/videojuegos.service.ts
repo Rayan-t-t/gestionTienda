@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { EMPTY, Observable, catchError, expand, map, of, reduce, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Videojuego, VideojuegoListado } from '../models/videojuego.model';
+import { Videojuego, VideojuegoInforme, VideojuegoListado } from '../models/videojuego.model';
 
 /**
  * Acceso al catálogo de videojuegos mediante PostgREST.
@@ -14,6 +14,7 @@ export class VideojuegosService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = `${environment.supabaseUrl}/rest/v1/video-juegos`;
   private readonly limiteCatalogo = 50;
+  private readonly limiteInforme = 1000;
   private readonly _catalogo = signal<VideojuegoListado[] | null>(null);
 
   /** Catálogo resumido cacheado para la primera página. */
@@ -71,6 +72,24 @@ export class VideojuegosService {
           throwError(() => new Error(this.mensajeError(error, 'No se pudo cargar el catálogo.')))
         )
       );
+  }
+
+  /**
+   * Obtiene todos los campos mínimos para los informes, paginando PostgREST.
+   */
+  obtenerParaInforme(): Observable<VideojuegoInforme[]> {
+    let siguienteOffset = this.limiteInforme;
+    return this.obtenerPaginaInforme(0).pipe(
+      expand((pagina) => {
+        if (pagina.length < this.limiteInforme) {
+          return EMPTY;
+        }
+        const offset = siguienteOffset;
+        siguienteOffset += this.limiteInforme;
+        return this.obtenerPaginaInforme(offset);
+      }),
+      reduce((videojuegos, pagina) => videojuegos.concat(pagina), [] as VideojuegoInforme[])
+    );
   }
 
   /**
@@ -161,6 +180,27 @@ export class VideojuegosService {
    */
   invalidarCatalogo(): void {
     this._catalogo.set(null);
+  }
+
+  private obtenerPaginaInforme(offset: number): Observable<VideojuegoInforme[]> {
+    const params = new HttpParams()
+      .set('select', 'precio,stock,valoracion,plataforma,genero')
+      .set('order', 'id.asc')
+      .set('limit', this.limiteInforme)
+      .set('offset', offset);
+
+    return this.http
+      .get<VideojuegoInforme[]>(this.baseUrl, {
+        headers: this.headers.set('Prefer', 'count=exact'),
+        params
+      })
+      .pipe(
+        catchError((error: unknown) =>
+          throwError(() =>
+            new Error(this.mensajeError(error, 'No se pudieron cargar los datos para el informe.'))
+          )
+        )
+      );
   }
 
   private mensajeError(error: unknown, predeterminado: string): string {

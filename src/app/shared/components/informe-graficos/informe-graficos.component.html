@@ -1,0 +1,70 @@
+<section class="graficos" aria-label="Gráficos del informe">
+  <article>
+    <h3>Juegos por género</h3>
+    <div class="lienzo">
+      <canvas
+        #graficoGenero
+        role="img"
+        aria-label="Gráfico de anillo con el número de juegos por género"
+        aria-describedby="resumen-genero"
+      ></canvas>
+    </div>
+    <table id="resumen-genero" class="visualmente-oculto">
+      <caption>Resumen de juegos por género</caption>
+      <thead><tr><th scope="col">Género</th><th scope="col">Juegos</th></tr></thead>
+      <tbody>
+        @for (fila of resumenGenero(); track fila.clave) {
+          <tr><th scope="row">{{ fila.clave }}</th><td>{{ fila.cantidad }}</td></tr>
+        } @empty {
+          <tr><td colspan="2">Sin datos</td></tr>
+        }
+      </tbody>
+    </table>
+  </article>
+
+  <article>
+    <h3>Stock por plataforma</h3>
+    <div class="lienzo">
+      <canvas
+        #graficoPlataforma
+        role="img"
+        aria-label="Gráfico de barras con el stock total por plataforma"
+        aria-describedby="resumen-plataforma"
+      ></canvas>
+    </div>
+    <table id="resumen-plataforma" class="visualmente-oculto">
+      <caption>Resumen de stock por plataforma</caption>
+      <thead><tr><th scope="col">Plataforma</th><th scope="col">Stock</th></tr></thead>
+      <tbody>
+        @for (fila of resumenPlataforma(); track fila.clave) {
+          <tr><th scope="row">{{ fila.clave }}</th><td>{{ fila.cantidad }}</td></tr>
+        } @empty {
+          <tr><td colspan="2">Sin datos</td></tr>
+        }
+      </tbody>
+    </table>
+  </article>
+
+  <article>
+    <h3>Actividad por tipo</h3>
+    <div class="lienzo">
+      <canvas
+        #graficoActividad
+        role="img"
+        aria-label="Gráfico de barras con el número de actividades por tipo"
+        aria-describedby="resumen-actividad"
+      ></canvas>
+    </div>
+    <table id="resumen-actividad" class="visualmente-oculto">
+      <caption>Resumen de actividades por tipo</caption>
+      <thead><tr><th scope="col">Tipo</th><th scope="col">Actividades</th></tr></thead>
+      <tbody>
+        @for (fila of resumenActividad(); track fila.clave) {
+          <tr><th scope="row">{{ fila.clave }}</th><td>{{ fila.cantidad }}</td></tr>
+        } @empty {
+          <tr><td colspan="2">Sin datos</td></tr>
+        }
+      </tbody>
+    </table>
+  </article>
+</section>
