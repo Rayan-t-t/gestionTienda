@@ -1,0 +1,86 @@
+:host {
+  display: block;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.buscador {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.75rem 0;
+  max-width: 24rem;
+}
+
+.buscador input {
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 0.35rem;
+  font: inherit;
+  padding: 0.55rem;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 40rem;
+  width: 100%;
+}
+
+caption {
+  font-weight: 600;
+  padding: 0.65rem;
+  text-align: left;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--ion-color-light-shade);
+  padding: 0.65rem;
+  text-align: left;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover,
+tbody tr:focus-visible {
+  background: var(--ion-color-light);
+}
+
+.ordenar,
+.acciones button,
+.paginacion button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.25rem;
+}
+
+.acciones {
+  white-space: nowrap;
+}
+
+.acciones .peligro {
+  color: var(--ion-color-danger);
+}
+
+.paginacion {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+.paginacion button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.estado {
+  padding: 1rem;
+  text-align: center;
+}

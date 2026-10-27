@@ -27,17 +27,34 @@ export class VideojuegosService {
   /**
    * Obtiene una página del catálogo con los campos necesarios para el listado.
    */
-  obtenerTodos(offset = 0, limite = this.limiteCatalogo): Observable<VideojuegoListado[]> {
+  obtenerTodos(
+    offset = 0,
+    limite = this.limiteCatalogo,
+    busqueda = ''
+  ): Observable<VideojuegoListado[]> {
     const catalogoCacheado = this._catalogo();
-    if (offset === 0 && limite === this.limiteCatalogo && catalogoCacheado !== null) {
+    if (
+      offset === 0 &&
+      limite === this.limiteCatalogo &&
+      !busqueda &&
+      catalogoCacheado !== null
+    ) {
       return of(catalogoCacheado);
     }
 
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('select', 'id,titulo,precio,stock,plataforma,genero,disponible')
       .set('order', 'id.asc')
       .set('limit', limite)
       .set('offset', offset);
+    if (busqueda.trim()) {
+      const termino = busqueda.trim().replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+      const filtro = `"*${termino}*"`;
+      params = params.set(
+        'or',
+        `(titulo.ilike.${filtro},plataforma.ilike.${filtro},genero.ilike.${filtro})`
+      );
+    }
 
     return this.http
       .get<VideojuegoListado[]>(this.baseUrl, {
@@ -46,7 +63,7 @@ export class VideojuegosService {
       })
       .pipe(
         tap((videojuegos) => {
-          if (offset === 0 && limite === this.limiteCatalogo) {
+          if (offset === 0 && limite === this.limiteCatalogo && !busqueda.trim()) {
             this._catalogo.set(videojuegos);
           }
         }),

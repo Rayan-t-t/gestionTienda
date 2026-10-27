@@ -14,6 +14,14 @@
     </ion-toolbar>
   </ion-header>
 
+  <app-stat-card
+    titulo="Actividades registradas"
+    [valor]="totalActividades()"
+    icono="refresh"
+    tendencia="Toca para actualizar el historial"
+    (pulsado)="recargarActividades()"
+  />
+
   @defer (on idle) {
     <ion-card>
       <ion-card-header>
