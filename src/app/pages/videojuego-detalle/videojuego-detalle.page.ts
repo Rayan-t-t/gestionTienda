@@ -11,11 +11,14 @@ import {
   IonCardHeader,
   IonCardSubtitle,
   IonCardTitle,
+  IonCol,
   IonContent,
+  IonGrid,
   IonHeader,
   IonSpinner,
   IonText,
   IonTitle,
+  IonRow,
   IonToolbar
 } from '@ionic/angular';
 import { Videojuego } from '../../core/models/videojuego.model';
@@ -39,11 +42,14 @@ import { VideojuegosService } from '../../core/services/videojuegos.service';
     IonCardHeader,
     IonCardSubtitle,
     IonCardTitle,
+    IonCol,
     IonContent,
+    IonGrid,
     IonHeader,
     IonSpinner,
     IonText,
     IonTitle,
+    IonRow,
     IonToolbar
   ],
   templateUrl: './videojuego-detalle.page.html',

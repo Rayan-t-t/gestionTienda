@@ -1,56 +1,66 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>
     </ion-buttons>
     <ion-title>Videojuegos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    <ion-button size="small" (click)="exportarCSV()" [disabled]="cargando()">Exportar CSV</ion-button>
-    <ion-button size="small" (click)="exportarPDF()" [disabled]="cargando()">Exportar PDF</ion-button>
-  </div>
+<ion-content role="region" aria-label="Catálogo de videojuegos">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="ion-padding acciones-exportacion">
+          <ion-button size="small" (click)="exportarCSV()" [disabled]="cargando()">Exportar CSV</ion-button>
+          <ion-button size="small" (click)="exportarPDF()" [disabled]="cargando()">Exportar PDF</ion-button>
+        </div>
 
-  @if (cargando()) {
-    <div class="ion-text-center ion-padding" aria-live="polite">
-      <ion-spinner name="crescent" aria-label="Cargando videojuegos"></ion-spinner>
-      <p>Cargando videojuegos…</p>
-    </div>
-  } @else if (errorMensaje(); as mensaje) {
-    <app-estado-vacio
-      [mensaje]="mensaje"
-      textoAccion="Reintentar"
-      (accion)="cargarVideojuegos()"
-    />
-  } @else {
-    @defer (on idle) {
-      <app-data-table
-        [columnas]="columnas"
-        [datos]="videojuegos()"
-        [cargando]="cargando()"
-        [mostrarAcciones]="esAdministrador()"
-        textoVacio="No hay videojuegos que mostrar."
-        [tamanoPagina]="10"
-        (busquedaCambiada)="buscar($event)"
-        (filaSeleccionada)="abrirDetalle($event)"
-        (editar)="editarVideojuego($event)"
-        (eliminar)="confirmarEliminacion($event)"
-      />
-    } @placeholder {
-      <div class="ion-padding ion-text-center">Preparando el catálogo…</div>
-    }
+        @if (cargando()) {
+          <div class="ion-text-center ion-padding" role="status" aria-live="polite">
+            <ion-spinner name="crescent" aria-label="Cargando videojuegos"></ion-spinner>
+            <p>Cargando videojuegos…</p>
+          </div>
+        } @else if (errorMensaje(); as mensaje) {
+          <div role="status" aria-live="polite">
+            <app-estado-vacio
+              [mensaje]="mensaje"
+              textoAccion="Reintentar"
+              (accion)="cargarVideojuegos()"
+            />
+          </div>
+        } @else {
+          @defer (on idle) {
+            <app-data-table
+              [columnas]="columnas"
+              [datos]="videojuegos()"
+              [cargando]="cargando()"
+              [mostrarAcciones]="esAdministrador()"
+              textoVacio="No hay videojuegos que mostrar."
+              [tamanoPagina]="10"
+              (busquedaCambiada)="buscar($event)"
+              (filaSeleccionada)="abrirDetalle($event)"
+              (editar)="editarVideojuego($event)"
+              (eliminar)="confirmarEliminacion($event)"
+            />
+          } @placeholder {
+            <div class="ion-padding ion-text-center" role="status" aria-live="polite">
+              Preparando el catálogo…
+            </div>
+          }
 
-    <div class="ion-padding ion-text-center">
-      <ion-button fill="outline" (click)="retrocederPagina()" [disabled]="offset() === 0">
-        Anterior
-      </ion-button>
-      <ion-button fill="outline" (click)="avanzarPagina()" [disabled]="!puedeAvanzar()">
-        Siguiente
-      </ion-button>
-    </div>
-  }
+          <div class="ion-padding ion-text-center paginacion-servidor">
+            <ion-button fill="outline" (click)="retrocederPagina()" [disabled]="offset() === 0">
+              Anterior
+            </ion-button>
+            <ion-button fill="outline" (click)="avanzarPagina()" [disabled]="!puedeAvanzar()">
+              Siguiente
+            </ion-button>
+          </div>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   @if (esAdministrador()) {
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

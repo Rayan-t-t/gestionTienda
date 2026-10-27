@@ -3,7 +3,12 @@
 }
 
 .tabla-contenedor {
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 .buscador {

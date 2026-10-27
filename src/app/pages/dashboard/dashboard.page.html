@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>
     </ion-buttons>
     <ion-title>Dashboard</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="ion-padding" role="region" aria-label="Informes del catálogo">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Dashboard</ion-title>
@@ -22,7 +22,7 @@
   }
 
   @if (errorVideojuegos(); as mensajeVideojuegos) {
-    <ion-card>
+    <ion-card role="alert">
       <ion-card-content>
         <ion-text color="danger" role="alert">
           <p>Error al cargar los videojuegos: {{ mensajeVideojuegos }}</p>
@@ -33,7 +33,7 @@
   }
 
   @if (errorActividades(); as mensajeActividades) {
-    <ion-card>
+    <ion-card role="alert">
       <ion-card-content>
         <ion-text color="danger" role="alert">
           <p>Error al cargar las actividades: {{ mensajeActividades }}</p>
@@ -44,32 +44,47 @@
   }
 
   @if (!cargando() && !errorVideojuegos()) {
-    <section class="filtros" aria-label="Filtros de informes">
-      <label>
-        Plataforma
-        <select [value]="filtroPlataforma()" (change)="cambiarPlataforma($event)">
-          <option value="">Todas las plataformas</option>
-          @for (plataforma of plataformas; track plataforma) {
-            <option [value]="plataforma">{{ plataforma }}</option>
-          }
-        </select>
-      </label>
-      <label>
-        Género
-        <select [value]="filtroGenero()" (change)="cambiarGenero($event)">
-          <option value="">Todos los géneros</option>
-          @for (genero of generos; track genero) {
-            <option [value]="genero">{{ genero }}</option>
-          }
-        </select>
-      </label>
-    </section>
-
-    <section class="tarjetas" aria-label="Resumen del catálogo">
-      <app-stat-card titulo="Total de juegos" [valor]="totalJuegos()" icono="game-controller" />
-      <app-stat-card titulo="Stock total" [valor]="stockTotal()" icono="cube" />
-      <app-stat-card titulo="Valor del inventario" [valor]="valorInventario()" icono="cash" />
-      <app-stat-card titulo="Valoración media" [valor]="valoracionMedia()" icono="star" />
+    <section aria-label="Filtros de informes">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <label>
+            Plataforma
+            <select [value]="filtroPlataforma()" (change)="cambiarPlataforma($event)">
+              <option value="">Todas las plataformas</option>
+              @for (plataforma of plataformas; track plataforma) {
+                <option [value]="plataforma">{{ plataforma }}</option>
+              }
+            </select>
+          </label>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <label>
+            Género
+            <select [value]="filtroGenero()" (change)="cambiarGenero($event)">
+              <option value="">Todos los géneros</option>
+              @for (genero of generos; track genero) {
+                <option [value]="genero">{{ genero }}</option>
+              }
+            </select>
+          </label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Total de juegos" [valor]="totalJuegos()" icono="game-controller" />
+        </ion-col>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Stock total" [valor]="stockTotal()" icono="cube" />
+        </ion-col>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Valor del inventario" [valor]="valorInventario()" icono="cash" />
+        </ion-col>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Valoración media" [valor]="valoracionMedia()" icono="star" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     </section>
 
     @defer (on idle) {

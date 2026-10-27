@@ -17,6 +17,8 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
+  IonCol,
+  IonGrid,
   IonHeader,
   IonItem,
   IonLabel,
@@ -24,6 +26,7 @@ import {
   IonMenuButton,
   IonSpinner,
   IonText,
+  IonRow,
   IonTitle,
   IonToolbar
 } from '@ionic/angular';
@@ -61,6 +64,8 @@ const GENEROS: readonly Genero[] = ['RPG', 'Accion', 'Deportes', 'Estrategia', '
     IonCardHeader,
     IonCardTitle,
     IonContent,
+    IonCol,
+    IonGrid,
     IonHeader,
     IonItem,
     IonLabel,
@@ -68,6 +73,7 @@ const GENEROS: readonly Genero[] = ['RPG', 'Accion', 'Deportes', 'Estrategia', '
     IonMenuButton,
     IonSpinner,
     IonText,
+    IonRow,
     IonTitle,
     IonToolbar,
     InformeGraficosComponent,

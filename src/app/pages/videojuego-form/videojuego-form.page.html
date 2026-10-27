@@ -1,32 +1,37 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/videojuegos"></ion-back-button>
+      <ion-back-button defaultHref="/videojuegos" text="Volver al catálogo" aria-label="Volver al catálogo"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ modoEdicion() ? 'Editar videojuego' : 'Nuevo videojuego' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" role="region" aria-label="Formulario de videojuego">
   @if (cargando()) {
-    <div class="ion-text-center ion-padding" aria-live="polite">
+    <div class="ion-text-center ion-padding" role="status" aria-live="polite">
       <ion-spinner name="crescent" aria-label="Cargando videojuego"></ion-spinner>
       <p>Cargando videojuego…</p>
     </div>
   } @else {
-    @if (errorMensaje(); as mensaje) {
-      <ion-text color="danger" role="alert"><p>{{ mensaje }}</p></ion-text>
-    }
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="10" offset-md="1" size-lg="8" offset-lg="2">
+    <div aria-live="polite" aria-atomic="true">
+      @if (errorMensaje(); as mensaje) {
+        <ion-text color="danger" role="status"><p>{{ mensaje }}</p></ion-text>
+      }
+    </div>
 
     @if (modoEdicion()) {
       <ion-item>
-        <ion-label position="stacked">ID</ion-label>
-        <ion-input [value]="idVideojuego()" readonly></ion-input>
+        <ion-label position="stacked" for="id-videojuego">ID</ion-label>
+        <ion-input id="id-videojuego" [value]="idVideojuego()" readonly></ion-input>
       </ion-item>
       @if (fechaCreacion(); as fecha) {
         <ion-item>
-          <ion-label position="stacked">Fecha de creación</ion-label>
-          <ion-input [value]="fecha" readonly></ion-input>
+          <ion-label position="stacked" for="fecha-creacion">Fecha de creación</ion-label>
+          <ion-input id="fecha-creacion" [value]="fecha" readonly></ion-input>
         </ion-item>
       }
     }
@@ -34,28 +39,32 @@
     <form [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
       <ion-item>
         <ion-label position="stacked" for="titulo">Título *</ion-label>
-        <ion-input id="titulo" formControlName="titulo" required></ion-input>
+        <ion-input id="titulo" formControlName="titulo" required [attr.aria-invalid]="formulario.controls.titulo.touched && formulario.controls.titulo.invalid" aria-describedby="titulo-error"></ion-input>
       </ion-item>
-      @if (formulario.controls.titulo.touched && formulario.controls.titulo.hasError('required')) {
-        <ion-text color="danger"><p class="ion-padding-start">El título es obligatorio.</p></ion-text>
-      }
+      <div id="titulo-error" aria-live="polite" aria-atomic="true">
+        @if (formulario.controls.titulo.touched && formulario.controls.titulo.hasError('required')) {
+          <ion-text color="danger"><p class="ion-padding-start">El título es obligatorio.</p></ion-text>
+        }
+      </div>
 
       <ion-item>
         <ion-label position="stacked" for="codigo-sku">Código SKU *</ion-label>
-        <ion-input id="codigo-sku" formControlName="codigo_sku" required></ion-input>
+        <ion-input id="codigo-sku" formControlName="codigo_sku" required [attr.aria-invalid]="formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.invalid" aria-describedby="sku-error"></ion-input>
       </ion-item>
-      @if (formulario.controls.codigo_sku.pending) {
-        <ion-text color="medium"><p class="ion-padding-start">Comprobando código SKU…</p></ion-text>
-      }
-      @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError('required')) {
-        <ion-text color="danger"><p class="ion-padding-start">El código SKU es obligatorio.</p></ion-text>
-      }
-      @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError('skuDuplicado')) {
-        <ion-text color="danger"><p class="ion-padding-start">Ese código SKU ya está en uso.</p></ion-text>
-      }
-      @if (formulario.controls.codigo_sku.hasError('errorComprobandoSku')) {
-        <ion-text color="danger"><p class="ion-padding-start">No se pudo comprobar el SKU. Revisa la conexión e inténtalo de nuevo.</p></ion-text>
-      }
+      <div id="sku-error" aria-live="polite" aria-atomic="true">
+        @if (formulario.controls.codigo_sku.pending) {
+          <ion-text color="medium"><p class="ion-padding-start">Comprobando código SKU…</p></ion-text>
+        }
+        @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError('required')) {
+          <ion-text color="danger"><p class="ion-padding-start">El código SKU es obligatorio.</p></ion-text>
+        }
+        @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError('skuDuplicado')) {
+          <ion-text color="danger"><p class="ion-padding-start">Ese código SKU ya está en uso.</p></ion-text>
+        }
+        @if (formulario.controls.codigo_sku.hasError('errorComprobandoSku')) {
+          <ion-text color="danger"><p class="ion-padding-start">No se pudo comprobar el SKU. Revisa la conexión e inténtalo de nuevo.</p></ion-text>
+        }
+      </div>
 
       <ion-item>
         <ion-label position="stacked" for="descripcion">Descripción</ion-label>
@@ -64,27 +73,33 @@
 
       <ion-item>
         <ion-label position="stacked" for="precio">Precio (€) *</ion-label>
-        <ion-input id="precio" type="number" min="0" step="0.01" formControlName="precio" required></ion-input>
+        <ion-input id="precio" type="number" min="0" step="0.01" formControlName="precio" required [attr.aria-invalid]="formulario.controls.precio.touched && formulario.controls.precio.invalid" aria-describedby="precio-error"></ion-input>
       </ion-item>
-      @if (formulario.controls.precio.touched && formulario.controls.precio.invalid) {
-        <ion-text color="danger"><p class="ion-padding-start">El precio debe ser mayor o igual a 0.</p></ion-text>
-      }
+      <div id="precio-error" aria-live="polite" aria-atomic="true">
+        @if (formulario.controls.precio.touched && formulario.controls.precio.invalid) {
+          <ion-text color="danger"><p class="ion-padding-start">El precio debe ser mayor o igual a 0.</p></ion-text>
+        }
+      </div>
 
       <ion-item>
         <ion-label position="stacked" for="stock">Stock *</ion-label>
-        <ion-input id="stock" type="number" min="0" step="1" formControlName="stock" required></ion-input>
+        <ion-input id="stock" type="number" min="0" step="1" formControlName="stock" required [attr.aria-invalid]="formulario.controls.stock.touched && formulario.controls.stock.invalid" aria-describedby="stock-error"></ion-input>
       </ion-item>
-      @if (formulario.controls.stock.touched && formulario.controls.stock.invalid) {
-        <ion-text color="danger"><p class="ion-padding-start">El stock debe ser un entero mayor o igual a 0.</p></ion-text>
-      }
+      <div id="stock-error" aria-live="polite" aria-atomic="true">
+        @if (formulario.controls.stock.touched && formulario.controls.stock.invalid) {
+          <ion-text color="danger"><p class="ion-padding-start">El stock debe ser un entero mayor o igual a 0.</p></ion-text>
+        }
+      </div>
 
       <ion-item>
         <ion-label position="stacked" for="valoracion">Valoración (0–10)</ion-label>
-        <ion-input id="valoracion" type="number" min="0" max="10" step="0.1" formControlName="valoracion"></ion-input>
+        <ion-input id="valoracion" type="number" min="0" max="10" step="0.1" formControlName="valoracion" [attr.aria-invalid]="formulario.controls.valoracion.touched && formulario.controls.valoracion.invalid" aria-describedby="valoracion-error"></ion-input>
       </ion-item>
-      @if (formulario.controls.valoracion.touched && formulario.controls.valoracion.invalid) {
-        <ion-text color="danger"><p class="ion-padding-start">La valoración debe estar entre 0 y 10.</p></ion-text>
-      }
+      <div id="valoracion-error" aria-live="polite" aria-atomic="true">
+        @if (formulario.controls.valoracion.touched && formulario.controls.valoracion.invalid) {
+          <ion-text color="danger"><p class="ion-padding-start">La valoración debe estar entre 0 y 10.</p></ion-text>
+        }
+      </div>
 
       <ion-item>
         <ion-label position="stacked" for="fecha-lanzamiento">Fecha de lanzamiento</ion-label>
@@ -92,8 +107,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Disponible</ion-label>
-        <ion-toggle formControlName="disponible" slot="end" aria-label="Disponible"></ion-toggle>
+        <ion-label for="disponible">Disponible</ion-label>
+        <ion-toggle id="disponible" formControlName="disponible" slot="end" aria-label="Disponible"></ion-toggle>
       </ion-item>
 
       <ion-item>
@@ -151,6 +166,7 @@
         type="submit"
         class="ion-margin-top"
         [disabled]="guardando() || formulario.pending"
+        [attr.aria-busy]="guardando()"
       >
         @if (guardando()) {
           <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>
@@ -160,5 +176,8 @@
         }
       </ion-button>
     </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   }
 </ion-content>

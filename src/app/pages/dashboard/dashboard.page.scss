@@ -3,25 +3,35 @@ canvas {
   height: auto;
 }
 
-.filtros,
-.tarjetas {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+ion-grid {
   margin-bottom: 1rem;
+  max-width: 100%;
 }
 
-.filtros label {
+ion-row {
+  align-items: stretch;
+}
+
+ion-col {
+  min-width: 0;
+}
+
+ion-col app-stat-card {
+  height: 100%;
+}
+
+label {
   display: grid;
   gap: 0.4rem;
 }
 
-.filtros select {
+select {
   background: var(--ion-background-color, #fff);
   border: 1px solid var(--ion-color-medium);
   border-radius: 0.4rem;
   color: var(--ion-text-color);
   font: inherit;
   min-height: 2.75rem;
+  max-width: 100%;
   padding: 0.5rem;
 }

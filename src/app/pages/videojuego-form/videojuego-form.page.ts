@@ -12,7 +12,9 @@ import {
   IonBackButton,
   IonButton,
   IonButtons,
+  IonCol,
   IonContent,
+  IonGrid,
   IonHeader,
   IonInput,
   IonItem,
@@ -24,6 +26,7 @@ import {
   IonTextarea,
   IonTitle,
   IonToggle,
+  IonRow,
   IonToolbar
 } from '@ionic/angular';
 import { catchError, map, of, switchMap, timer } from 'rxjs';
@@ -63,7 +66,9 @@ type VideojuegoFormControls = {
     IonBackButton,
     IonButton,
     IonButtons,
+    IonCol,
     IonContent,
+    IonGrid,
     IonHeader,
     IonInput,
     IonItem,
@@ -75,6 +80,7 @@ type VideojuegoFormControls = {
     IonTextarea,
     IonTitle,
     IonToggle,
+    IonRow,
     IonToolbar
   ],
   templateUrl: './videojuego-form.page.html',

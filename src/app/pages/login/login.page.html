@@ -1,10 +1,16 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>
+    </ion-buttons>
     <ion-title>Iniciar sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" role="region" aria-label="Formulario de inicio de sesión">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
   <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate>
     <ion-item>
       <ion-label position="stacked" for="email">Correo electrónico</ion-label>
@@ -14,13 +20,17 @@
         autocomplete="email"
         formControlName="email"
         aria-required="true"
+        [attr.aria-invalid]="loginForm.controls.email.touched && loginForm.controls.email.invalid"
+        aria-describedby="email-error"
       ></ion-input>
     </ion-item>
-    @if (loginForm.controls.email.touched && loginForm.controls.email.invalid) {
-      <ion-text color="danger">
-        <p class="ion-padding-start">Introduce un correo electrónico válido.</p>
-      </ion-text>
-    }
+    <div id="email-error" aria-live="polite" aria-atomic="true">
+      @if (loginForm.controls.email.touched && loginForm.controls.email.invalid) {
+        <ion-text color="danger">
+          <p class="ion-padding-start">Introduce un correo electrónico válido.</p>
+        </ion-text>
+      }
+    </div>
 
     <ion-item>
       <ion-label position="stacked" for="password">Contraseña</ion-label>
@@ -30,21 +40,27 @@
         autocomplete="current-password"
         formControlName="password"
         aria-required="true"
+        [attr.aria-invalid]="loginForm.controls.password.touched && loginForm.controls.password.invalid"
+        aria-describedby="password-error"
       ></ion-input>
     </ion-item>
-    @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
-      <ion-text color="danger">
-        <p class="ion-padding-start">La contraseña es obligatoria.</p>
-      </ion-text>
-    }
+    <div id="password-error" aria-live="polite" aria-atomic="true">
+      @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+        <ion-text color="danger">
+          <p class="ion-padding-start">La contraseña es obligatoria.</p>
+        </ion-text>
+      }
+    </div>
 
-    @if (errorMensaje(); as mensaje) {
-      <ion-text color="danger" aria-live="assertive">
-        <p>{{ mensaje }}</p>
-      </ion-text>
-    }
+    <div aria-live="polite" aria-atomic="true">
+      @if (errorMensaje(); as mensaje) {
+        <ion-text color="danger">
+          <p>{{ mensaje }}</p>
+        </ion-text>
+      }
+    </div>
 
-    <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="cargando()">
+    <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="cargando()" [attr.aria-busy]="cargando()">
       @if (cargando()) {
         <span>Validando…</span>
       } @else {
@@ -52,4 +68,7 @@
       }
     </ion-button>
   </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

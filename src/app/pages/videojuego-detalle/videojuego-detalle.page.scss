@@ -1,3 +1,13 @@
 ion-card img {
+  display: block;
   width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+ion-grid,
+ion-col,
+ion-card {
+  max-width: 100%;
+  min-width: 0;
 }
