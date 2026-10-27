@@ -9,10 +9,5 @@ export const adminGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.estaAutenticado() && authService.esAdministrador()) {
-    return true;
-  }
-
-  router.navigate(['/videojuegos']);
-  return false;
+  return authService.esAdministrador() || router.createUrlTree(['/videojuegos']);
 };

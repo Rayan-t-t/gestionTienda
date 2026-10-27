@@ -1,5 +1,4 @@
-import { Component, ChangeDetectionStrategy, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   IonMenu,
@@ -11,10 +10,16 @@ import {
   IonItem,
   IonLabel,
   IonIcon,
-  IonRouterOutlet
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { home, gameController, speedometer, informationCircle, logIn, logOut } from 'ionicons/icons';
+import {
+  gameController,
+  helpCircle,
+  informationCircle,
+  logIn,
+  logOut,
+  speedometer
+} from 'ionicons/icons';
 import { AuthService } from '../../../core/services/auth.service';
 
 /**
@@ -24,7 +29,6 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-menu',
   standalone: true,
   imports: [
-    CommonModule,
     RouterLink,
     IonMenu,
     IonHeader,
@@ -34,19 +38,21 @@ import { AuthService } from '../../../core/services/auth.service';
     IonList,
     IonItem,
     IonLabel,
-    IonIcon,
-    IonRouterOutlet
+    IonIcon
   ],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuComponent {
-  readonly usuario = this.authService.usuarioActual;
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+  readonly estaAutenticado = this.authService.estaAutenticado;
   readonly esAdmin = computed(() => this.authService.esAdministrador());
 
-  constructor(private authService: AuthService, private router: Router) {
-    addIcons({ home, gameController, speedometer, informationCircle, logIn, logOut });
+  constructor() {
+    addIcons({ gameController, helpCircle, speedometer, informationCircle, logIn, logOut });
   }
 
   /**
@@ -54,6 +60,6 @@ export class MenuComponent {
    */
   cerrarSesion(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    void this.router.navigateByUrl('/login');
   }
 }
