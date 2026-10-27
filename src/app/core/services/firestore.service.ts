@@ -1,60 +1,77 @@
-import { Injectable } from '@angular/core';
-import { initializeApp } from 'firebase/app';
+import { getApp, getApps, initializeApp } from 'firebase/app';
 import {
-  getFirestore,
-  collection,
   addDoc,
+  collection,
+  Firestore,
   getDocs,
-  Firestore
+  getFirestore,
+  limit,
+  orderBy,
+  query,
+  Timestamp
 } from 'firebase/firestore';
+import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
+/** Datos que se guardan en la colección de auditoría. */
+export interface NuevaActividad {
+  tipo: string;
+  usuario: string;
+  detalle: string;
+  fecha: Date;
+}
+
+/** Actividad de auditoría recuperada de Firestore. */
+export interface Actividad extends Omit<NuevaActividad, 'fecha'> {
+  id: string;
+  fecha: Timestamp;
+}
+
 /**
- * Servicio para interactuar con Firebase Firestore.
- * Usa la colección 'actividad' para registrar acciones.
+ * Servicio de auditoría sobre la colección actividad de Firestore.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
-  private db: Firestore;
+  private readonly db: Firestore;
 
   constructor() {
-    const app = initializeApp(environment.firebaseConfig);
+    const app = getApps().length > 0 ? getApp() : initializeApp(environment.firebaseConfig);
     this.db = getFirestore(app);
   }
 
   /**
-   * Registra una actividad en la colección 'actividad'.
+   * Registra una actividad y propaga cualquier fallo para que la interfaz lo informe.
    */
-  async registrarActividad(actividad: {
-    tipo: string;
-    descripcion: string;
-    usuario?: string;
-    fecha?: Date;
-  }): Promise<void> {
+  async registrarActividad(actividad: NuevaActividad): Promise<void> {
     try {
-      const coleccion = collection(this.db, 'actividad');
-      await addDoc(coleccion, {
-        ...actividad,
-        fecha: actividad.fecha || new Date()
-      });
+      await addDoc(collection(this.db, 'actividad'), actividad);
     } catch (error) {
-      console.error('Error al registrar actividad en Firestore:', error);
+      console.error('No se pudo registrar la actividad en Firestore.', error);
+      throw error;
     }
   }
 
   /**
-   * Obtiene todas las actividades registradas.
+   * Obtiene las actividades más recientes, ordenadas por fecha descendente.
    */
-  async obtenerActividades(): Promise<any[]> {
+  async obtenerActividades(limite = 200): Promise<Actividad[]> {
     try {
-      const coleccion = collection(this.db, 'actividad');
-      const snapshot = await getDocs(coleccion);
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const consulta = query(
+        collection(this.db, 'actividad'),
+        orderBy('fecha', 'desc'),
+        limit(Math.max(1, Math.floor(limite)))
+      );
+      const snapshot = await getDocs(consulta);
+      return snapshot.docs.map((documento) => ({
+        id: documento.id,
+        ...(documento.data() as Omit<NuevaActividad, 'fecha'>),
+        fecha: documento.get('fecha') as Timestamp
+      }));
     } catch (error) {
-      console.error('Error al obtener actividades de Firestore:', error);
-      return [];
+      console.error('No se pudieron obtener las actividades de Firestore.', error);
+      throw error;
     }
   }
 }

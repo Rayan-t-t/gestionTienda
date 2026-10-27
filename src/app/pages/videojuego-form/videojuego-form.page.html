@@ -1,153 +1,164 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/videojuegos"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ modoEdicion() ? 'Editar Videojuego' : 'Nuevo Videojuego' }}</ion-title>
+    <ion-title>{{ modoEdicion() ? 'Editar videojuego' : 'Nuevo videojuego' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ modoEdicion() ? 'Editar' : 'Nuevo' }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content class="ion-padding">
   @if (cargando()) {
     <div class="ion-text-center ion-padding" aria-live="polite">
-      <ion-spinner name="crescent" aria-label="Cargando formulario"></ion-spinner>
-      <p>Cargando...</p>
+      <ion-spinner name="crescent" aria-label="Cargando videojuego"></ion-spinner>
+      <p>Cargando videojuego…</p>
     </div>
-  }
-
-  @if (errorMensaje()) {
-    <ion-text color="danger" class="ion-padding" aria-live="assertive">
-      <p>{{ errorMensaje() }}</p>
-    </ion-text>
-  }
-
-  <form [formGroup]="formulario" (ngSubmit)="guardar()" novalidate aria-live="polite">
-    <ion-item>
-      <ion-label position="stacked" for="titulo">Título *</ion-label>
-      <ion-input id="titulo" formControlName="titulo" aria-required="true"></ion-input>
-    </ion-item>
-    @if (formulario.get('titulo')?.touched && formulario.get('titulo')?.invalid) {
-      <ion-text color="danger" class="ion-padding-start">
-        <small>El título es obligatorio</small>
-      </ion-text>
+  } @else {
+    @if (errorMensaje(); as mensaje) {
+      <ion-text color="danger" role="alert"><p>{{ mensaje }}</p></ion-text>
     }
 
-    <ion-item>
-      <ion-label position="stacked" for="codigo_sku">Código SKU *</ion-label>
-      <ion-input id="codigo_sku" formControlName="codigo_sku" aria-required="true"></ion-input>
-    </ion-item>
-    @if (formulario.get('codigo_sku')?.touched && formulario.get('codigo_sku')?.invalid) {
-      <ion-text color="danger" class="ion-padding-start">
-        <small>El código SKU es obligatorio</small>
-      </ion-text>
-    }
-
-    <ion-item>
-      <ion-label position="stacked" for="descripcion">Descripción</ion-label>
-      <ion-textarea id="descripcion" formControlName="descripcion"></ion-textarea>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked" for="precio">Precio (€) *</ion-label>
-      <ion-input id="precio" type="number" formControlName="precio" aria-required="true"></ion-input>
-    </ion-item>
-    @if (formulario.get('precio')?.touched && formulario.get('precio')?.invalid) {
-      <ion-text color="danger" class="ion-padding-start">
-        <small>El precio debe ser mayor o igual a 0</small>
-      </ion-text>
-    }
-
-    <ion-item>
-      <ion-label position="stacked" for="stock">Stock *</ion-label>
-      <ion-input id="stock" type="number" formControlName="stock" aria-required="true"></ion-input>
-    </ion-item>
-    @if (formulario.get('stock')?.touched && formulario.get('stock')?.invalid) {
-      <ion-text color="danger" class="ion-padding-start">
-        <small>El stock debe ser mayor o igual a 0</small>
-      </ion-text>
-    }
-
-    <ion-item>
-      <ion-label position="stacked" for="valoracion">Valoración (0-10)</ion-label>
-      <ion-input id="valoracion" type="number" formControlName="valoracion"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked" for="fecha_lanzamiento">Fecha de Lanzamiento</ion-label>
-      <ion-input id="fecha_lanzamiento" type="date" formControlName="fecha_lanzamiento"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Disponible</ion-label>
-      <ion-toggle formControlName="disponible" slot="end"></ion-toggle>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked" for="plataforma">Plataforma *</ion-label>
-      <ion-select id="plataforma" formControlName="plataforma" aria-required="true">
-        <ion-select-option value="PC">PC</ion-select-option>
-        <ion-select-option value="PS5">PS5</ion-select-option>
-        <ion-select-option value="Xbox">Xbox</ion-select-option>
-        <ion-select-option value="Switch">Switch</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked" for="genero">Género *</ion-label>
-      <ion-select id="genero" formControlName="genero" aria-required="true">
-        <ion-select-option value="RPG">RPG</ion-select-option>
-        <ion-select-option value="Accion">Acción</ion-select-option>
-        <ion-select-option value="Deportes">Deportes</ion-select-option>
-        <ion-select-option value="Estrategia">Estrategia</ion-select-option>
-        <ion-select-option value="Aventura">Aventura</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked" for="etiquetas">Etiquetas (separadas por coma)</ion-label>
-      <ion-input id="etiquetas" formControlName="etiquetas"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked" for="portada_url">URL de Portada</ion-label>
-      <ion-input id="portada_url" type="url" formControlName="portada_url"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Requisitos (Opcional)</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked" for="ram">RAM</ion-label>
-      <ion-input id="ram" formControlName="ram" placeholder="Ej: 8GB"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked" for="gpu">GPU</ion-label>
-      <ion-input id="gpu" formControlName="gpu" placeholder="Ej: GTX 1060"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked" for="almacenamiento">Almacenamiento</ion-label>
-      <ion-input id="almacenamiento" formControlName="almacenamiento" placeholder="Ej: 50GB"></ion-input>
-    </ion-item>
-
-    <ion-button
-      expand="block"
-      type="submit"
-      class="ion-margin-top"
-      [disabled]="guardando()"
-      aria-label="Guardar videojuego"
-    >
-      @if (guardando()) {
-        <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>
-        <span class="ion-margin-start">Guardando...</span>
-      } @else {
-        <span>Guardar</span>
+    @if (modoEdicion()) {
+      <ion-item>
+        <ion-label position="stacked">ID</ion-label>
+        <ion-input [value]="idVideojuego()" readonly></ion-input>
+      </ion-item>
+      @if (fechaCreacion(); as fecha) {
+        <ion-item>
+          <ion-label position="stacked">Fecha de creación</ion-label>
+          <ion-input [value]="fecha" readonly></ion-input>
+        </ion-item>
       }
-    </ion-button>
-  </form>
+    }
+
+    <form [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
+      <ion-item>
+        <ion-label position="stacked" for="titulo">Título *</ion-label>
+        <ion-input id="titulo" formControlName="titulo" required></ion-input>
+      </ion-item>
+      @if (formulario.controls.titulo.touched && formulario.controls.titulo.hasError('required')) {
+        <ion-text color="danger"><p class="ion-padding-start">El título es obligatorio.</p></ion-text>
+      }
+
+      <ion-item>
+        <ion-label position="stacked" for="codigo-sku">Código SKU *</ion-label>
+        <ion-input id="codigo-sku" formControlName="codigo_sku" required></ion-input>
+      </ion-item>
+      @if (formulario.controls.codigo_sku.pending) {
+        <ion-text color="medium"><p class="ion-padding-start">Comprobando código SKU…</p></ion-text>
+      }
+      @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError('required')) {
+        <ion-text color="danger"><p class="ion-padding-start">El código SKU es obligatorio.</p></ion-text>
+      }
+      @if (formulario.controls.codigo_sku.touched && formulario.controls.codigo_sku.hasError('skuDuplicado')) {
+        <ion-text color="danger"><p class="ion-padding-start">Ese código SKU ya está en uso.</p></ion-text>
+      }
+      @if (formulario.controls.codigo_sku.hasError('errorComprobandoSku')) {
+        <ion-text color="danger"><p class="ion-padding-start">No se pudo comprobar el SKU. Revisa la conexión e inténtalo de nuevo.</p></ion-text>
+      }
+
+      <ion-item>
+        <ion-label position="stacked" for="descripcion">Descripción</ion-label>
+        <ion-textarea id="descripcion" formControlName="descripcion" autoGrow></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" for="precio">Precio (€) *</ion-label>
+        <ion-input id="precio" type="number" min="0" step="0.01" formControlName="precio" required></ion-input>
+      </ion-item>
+      @if (formulario.controls.precio.touched && formulario.controls.precio.invalid) {
+        <ion-text color="danger"><p class="ion-padding-start">El precio debe ser mayor o igual a 0.</p></ion-text>
+      }
+
+      <ion-item>
+        <ion-label position="stacked" for="stock">Stock *</ion-label>
+        <ion-input id="stock" type="number" min="0" step="1" formControlName="stock" required></ion-input>
+      </ion-item>
+      @if (formulario.controls.stock.touched && formulario.controls.stock.invalid) {
+        <ion-text color="danger"><p class="ion-padding-start">El stock debe ser un entero mayor o igual a 0.</p></ion-text>
+      }
+
+      <ion-item>
+        <ion-label position="stacked" for="valoracion">Valoración (0–10)</ion-label>
+        <ion-input id="valoracion" type="number" min="0" max="10" step="0.1" formControlName="valoracion"></ion-input>
+      </ion-item>
+      @if (formulario.controls.valoracion.touched && formulario.controls.valoracion.invalid) {
+        <ion-text color="danger"><p class="ion-padding-start">La valoración debe estar entre 0 y 10.</p></ion-text>
+      }
+
+      <ion-item>
+        <ion-label position="stacked" for="fecha-lanzamiento">Fecha de lanzamiento</ion-label>
+        <ion-input id="fecha-lanzamiento" type="date" formControlName="fecha_lanzamiento"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Disponible</ion-label>
+        <ion-toggle formControlName="disponible" slot="end" aria-label="Disponible"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" for="plataforma">Plataforma *</ion-label>
+        <ion-select id="plataforma" formControlName="plataforma" interface="popover">
+          @for (plataforma of plataformas; track plataforma) {
+            <ion-select-option [value]="plataforma">{{ plataforma }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" for="genero">Género *</ion-label>
+        <ion-select id="genero" formControlName="genero" interface="popover">
+          @for (genero of generos; track genero) {
+            <ion-select-option [value]="genero">{{ genero }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" for="etiquetas">Etiquetas (separadas por comas)</ion-label>
+        <ion-input id="etiquetas" formControlName="etiquetas"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" for="portada-url">URL de portada</ion-label>
+        <ion-input id="portada-url" type="url" formControlName="portada_url"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none"><ion-label><h2>Requisitos</h2></ion-label></ion-item>
+      <ion-item>
+        <ion-label position="stacked" for="so">Sistema operativo</ion-label>
+        <ion-input id="so" formControlName="so"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" for="procesador">Procesador</ion-label>
+        <ion-input id="procesador" formControlName="procesador"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" for="ram">RAM</ion-label>
+        <ion-input id="ram" formControlName="ram"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" for="gpu">GPU</ion-label>
+        <ion-input id="gpu" formControlName="gpu"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" for="almacenamiento">Almacenamiento</ion-label>
+        <ion-input id="almacenamiento" formControlName="almacenamiento"></ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="ion-margin-top"
+        [disabled]="guardando() || formulario.pending"
+      >
+        @if (guardando()) {
+          <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>
+          <span class="ion-margin-start">Guardando…</span>
+        } @else {
+          <span>Guardar videojuego</span>
+        }
+      </ion-button>
+    </form>
+  }
 </ion-content>

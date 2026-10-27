@@ -14,14 +14,22 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Estadísticas de Actividades</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <canvas id="graficoActividades" aria-label="Gráfico de actividades" role="img"></canvas>
-    </ion-card-content>
-  </ion-card>
+  @defer (on idle) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Estadísticas de actividades</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas
+          #graficoActividades
+          aria-label="Gráfico de actividades"
+          role="img"
+        ></canvas>
+      </ion-card-content>
+    </ion-card>
+  } @placeholder {
+    <ion-card><ion-card-content>Cargando el gráfico…</ion-card-content></ion-card>
+  }
 
   <ion-card>
     <ion-card-header>
@@ -33,12 +41,15 @@
           <ion-spinner name="crescent" aria-label="Cargando actividades"></ion-spinner>
         </div>
       } @else {
+        @if (errorMensaje(); as mensaje) {
+          <ion-text color="danger" role="alert"><p>{{ mensaje }}</p></ion-text>
+        } @else {
         <ion-list>
-          @for (actividad of actividades(); track $index) {
+          @for (actividad of actividades(); track actividad.id) {
             <ion-item>
               <ion-label>
                 <h2>{{ actividad.tipo | uppercase }}</h2>
-                <p>{{ actividad.descripcion }}</p>
+                <p>{{ actividad.detalle }}</p>
                 @if (actividad.usuario) {
                   <p><small>Usuario: {{ actividad.usuario }}</small></p>
                 }
@@ -46,6 +57,7 @@
             </ion-item>
           }
         </ion-list>
+        }
       }
     </ion-card-content>
   </ion-card>

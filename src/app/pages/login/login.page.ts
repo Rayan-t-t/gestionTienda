@@ -14,6 +14,7 @@ import {
   IonToolbar
 } from '@ionic/angular';
 import { AuthService } from '../../core/services/auth.service';
+import { FirestoreService } from '../../core/services/firestore.service';
 
 /**
  * Página de inicio de sesión.
@@ -40,6 +41,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class LoginPage {
   private readonly formBuilder = inject(FormBuilder);
   private readonly authService = inject(AuthService);
+  private readonly firestoreService = inject(FirestoreService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -67,8 +69,18 @@ export class LoginPage {
       .login(email.trim(), password)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: () => {
+        next: (usuario) => {
           this.cargando.set(false);
+          void this.firestoreService
+            .registrarActividad({
+              tipo: 'login',
+              usuario: usuario.email,
+              detalle: `Inicio de sesión de ${usuario.email}`,
+              fecha: new Date()
+            })
+            .catch((error: unknown) =>
+              console.error('La sesión se inició, pero falló el registro de auditoría.', error)
+            );
           void this.router.navigateByUrl('/videojuegos');
         },
         error: () => {

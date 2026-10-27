@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Videojuego } from '../../core/models/videojuego.model';
+import { VideojuegoListado } from '../../core/models/videojuego.model';
 
 /**
  * Pipe para filtrar videojuegos por título, plataforma o género.
@@ -12,7 +12,7 @@ export class FiltroVideojuegosPipe implements PipeTransform {
   /**
    * Filtra la lista de videojuegos según el texto de búsqueda.
    */
-  transform(videojuegos: Videojuego[] | null, termino: string): Videojuego[] {
+  transform(videojuegos: VideojuegoListado[] | null, termino: string): VideojuegoListado[] {
     if (!videojuegos) {
       return [];
     }
