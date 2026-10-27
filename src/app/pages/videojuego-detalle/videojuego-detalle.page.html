@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/videojuegos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle del Videojuego</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Detalle</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @if (cargando()) {
+    <div class="ion-text-center ion-padding" aria-live="polite">
+      <ion-spinner name="crescent" aria-label="Cargando detalles"></ion-spinner>
+      <p>Cargando...</p>
+    </div>
+  }
+
+  @if (errorMensaje()) {
+    <ion-text color="danger" class="ion-padding" aria-live="assertive">
+      <p>{{ errorMensaje() }}</p>
+    </ion-text>
+  }
+
+  @if (videojuego()) {
+    <ion-card>
+      @if (videojuego()!.portada_url) {
+        <img [src]="videojuego()!.portada_url" [alt]="'Portada de ' + videojuego()!.titulo" style="width: 100%; max-height: 300px; object-fit: cover;" />
+      }
+      <ion-card-header>
+        <ion-card-title>{{ videojuego()!.titulo }}</ion-card-title>
+        <ion-card-subtitle>{{ videojuego()!.plataforma }} - {{ videojuego()!.genero }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Código SKU:</strong> {{ videojuego()!.codigo_sku }}</p>
+        <p><strong>Precio:</strong> {{ videojuego()!.precio }}€</p>
+        <p><strong>Stock:</strong> {{ videojuego()!.stock }} unidades</p>
+        <p><strong>Disponible:</strong> {{ videojuego()!.disponible ? 'Sí' : 'No' }}</p>
+        @if (videojuego()!.valoracion !== null && videojuego()!.valoracion !== undefined) {
+          <p><strong>Valoración:</strong> {{ videojuego()!.valoracion }}/10</p>
+        }
+        @if (videojuego()!.fecha_lanzamiento) {
+          <p><strong>Fecha de lanzamiento:</strong> {{ videojuego()!.fecha_lanzamiento }}</p>
+        }
+        @if (videojuego()!.descripcion) {
+          <p><strong>Descripción:</strong></p>
+          <p>{{ videojuego()!.descripcion }}</p>
+        }
+        @if (videojuego()!.etiquetas && videojuego()!.etiquetas!.length > 0) {
+          <p><strong>Etiquetas:</strong> {{ videojuego()!.etiquetas!.join(', ') }}</p>
+        }
+        @if (videojuego()!.requisitos) {
+          <p><strong>Requisitos:</strong></p>
+          <ul>
+            @if (videojuego()!.requisitos!.ram) {
+              <li>RAM: {{ videojuego()!.requisitos!.ram }}</li>
+            }
+            @if (videojuego()!.requisitos!.gpu) {
+              <li>GPU: {{ videojuego()!.requisitos!.gpu }}</li>
+            }
+            @if (videojuego()!.requisitos!.almacenamiento) {
+              <li>Almacenamiento: {{ videojuego()!.requisitos!.almacenamiento }}</li>
+            }
+          </ul>
+        }
+        @if (esAdmin()) {
+          <ion-button [routerLink]="['/videojuegos', videojuego()!.id, 'editar']" expand="block" class="ion-margin-top">
+            Editar Videojuego
+          </ion-button>
+        }
+        <ion-button routerLink="/videojuegos" expand="block" fill="outline">
+          Volver al listado
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+</ion-content>

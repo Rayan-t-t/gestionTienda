@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Iniciar Sesión</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate aria-live="polite">
+    <ion-item>
+      <ion-label position="stacked" for="email">Correo Electrónico *</ion-label>
+      <ion-input
+        id="email"
+        type="email"
+        formControlName="email"
+        aria-required="true"
+        aria-label="Correo Electrónico"
+      ></ion-input>
+    </ion-item>
+    @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+      <ion-text color="danger" class="ion-padding-start">
+        <small>Introduce un correo electrónico válido</small>
+      </ion-text>
+    }
+
+    <ion-item>
+      <ion-label position="stacked" for="password">Contraseña *</ion-label>
+      <ion-input
+        id="password"
+        type="password"
+        formControlName="password"
+        aria-required="true"
+        aria-label="Contraseña"
+      ></ion-input>
+    </ion-item>
+    @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+      <ion-text color="danger" class="ion-padding-start">
+        <small>La contraseña es obligatoria</small>
+      </ion-text>
+    }
+
+    @if (errorMensaje()) {
+      <ion-text color="danger" class="ion-padding" aria-live="assertive">
+        <p>{{ errorMensaje() }}</p>
+      </ion-text>
+    }
+
+    <ion-button
+      expand="block"
+      type="submit"
+      class="ion-margin-top"
+      [disabled]="cargando()"
+      aria-label="Iniciar sesión"
+    >
+      @if (cargando()) {
+        <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>
+        <span class="ion-margin-start">Cargando...</span>
+      } @else {
+        <span>Iniciar Sesión</span>
+      }
+    </ion-button>
+  </form>
+</ion-content>
