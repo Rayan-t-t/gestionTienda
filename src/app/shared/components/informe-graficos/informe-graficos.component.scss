@@ -4,24 +4,28 @@
 
 .graficos {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1.15rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  margin: 0 auto;
+  max-width: 90rem;
 }
 
 article {
   background: var(--ion-card-background, var(--ion-background-color, #fff));
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
-  padding: 1rem;
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.4rem rgb(15 23 42 / 6%);
+  padding: clamp(1rem, 3vw, 1.35rem);
 }
 
 h3 {
-  font-size: 1rem;
-  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 720;
+  margin: 0 0 1rem;
 }
 
 .lienzo {
-  height: 16rem;
+  height: clamp(15rem, 34vw, 19rem);
   position: relative;
 }
 

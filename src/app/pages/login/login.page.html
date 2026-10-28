@@ -8,10 +8,22 @@
 </ion-header>
 
 <ion-content class="ion-padding" role="region" aria-label="Formulario de inicio de sesión">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
-  <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate>
+  <div class="login-layout">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+          <section class="login-card" aria-labelledby="login-titulo">
+            <div class="login-identidad" aria-hidden="true">
+              <span class="marca-icono">VG</span>
+              <span class="marca-texto">VIDEOJUEGOS <span>·</span> GESTIÓN</span>
+            </div>
+            <header class="login-introduccion">
+              <p class="login-etiqueta">ACCESO SEGURO</p>
+              <h1 id="login-titulo">Te damos la bienvenida</h1>
+              <p>Inicia sesión para continuar al catálogo.</p>
+            </header>
+
+            <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate>
     <ion-item>
       <ion-label position="stacked" for="email">Correo electrónico</ion-label>
       <ion-input
@@ -67,8 +79,11 @@
         <span>Iniciar sesión</span>
       }
     </ion-button>
-  </form>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            </form>
+            <p class="login-pie">Gestor de videojuegos · DAM</p>
+          </section>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

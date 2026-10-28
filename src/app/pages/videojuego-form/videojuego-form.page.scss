@@ -1,6 +1,6 @@
 form {
   display: grid;
-  gap: 0.25rem 0.75rem;
+  gap: 0.55rem 0.85rem;
   grid-template-columns: minmax(0, 1fr);
   margin: 0 auto;
   max-width: 64rem;
@@ -11,6 +11,37 @@ ion-grid,
 ion-col {
   max-width: 100%;
   min-width: 0;
+}
+
+ion-grid {
+  margin: 0 auto;
+  max-width: 90rem;
+  padding-top: 1rem;
+}
+
+ion-col {
+  background: var(--ion-card-background, var(--ion-background-color, #fff));
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1.1rem;
+  box-shadow: 0 0.55rem 1.8rem rgb(15 23 42 / 7%);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+form ion-item {
+  --background: transparent;
+  --border-color: var(--ion-color-light-shade);
+  --padding-start: 0.15rem;
+}
+
+form ion-item:focus-within {
+  --border-color: var(--ion-color-primary);
+}
+
+form > ion-button {
+  --border-radius: 0.7rem;
+  font-weight: 700;
+  min-height: 3rem;
+  margin-top: 1rem;
 }
 
 ion-text,
@@ -29,5 +60,12 @@ ion-item:has(h2) {
 @media (min-width: 48rem) {
   form {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 35rem) {
+  ion-col {
+    border-radius: 0.85rem;
+    padding: 0.85rem;
   }
 }

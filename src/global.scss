@@ -42,9 +42,38 @@ html {
 }
 
 body {
+  background: var(--ion-background-color);
   font-family: var(--ion-font-family);
   font-size: 1rem;
   line-height: 1.5;
+}
+
+ion-header ion-toolbar[color="primary"] {
+  --background: linear-gradient(110deg, var(--ion-color-primary-shade), var(--ion-color-primary));
+  --color: var(--ion-color-primary-contrast);
+  --border-color: transparent;
+}
+
+ion-title {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+ion-content::part(background) {
+  background:
+    radial-gradient(ellipse at 92% 2%, rgb(var(--ion-color-primary-rgb) / 4%), transparent 27rem),
+    var(--ion-background-color);
+}
+
+ion-card {
+  --background: var(--ion-card-background, var(--ion-background-color));
+  color: var(--ion-text-color);
+}
+
+ion-button {
+  --border-radius: 0.65rem;
+  font-weight: 650;
+  text-transform: none;
 }
 
 * {
