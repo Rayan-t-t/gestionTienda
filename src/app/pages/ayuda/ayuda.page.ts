@@ -37,6 +37,7 @@ import {
     IonToolbar
   ],
   templateUrl: './ayuda.page.html',
+  styleUrl: './ayuda.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AyudaPage {}

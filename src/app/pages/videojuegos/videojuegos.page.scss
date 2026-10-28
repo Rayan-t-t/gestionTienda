@@ -2,10 +2,31 @@ ion-thumbnail img {
   object-fit: cover;
 }
 
-ion-grid,
+ion-grid {
+  margin: 0 auto;
+  max-width: 90rem;
+  padding-top: 1.25rem;
+}
+
 ion-col {
   max-width: 100%;
   min-width: 0;
+}
+
+.acciones-exportacion {
+  align-items: center;
+  background: var(--ion-card-background, var(--ion-background-color, #fff));
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  box-shadow: 0 0.35rem 1.2rem rgb(15 23 42 / 5%);
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.acciones-exportacion ion-button {
+  --border-radius: 0.65rem;
+  font-weight: 650;
+  margin: 0;
 }
 
 .paginacion-servidor {
@@ -19,4 +40,17 @@ ion-col {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+app-data-table {
+  background: var(--ion-card-background, var(--ion-background-color, #fff));
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  box-shadow: 0 0.35rem 1.2rem rgb(15 23 42 / 5%);
+  display: block;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+ion-fab-button {
+  --box-shadow: 0 0.7rem 1.5rem rgb(var(--ion-color-primary-rgb) / 30%);
 }
