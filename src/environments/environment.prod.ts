@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  supabaseUrl: 'https://example.supabase.co',
-  supabaseAnonKey: 'example-anon-key',
+  supabaseUrl: 'https://uhorcsuakrrjbdllubjl.supabase.co',
+  supabaseAnonKey: 'sb_publishable_n9dMsU4cIgvHJeuMfEnyOw_Hi9GsvML',
   firebaseConfig: {
     apiKey: 'example',
     authDomain: 'example.firebaseapp.com',
