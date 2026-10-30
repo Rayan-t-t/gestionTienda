@@ -28,6 +28,8 @@ import {
   IonRow,
   IonToolbar
 } from '@ionic/angular';
+import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
+import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 import { crearValidadorSku } from '../../core/validators/sku-disponible.validator';
 import { AuthService } from '../../core/services/auth.service';
 import { FirestoreService } from '../../core/services/firestore.service';
@@ -80,7 +82,9 @@ type VideojuegoFormControls = {
     IonTitle,
     IonToggle,
     IonRow,
-    IonToolbar
+    IonToolbar,
+    ControlSesionComponent,
+    NavegacionPrincipalComponent
   ],
   templateUrl: './videojuego-form.page.html',
   styleUrls: ['./videojuego-form.page.scss'],

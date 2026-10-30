@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import {
   AlertController,
   IonButton,
-  IonButtons,
   IonContent,
   IonCol,
   IonFab,
@@ -12,8 +11,8 @@ import {
   IonHeader,
   IonIcon,
   IonGrid,
-  IonMenuButton,
   IonRow,
+  IonSearchbar,
   IonSpinner,
   IonTitle,
   IonToolbar
@@ -26,11 +25,10 @@ import { ExportacionService } from '../../core/services/exportacion.service';
 import { FirestoreService } from '../../core/services/firestore.service';
 import { VideojuegosService } from '../../core/services/videojuegos.service';
 import { VideojuegoListado } from '../../core/models/videojuego.model';
-import {
-  ColumnaTabla,
-  DataTableComponent
-} from '../../shared/components/data-table/data-table.component';
 import { EstadoVacioComponent } from '../../shared/components/estado-vacio/estado-vacio.component';
+import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
+import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
+import { VideojuegoCardComponent } from '../../shared/components/videojuego-card/videojuego-card.component';
 
 /**
  * Página de catálogo paginado de videojuegos.
@@ -40,7 +38,6 @@ import { EstadoVacioComponent } from '../../shared/components/estado-vacio/estad
   standalone: true,
   imports: [
     IonButton,
-    IonButtons,
     IonContent,
     IonCol,
     IonFab,
@@ -48,13 +45,15 @@ import { EstadoVacioComponent } from '../../shared/components/estado-vacio/estad
     IonHeader,
     IonIcon,
     IonGrid,
-    IonMenuButton,
     IonRow,
+    IonSearchbar,
     IonSpinner,
     IonTitle,
     IonToolbar,
-    DataTableComponent,
-    EstadoVacioComponent
+    EstadoVacioComponent,
+    ControlSesionComponent,
+    NavegacionPrincipalComponent,
+    VideojuegoCardComponent
   ],
   templateUrl: './videojuegos.page.html',
   styleUrls: ['./videojuegos.page.scss'],
@@ -72,20 +71,12 @@ export class VideojuegosPage {
   private readonly limitePagina = 50;
   private solicitudCatalogo = 0;
 
-  readonly columnas: readonly ColumnaTabla[] = [
-    { clave: 'titulo', etiqueta: 'Título', ordenable: true },
-    { clave: 'precio', etiqueta: 'Precio (€)', ordenable: true },
-    { clave: 'stock', etiqueta: 'Stock', ordenable: true },
-    { clave: 'plataforma', etiqueta: 'Plataforma', ordenable: true },
-    { clave: 'genero', etiqueta: 'Género', ordenable: true },
-    { clave: 'disponible', etiqueta: 'Disponible', ordenable: true }
-  ];
   readonly videojuegos = signal<VideojuegoListado[]>([]);
   readonly cargando = signal(false);
   readonly errorMensaje = signal<string | null>(null);
   readonly terminoBusqueda = signal('');
   readonly offset = signal(0);
-  readonly esAdministrador = this.authService.esAdministrador;
+  readonly puedeGestionar = this.authService.puedeGestionar;
   readonly puedeAvanzar = signal(false);
 
   constructor() {

@@ -1,10 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>
-    </ion-buttons>
     <ion-title>Dashboard</ion-title>
+    <app-control-sesion slot="end" />
   </ion-toolbar>
+  <app-navegacion-principal />
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding" role="region" aria-label="Informes del catálogo">

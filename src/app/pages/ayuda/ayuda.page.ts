@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -9,11 +8,12 @@ import {
   IonContent,
   IonGrid,
   IonHeader,
-  IonMenuButton,
   IonRow,
   IonTitle,
   IonToolbar
 } from '@ionic/angular';
+import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
+import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 
 /**
  * Página placeholder de ayuda.
@@ -22,7 +22,6 @@ import {
   selector: 'app-ayuda',
   standalone: true,
   imports: [
-    IonButtons,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -31,10 +30,11 @@ import {
     IonContent,
     IonGrid,
     IonHeader,
-    IonMenuButton,
     IonRow,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    ControlSesionComponent,
+    NavegacionPrincipalComponent
   ],
   templateUrl: './ayuda.page.html',
   styleUrl: './ayuda.page.scss',

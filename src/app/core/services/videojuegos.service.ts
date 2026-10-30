@@ -44,7 +44,10 @@ export class VideojuegosService {
     }
 
     let params = new HttpParams()
-      .set('select', 'id,titulo,precio,stock,plataforma,genero,disponible')
+      .set(
+        'select',
+        'id,titulo,precio,stock,plataforma,genero,disponible,valoracion,portada_url'
+      )
       .set('order', 'id.asc')
       .set('limit', limite)
       .set('offset', offset);

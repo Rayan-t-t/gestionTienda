@@ -1,0 +1,8 @@
+@if (estaAutenticado()) {
+  <ion-buttons class="control-sesion">
+    <span class="saludo">Hola, {{ nombreUsuario() }}</span>
+    <ion-button fill="clear" color="light" (click)="cerrarSesion()" aria-label="Cerrar sesión">
+      Cerrar sesión
+    </ion-button>
+  </ion-buttons>
+}

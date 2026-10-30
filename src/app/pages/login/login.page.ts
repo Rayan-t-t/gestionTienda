@@ -4,19 +4,14 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonButton,
-  IonButtons,
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonInput,
   IonItem,
   IonLabel,
-  IonMenuButton,
   IonText,
-  IonTitle,
-  IonRow,
-  IonToolbar
+  IonRow
 } from '@ionic/angular';
 import { AuthService } from '../../core/services/auth.service';
 import { FirestoreService } from '../../core/services/firestore.service';
@@ -30,19 +25,14 @@ import { FirestoreService } from '../../core/services/firestore.service';
   imports: [
     ReactiveFormsModule,
     IonButton,
-    IonButtons,
     IonCol,
     IonContent,
     IonGrid,
-    IonHeader,
     IonInput,
     IonItem,
     IonLabel,
-    IonMenuButton,
     IonText,
-    IonTitle,
-    IonRow,
-    IonToolbar
+    IonRow
   ],
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],

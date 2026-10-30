@@ -1,0 +1,41 @@
+@if (estaAutenticado()) {
+  <ion-toolbar class="barra-navegacion">
+    <nav aria-label="Navegación principal">
+      <ion-button
+        fill="clear"
+        routerLink="/videojuegos"
+        routerLinkActive="enlace-activo"
+        [routerLinkActiveOptions]="{ exact: false }"
+        ariaCurrentWhenActive="page"
+      >
+        Catálogo
+      </ion-button>
+      @if (puedeGestionar()) {
+        <ion-button
+          fill="clear"
+          routerLink="/dashboard"
+          routerLinkActive="enlace-activo"
+          ariaCurrentWhenActive="page"
+        >
+          Dashboard
+        </ion-button>
+      }
+      <ion-button
+        fill="clear"
+        routerLink="/ayuda"
+        routerLinkActive="enlace-activo"
+        ariaCurrentWhenActive="page"
+      >
+        Ayuda
+      </ion-button>
+      <ion-button
+        fill="clear"
+        routerLink="/acerca"
+        routerLinkActive="enlace-activo"
+        ariaCurrentWhenActive="page"
+      >
+        Acerca de
+      </ion-button>
+    </nav>
+  </ion-toolbar>
+}
