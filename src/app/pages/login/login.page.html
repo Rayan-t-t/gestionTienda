@@ -1,71 +1,80 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Iniciar Sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding" role="region" aria-label="Formulario de inicio de sesión">
+  <div class="login-layout">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+          <section class="login-card" aria-labelledby="login-titulo">
+            <div class="login-identidad" aria-hidden="true">
+              <span class="marca-icono">VG</span>
+              <span class="marca-texto">VIDEOJUEGOS <span>·</span> GESTIÓN</span>
+            </div>
+            <header class="login-introduccion">
+              <p class="login-etiqueta">ACCESO SEGURO</p>
+              <h1 id="login-titulo">Te damos la bienvenida</h1>
+              <p>Inicia sesión para continuar al catálogo.</p>
+            </header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Iniciar Sesión</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate aria-live="polite">
+            <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" novalidate>
     <ion-item>
-      <ion-label position="stacked" for="email">Correo Electrónico *</ion-label>
+      <ion-label position="stacked" for="email">Correo electrónico</ion-label>
       <ion-input
         id="email"
         type="email"
+        autocomplete="email"
         formControlName="email"
         aria-required="true"
-        aria-label="Correo Electrónico"
+        [attr.aria-invalid]="loginForm.controls.email.touched && loginForm.controls.email.invalid"
+        aria-describedby="email-error"
       ></ion-input>
     </ion-item>
-    @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
-      <ion-text color="danger" class="ion-padding-start">
-        <small>Introduce un correo electrónico válido</small>
-      </ion-text>
-    }
+    <div id="email-error" aria-live="polite" aria-atomic="true">
+      @if (loginForm.controls.email.touched && loginForm.controls.email.invalid) {
+        <ion-text color="danger">
+          <p class="ion-padding-start">Introduce un correo electrónico válido.</p>
+        </ion-text>
+      }
+    </div>
 
     <ion-item>
-      <ion-label position="stacked" for="password">Contraseña *</ion-label>
+      <ion-label position="stacked" for="password">Contraseña</ion-label>
       <ion-input
         id="password"
         type="password"
+        autocomplete="current-password"
         formControlName="password"
         aria-required="true"
-        aria-label="Contraseña"
+        [attr.aria-invalid]="loginForm.controls.password.touched && loginForm.controls.password.invalid"
+        aria-describedby="password-error"
       ></ion-input>
     </ion-item>
-    @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
-      <ion-text color="danger" class="ion-padding-start">
-        <small>La contraseña es obligatoria</small>
-      </ion-text>
-    }
+    <div id="password-error" aria-live="polite" aria-atomic="true">
+      @if (loginForm.controls.password.touched && loginForm.controls.password.invalid) {
+        <ion-text color="danger">
+          <p class="ion-padding-start">La contraseña es obligatoria.</p>
+        </ion-text>
+      }
+    </div>
 
-    @if (errorMensaje()) {
-      <ion-text color="danger" class="ion-padding" aria-live="assertive">
-        <p>{{ errorMensaje() }}</p>
-      </ion-text>
-    }
+    <div aria-live="polite" aria-atomic="true">
+      @if (errorMensaje(); as mensaje) {
+        <ion-text color="danger">
+          <p>{{ mensaje }}</p>
+        </ion-text>
+      }
+    </div>
 
-    <ion-button
-      expand="block"
-      type="submit"
-      class="ion-margin-top"
-      [disabled]="cargando()"
-      aria-label="Iniciar sesión"
-    >
+    <ion-button expand="block" type="submit" class="ion-margin-top" [disabled]="cargando()" [attr.aria-busy]="cargando()">
       @if (cargando()) {
-        <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>
-        <span class="ion-margin-start">Cargando...</span>
+        <span>Validando…</span>
       } @else {
-        <span>Iniciar Sesión</span>
+        <span>Iniciar sesión</span>
       }
     </ion-button>
-  </form>
+            </form>
+            <p class="login-pie">Gestor de videojuegos · DAM</p>
+          </section>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

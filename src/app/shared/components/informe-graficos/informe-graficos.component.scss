@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.graficos {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  margin: 0 auto;
+  max-width: 90rem;
+}
+
+article {
+  background: var(--ion-card-background, var(--ion-background-color, #fff));
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.4rem rgb(15 23 42 / 6%);
+  padding: clamp(1rem, 3vw, 1.35rem);
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 720;
+  margin: 0 0 1rem;
+}
+
+.lienzo {
+  height: clamp(15rem, 34vw, 19rem);
+  position: relative;
+}
+
+.visualmente-oculto {
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

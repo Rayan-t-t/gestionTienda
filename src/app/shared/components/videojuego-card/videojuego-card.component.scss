@@ -1,0 +1,156 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.juego-card {
+  background: var(--ion-card-background, #1c2028);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 0.8rem;
+  box-shadow: 0 0.4rem 1.3rem rgb(0 0 0 / 16%);
+  height: 100%;
+  overflow: hidden;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.juego-card:hover {
+  border-color: rgb(var(--ion-color-primary-rgb) / 55%);
+  box-shadow: 0 0.75rem 1.8rem rgb(0 0 0 / 24%);
+  transform: translateY(-0.2rem);
+}
+
+.juego-enlace {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  text-align: start;
+  width: 100%;
+}
+
+.juego-enlace:focus-visible,
+.acciones button:focus-visible {
+  outline: 3px solid var(--ion-color-warning);
+  outline-offset: -3px;
+}
+
+.portada-contenedor {
+  aspect-ratio: 16 / 9;
+  background: var(--ion-color-step-100, #262a32);
+  overflow: hidden;
+  position: relative;
+}
+
+.portada-contenedor img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+  width: 100%;
+}
+
+.juego-card:hover .portada-contenedor img {
+  transform: scale(1.035);
+}
+
+.plataforma {
+  background: rgb(12 15 20 / 78%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  inset-block-start: 0.65rem;
+  inset-inline-start: 0.65rem;
+  padding: 0.25rem 0.55rem;
+  position: absolute;
+}
+
+.informacion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-height: 9.5rem;
+  padding: 0.85rem;
+}
+
+.titulo {
+  color: var(--ion-text-color);
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.genero {
+  color: var(--ion-color-medium);
+  font-size: 0.82rem;
+}
+
+.valoracion {
+  color: var(--ion-color-warning);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.pie-tarjeta {
+  align-items: center;
+  background: rgb(var(--ion-color-primary-rgb) / 9%);
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: space-between;
+  margin-block-start: auto;
+  padding: 0.5rem 0.6rem;
+}
+
+.precio {
+  color: var(--ion-text-color);
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.disponibilidad {
+  color: var(--ion-color-success-shade, #2dd36f);
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-align: end;
+}
+
+.disponibilidad.no-disponible {
+  color: var(--ion-color-medium);
+}
+
+.acciones {
+  border-top: 1px solid rgb(255 255 255 / 8%);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.acciones button {
+  background: transparent;
+  border: 0;
+  border-radius: 0.35rem;
+  color: var(--ion-color-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 650;
+  padding: 0.4rem 0.55rem;
+}
+
+.acciones button.eliminar {
+  color: var(--ion-color-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .juego-card,
+  .portada-contenedor img {
+    transition: none;
+  }
+}

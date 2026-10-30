@@ -1,0 +1,94 @@
+<div class="tabla-contenedor">
+  <label class="buscador">
+    <span>Buscar</span>
+    <input
+      type="search"
+      [value]="busqueda()"
+      (input)="cambiarBusqueda($event)"
+      aria-label="Buscar en la tabla"
+    />
+  </label>
+
+  @if (cargando()) {
+    <p class="estado" role="status">Cargando datos…</p>
+  } @else {
+    <table>
+      <caption>Datos del catálogo</caption>
+      <thead>
+        <tr>
+          @for (columna of columnas(); track columna.clave) {
+            <th scope="col" [attr.aria-sort]="estadoOrden(columna)">
+              @if (columna.ordenable) {
+                <button type="button" class="ordenar" (click)="ordenar(columna)">
+                  {{ columna.etiqueta }}
+                  @if (columnaOrden() === columna.clave) {
+                    <span aria-hidden="true">{{ ordenAscendente() ? '▲' : '▼' }}</span>
+                  }
+                </button>
+              } @else {
+                {{ columna.etiqueta }}
+              }
+            </th>
+          }
+          @if (mostrarAcciones()) {
+            <th scope="col">Acciones</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (fila of datosPagina(); track identificador(fila)) {
+          <tr
+            tabindex="0"
+            (click)="filaSeleccionada.emit(fila)"
+            (keydown.enter)="filaSeleccionada.emit(fila)"
+          >
+            @for (columna of columnas(); track columna.clave) {
+              <td>{{ valorCelda(fila, columna.clave) }}</td>
+            }
+            @if (mostrarAcciones()) {
+              <td class="acciones">
+                <button
+                  type="button"
+                  (click)="$event.stopPropagation(); editar.emit(fila)"
+                  (keydown.enter)="$event.stopPropagation()"
+                  [attr.aria-label]="'Editar ' + valorCelda(fila, columnas()[0]?.clave ?? '')"
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
+                  class="peligro"
+                  (click)="$event.stopPropagation(); eliminar.emit(fila)"
+                  (keydown.enter)="$event.stopPropagation()"
+                  [attr.aria-label]="'Eliminar ' + valorCelda(fila, columnas()[0]?.clave ?? '')"
+                >
+                  Eliminar
+                </button>
+              </td>
+            }
+          </tr>
+        } @empty {
+          <tr>
+            <td [attr.colspan]="columnas().length + (mostrarAcciones() ? 1 : 0)">
+              {{ textoVacio() }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <nav class="paginacion" aria-label="Paginación de la tabla">
+      <button type="button" (click)="cambiarPagina(-1)" [disabled]="pagina() === 0">
+        Anterior
+      </button>
+      <span>Página {{ pagina() + 1 }} de {{ paginasTotales() }}</span>
+      <button
+        type="button"
+        (click)="cambiarPagina(1)"
+        [disabled]="pagina() + 1 >= paginasTotales()"
+      >
+        Siguiente
+      </button>
+    </nav>
+  }
+</div>

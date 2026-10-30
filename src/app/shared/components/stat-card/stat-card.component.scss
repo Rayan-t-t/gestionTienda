@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.contenido {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+ion-card-content {
+  align-items: center;
+  background:
+    radial-gradient(circle at 100% 0, rgb(var(--ion-color-primary-rgb) / 8%), transparent 40%),
+    var(--ion-card-background, var(--ion-background-color, #fff));
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  display: grid;
+  gap: 0.45rem 0.8rem;
+  grid-template-columns: auto 1fr;
+  min-height: 8rem;
+  padding: 1.15rem;
+}
+
+ion-icon {
+  color: var(--ion-color-primary);
+  background: rgb(var(--ion-color-primary-rgb) / 10%);
+  border-radius: 0.75rem;
+  font-size: 1.35rem;
+  padding: 0.7rem;
+  grid-row: span 2;
+}
+
+.valor {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 760;
+  letter-spacing: -0.025em;
+}
+
+.tendencia {
+  color: var(--ion-color-medium-shade);
+  grid-column: 2;
+  font-size: 0.82rem;
+}

@@ -1,76 +1,80 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/videojuegos"></ion-back-button>
+      <ion-back-button defaultHref="/videojuegos" text="Volver al catálogo" aria-label="Volver al catálogo"></ion-back-button>
     </ion-buttons>
-    <ion-title>Detalle del Videojuego</ion-title>
+    <ion-title>Detalle del videojuego</ion-title>
+    <app-control-sesion slot="end" />
   </ion-toolbar>
+  <app-navegacion-principal />
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Detalle</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<ion-content class="ion-padding" role="region" aria-label="Detalle del videojuego">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="10" offset-md="1" size-lg="8" offset-lg="2">
   @if (cargando()) {
-    <div class="ion-text-center ion-padding" aria-live="polite">
+    <div class="ion-text-center ion-padding" role="status" aria-live="polite">
       <ion-spinner name="crescent" aria-label="Cargando detalles"></ion-spinner>
-      <p>Cargando...</p>
+      <p>Cargando videojuego…</p>
     </div>
-  }
-
-  @if (errorMensaje()) {
-    <ion-text color="danger" class="ion-padding" aria-live="assertive">
-      <p>{{ errorMensaje() }}</p>
-    </ion-text>
-  }
-
-  @if (videojuego()) {
+  } @else if (errorMensaje(); as mensaje) {
+    <div class="ion-text-center" role="status" aria-live="polite">
+      <ion-text color="danger"><p>{{ mensaje }}</p></ion-text>
+      <ion-button (click)="cargarVideojuego()">Reintentar</ion-button>
+    </div>
+  } @else if (videojuego(); as juego) {
     <ion-card>
-      @if (videojuego()!.portada_url) {
-        <img [src]="videojuego()!.portada_url" [alt]="'Portada de ' + videojuego()!.titulo" style="width: 100%; max-height: 300px; object-fit: cover;" />
-      }
+      <img
+        [ngSrc]="juego.portada_url || 'assets/shapes.svg'"
+        [alt]="'Portada de ' + juego.titulo"
+        width="640"
+        height="360"
+        loading="lazy"
+      />
       <ion-card-header>
-        <ion-card-title>{{ videojuego()!.titulo }}</ion-card-title>
-        <ion-card-subtitle>{{ videojuego()!.plataforma }} - {{ videojuego()!.genero }}</ion-card-subtitle>
+        <ion-card-title>{{ juego.titulo }}</ion-card-title>
+        <ion-card-subtitle>{{ juego.plataforma }} — {{ juego.genero }}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <p><strong>Código SKU:</strong> {{ videojuego()!.codigo_sku }}</p>
-        <p><strong>Precio:</strong> {{ videojuego()!.precio }}€</p>
-        <p><strong>Stock:</strong> {{ videojuego()!.stock }} unidades</p>
-        <p><strong>Disponible:</strong> {{ videojuego()!.disponible ? 'Sí' : 'No' }}</p>
-        @if (videojuego()!.valoracion !== null && videojuego()!.valoracion !== undefined) {
-          <p><strong>Valoración:</strong> {{ videojuego()!.valoracion }}/10</p>
+        @if (juego.id !== undefined) {
+          <p><strong>ID:</strong> {{ juego.id }}</p>
         }
-        @if (videojuego()!.fecha_lanzamiento) {
-          <p><strong>Fecha de lanzamiento:</strong> {{ videojuego()!.fecha_lanzamiento }}</p>
+        @if (juego.created_at) {
+          <p><strong>Fecha de creación:</strong> {{ juego.created_at }}</p>
         }
-        @if (videojuego()!.descripcion) {
+        <p><strong>Código SKU:</strong> {{ juego.codigo_sku }}</p>
+        <p><strong>Precio:</strong> {{ juego.precio }} €</p>
+        <p><strong>Stock:</strong> {{ juego.stock }} unidades</p>
+        <p><strong>Disponible:</strong> {{ juego.disponible ? 'Sí' : 'No' }}</p>
+        @if (juego.valoracion !== null && juego.valoracion !== undefined) {
+          <p><strong>Valoración:</strong> {{ juego.valoracion }}/10</p>
+        }
+        @if (juego.fecha_lanzamiento) {
+          <p><strong>Fecha de lanzamiento:</strong> {{ juego.fecha_lanzamiento }}</p>
+        }
+        @if (juego.descripcion) {
           <p><strong>Descripción:</strong></p>
-          <p>{{ videojuego()!.descripcion }}</p>
+          <p>{{ juego.descripcion }}</p>
         }
-        @if (videojuego()!.etiquetas && videojuego()!.etiquetas!.length > 0) {
-          <p><strong>Etiquetas:</strong> {{ videojuego()!.etiquetas!.join(', ') }}</p>
+        @if (juego.etiquetas?.length) {
+          <p><strong>Etiquetas:</strong> {{ juego.etiquetas.join(', ') }}</p>
         }
-        @if (videojuego()!.requisitos) {
+        @if (requisitos().length > 0) {
           <p><strong>Requisitos:</strong></p>
           <ul>
-            @if (videojuego()!.requisitos!.ram) {
-              <li>RAM: {{ videojuego()!.requisitos!.ram }}</li>
-            }
-            @if (videojuego()!.requisitos!.gpu) {
-              <li>GPU: {{ videojuego()!.requisitos!.gpu }}</li>
-            }
-            @if (videojuego()!.requisitos!.almacenamiento) {
-              <li>Almacenamiento: {{ videojuego()!.requisitos!.almacenamiento }}</li>
+            @for (requisito of requisitos(); track requisito[0]) {
+              <li>{{ requisito[0] }}: {{ requisito[1] }}</li>
             }
           </ul>
         }
-        @if (esAdmin()) {
-          <ion-button [routerLink]="['/videojuegos', videojuego()!.id, 'editar']" expand="block" class="ion-margin-top">
-            Editar Videojuego
+        @if (puedeGestionar()) {
+          <ion-button
+            [routerLink]="['/videojuegos/editar', juego.id]"
+            expand="block"
+            class="ion-margin-top"
+          >
+            Editar videojuego
           </ion-button>
         }
         <ion-button routerLink="/videojuegos" expand="block" fill="outline">
@@ -79,4 +83,7 @@
       </ion-card-content>
     </ion-card>
   }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

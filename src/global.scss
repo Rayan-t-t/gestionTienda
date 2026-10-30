@@ -35,3 +35,75 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ion-background-color);
+  font-family: var(--ion-font-family);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+ion-header ion-toolbar[color="primary"] {
+  --background: linear-gradient(110deg, var(--ion-color-primary-shade), var(--ion-color-primary));
+  --color: var(--ion-color-primary-contrast);
+  --border-color: transparent;
+}
+
+ion-title {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+ion-content::part(background) {
+  background:
+    radial-gradient(ellipse at 92% 2%, rgb(var(--ion-color-primary-rgb) / 4%), transparent 27rem),
+    var(--ion-background-color);
+}
+
+ion-card {
+  --background: var(--ion-card-background, var(--ion-background-color));
+  color: var(--ion-text-color);
+}
+
+ion-button {
+  --border-radius: 0.65rem;
+  font-weight: 650;
+  text-transform: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+ion-button::part(native):focus-visible,
+ion-back-button::part(native):focus-visible,
+ion-input::part(native):focus-visible,
+ion-textarea::part(native):focus-visible,
+ion-select::part(container):focus-visible,
+ion-toggle::part(native):focus-visible,
+ion-item:focus-visible {
+  outline: 3px solid var(--ion-color-warning);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

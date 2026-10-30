@@ -1,0 +1,134 @@
+:host {
+  display: block;
+}
+
+.tabla-contenedor {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.buscador {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.25rem 0 1rem;
+  max-width: 28rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.buscador input {
+  background: var(--ion-background-color, #fff);
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 0.65rem;
+  color: var(--ion-text-color);
+  font: inherit;
+  min-height: 2.8rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.buscador input:focus-visible {
+  border-color: var(--ion-color-primary);
+  box-shadow: 0 0 0 3px rgb(var(--ion-color-primary-rgb) / 16%);
+  outline: 0;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 44rem;
+  width: 100%;
+}
+
+caption {
+  color: var(--ion-color-medium);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--ion-color-light-shade);
+  padding: 0.85rem 0.75rem;
+  text-align: left;
+}
+
+thead {
+  background: var(--ion-color-light);
+}
+
+th {
+  color: var(--ion-text-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+tbody tr {
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+tbody tr:hover,
+tbody tr:focus-visible {
+  background: var(--ion-color-light);
+}
+
+.ordenar,
+.acciones button,
+.paginacion button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+}
+
+.ordenar {
+  border-radius: 0.4rem;
+  font-weight: 700;
+}
+
+.ordenar:hover,
+.acciones button:hover,
+.paginacion button:not(:disabled):hover {
+  background: rgb(var(--ion-color-primary-rgb) / 10%);
+  color: var(--ion-color-primary-shade);
+}
+
+.acciones {
+  white-space: nowrap;
+}
+
+.acciones .peligro {
+  color: var(--ion-color-danger);
+}
+
+.paginacion {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  padding: 1rem 0.5rem 0.25rem;
+}
+
+.paginacion button {
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 0.55rem;
+  min-height: 2.5rem;
+}
+
+.paginacion button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.estado {
+  padding: 1rem;
+  text-align: center;
+}

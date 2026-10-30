@@ -4,48 +4,74 @@ import { adminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage)
-  },
-  {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then((m) => m.LoginPage)
+    title: 'Iniciar sesión | Gestor de videojuegos',
+    loadComponent: () => import('./pages/login/login.page').then((module) => module.LoginPage)
   },
   {
     path: 'videojuegos',
-    loadComponent: () => import('./pages/videojuegos/videojuegos.page').then((m) => m.VideojuegosPage)
+    title: 'Catálogo | Gestor de videojuegos',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/videojuegos/videojuegos.page').then((module) => module.VideojuegosPage)
   },
   {
     path: 'videojuegos/nuevo',
-    loadComponent: () => import('./pages/videojuego-form/videojuego-form.page').then((m) => m.VideojuegoFormPage),
-    canActivate: [authGuard, adminGuard]
+    title: 'Nuevo videojuego | Gestor de videojuegos',
+    canActivate: [authGuard, adminGuard],
+    loadComponent: () =>
+      import('./pages/videojuego-form/videojuego-form.page').then(
+        (module) => module.VideojuegoFormPage
+      )
+  },
+  {
+    path: 'videojuegos/editar/:id',
+    title: 'Editar videojuego | Gestor de videojuegos',
+    canActivate: [authGuard, adminGuard],
+    loadComponent: () =>
+      import('./pages/videojuego-form/videojuego-form.page').then(
+        (module) => module.VideojuegoFormPage
+      )
   },
   {
     path: 'videojuegos/:id',
-    loadComponent: () => import('./pages/videojuego-detalle/videojuego-detalle.page').then((m) => m.VideojuegoDetallePage)
-  },
-  {
-    path: 'videojuegos/:id/editar',
-    loadComponent: () => import('./pages/videojuego-form/videojuego-form.page').then((m) => m.VideojuegoFormPage),
-    canActivate: [authGuard, adminGuard]
+    title: 'Detalle del videojuego | Gestor de videojuegos',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/videojuego-detalle/videojuego-detalle.page').then(
+        (module) => module.VideojuegoDetallePage
+      )
   },
   {
     path: 'dashboard',
-    loadComponent: () => import('./pages/dashboard/dashboard.page').then((m) => m.DashboardPage),
-    canActivate: [authGuard, adminGuard]
+    title: 'Dashboard | Gestor de videojuegos',
+    canActivate: [authGuard, adminGuard],
+    loadComponent: () =>
+      import('./pages/dashboard/dashboard.page').then((module) => module.DashboardPage)
   },
   {
     path: 'acerca',
-    loadComponent: () => import('./pages/acerca/acerca.page').then((m) => m.AcercaPage),
-    canActivate: [authGuard]
+    title: 'Acerca de | Gestor de videojuegos',
+    loadComponent: () =>
+      import('./pages/acerca/acerca.page').then((module) => module.AcercaPage)
+  },
+  {
+    path: 'ayuda',
+    title: 'Ayuda | Gestor de videojuegos',
+    loadComponent: () => import('./pages/ayuda/ayuda.page').then((module) => module.AyudaPage)
+  },
+  {
+    path: 'home',
+    title: 'Inicio | Gestor de videojuegos',
+    loadComponent: () => import('./home/home.page').then((module) => module.HomePage)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'videojuegos',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'videojuegos'
   }
 ];

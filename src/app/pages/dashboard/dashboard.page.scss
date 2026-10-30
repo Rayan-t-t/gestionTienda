@@ -2,3 +2,82 @@ canvas {
   max-width: 100%;
   height: auto;
 }
+
+ion-grid {
+  margin-left: auto;
+  margin-bottom: 1rem;
+  margin-right: auto;
+  max-width: 100%;
+  width: min(100%, 90rem);
+}
+
+ion-row {
+  align-items: stretch;
+}
+
+ion-col {
+  min-width: 0;
+}
+
+ion-col app-stat-card {
+  height: 100%;
+}
+
+section[aria-label="Filtros de informes"] {
+  margin: 0 auto;
+  max-width: 90rem;
+}
+
+ion-col app-stat-card {
+  display: block;
+}
+
+section[aria-label="Filtros de informes"] ion-row:first-child {
+  background: var(--ion-card-background, var(--ion-background-color, #fff));
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  box-shadow: 0 0.35rem 1.2rem rgb(15 23 42 / 5%);
+  margin: 0 0 1rem;
+  padding: 0.65rem;
+}
+
+ion-content > ion-card {
+  margin: 1.5rem auto 0;
+  max-width: 90rem;
+}
+
+ion-card {
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.4rem rgb(15 23 42 / 6%);
+}
+
+ion-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+select {
+  background: var(--ion-background-color, #fff);
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 0.65rem;
+  color: var(--ion-text-color);
+  font: inherit;
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: 0.5rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+select:focus-visible {
+  border-color: var(--ion-color-primary);
+  box-shadow: 0 0 0 3px rgb(var(--ion-color-primary-rgb) / 18%);
+  outline: 0;
+}

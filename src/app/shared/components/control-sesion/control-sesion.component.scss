@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.control-sesion {
+  align-items: center;
+  gap: 0.25rem;
+  padding-inline-end: 0.5rem;
+}
+
+.saludo {
+  color: var(--ion-toolbar-color, var(--ion-color-primary-contrast));
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+ion-button {
+  flex: 0 0 auto;
+  font-weight: 650;
+  text-transform: none;
+}
+
+@media (max-width: 30rem) {
+  .control-sesion {
+    gap: 0;
+    padding-inline-end: 0.15rem;
+  }
+
+  .saludo {
+    font-size: 0.78rem;
+    max-width: 7rem;
+  }
+
+  ion-button {
+    font-size: 0.75rem;
+  }
+}

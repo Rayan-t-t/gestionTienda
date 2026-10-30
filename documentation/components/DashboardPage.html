@@ -1,0 +1,1680 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>gestionTienda documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">gestionTienda documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DashboardPage</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/dashboard/dashboard.page.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Dashboard administrativo con métricas, gráficos e historial de auditoría.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-dashboard</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/UpperCasePipe" target="_blank" >UpperCasePipe</a></code>
+                            <code>IonButton</code>
+                            <code>IonButtons</code>
+                            <code>IonCard</code>
+                            <code>IonCardContent</code>
+                            <code>IonCardHeader</code>
+                            <code>IonCardTitle</code>
+                            <code>IonContent</code>
+                            <code>IonCol</code>
+                            <code>IonGrid</code>
+                            <code>IonHeader</code>
+                            <code>IonItem</code>
+                            <code>IonLabel</code>
+                            <code>IonList</code>
+                            <code>IonMenuButton</code>
+                            <code>IonSpinner</code>
+                            <code>IonText</code>
+                            <code>IonRow</code>
+                            <code>IonTitle</code>
+                            <code>IonToolbar</code>
+                                <code><a href="../components/InformeGraficosComponent.html" target="_self" >InformeGraficosComponent</a></code>
+                                <code><a href="../components/StatCardComponent.html" target="_self" >StatCardComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./dashboard.page.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./dashboard.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#actividades" >actividades</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cargando" >cargando</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroyRef" >destroyRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#errorActividades" >errorActividades</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#errorVideojuegos" >errorVideojuegos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#filtroGenero" >filtroGenero</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#filtroPlataforma" >filtroPlataforma</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#firestoreService" >firestoreService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#generos" >generos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#plataformas" >plataformas</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#stockTotal" >stockTotal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#totalJuegos" >totalJuegos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#valoracionMedia" >valoracionMedia</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#valorInventario" >valorInventario</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuegos" >videojuegos</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuegosFiltrados" >videojuegosFiltrados</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#videojuegosService" >videojuegosService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cambiarGenero" >cambiarGenero</a>
+                            </li>
+                            <li>
+                                <a href="#cambiarPlataforma" >cambiarPlataforma</a>
+                            </li>
+                            <li>
+                                <a href="#cargarDatos" >cargarDatos</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:129</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarGenero"></a>
+                    <span class="name">
+                        <span ><b>cambiarGenero</b></span>
+                        <a href="#cambiarGenero"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cambiarGenero(evento: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cambia el filtro de género usado por las tarjetas y los gráficos.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>evento</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarPlataforma"></a>
+                    <span class="name">
+                        <span ><b>cambiarPlataforma</b></span>
+                        <a href="#cambiarPlataforma"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cambiarPlataforma(evento: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:182</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cambia el filtro de plataforma usado por las tarjetas y los gráficos.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>evento</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarDatos"></a>
+                    <span class="name">
+                        <span ><b>cargarDatos</b></span>
+                        <a href="#cargarDatos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarDatos()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga en paralelo las fuentes del dashboard y conserva el error de cada una.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actividades"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>actividades</b></span>
+                        <a href="#actividades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Actividad[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargando"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cargando</b></span>
+                        <a href="#cargando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroyRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroyRef</b></span>
+                        <a href="#destroyRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DestroyRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorActividades"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>errorActividades</b></span>
+                        <a href="#errorActividades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorVideojuegos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>errorVideojuegos</b></span>
+                        <a href="#errorVideojuegos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filtroGenero"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>filtroGenero</b></span>
+                        <a href="#filtroGenero"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Genero | &#x27;&#x27;&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filtroPlataforma"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>filtroPlataforma</b></span>
+                        <a href="#filtroPlataforma"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Plataforma | &#x27;&#x27;&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firestoreService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>firestoreService</b></span>
+                        <a href="#firestoreService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FirestoreService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="generos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>generos</b></span>
+                        <a href="#generos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>GENEROS</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="plataformas"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>plataformas</b></span>
+                        <a href="#plataformas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>PLATAFORMAS</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stockTotal"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>stockTotal</b></span>
+                        <a href="#stockTotal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    this.videojuegosFiltrados().reduce((total, juego) &#x3D;&gt; total + juego.stock, 0)
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalJuegos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalJuegos</b></span>
+                        <a href="#totalJuegos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.videojuegosFiltrados().length)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valoracionMedia"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>valoracionMedia</b></span>
+                        <a href="#valoracionMedia"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const valoraciones &#x3D; this.videojuegosFiltrados()
+      .map((juego) &#x3D;&gt; juego.valoracion)
+      .filter((valoracion): valoracion is number &#x3D;&gt; valoracion !&#x3D;&#x3D; null &amp;&amp; valoracion !&#x3D;&#x3D; undefined);
+    if (valoraciones.length &#x3D;&#x3D;&#x3D; 0) {
+      return &#x27;0,0 / 10&#x27;;
+    }
+    const media &#x3D; valoraciones.reduce((total, valoracion) &#x3D;&gt; total + valoracion, 0) / valoraciones.length;
+    return &#x60;${media.toLocaleString(&#x27;es-ES&#x27;, { maximumFractionDigits: 1 })} / 10&#x60;;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valorInventario"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>valorInventario</b></span>
+                        <a href="#valorInventario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    new Intl.NumberFormat(&#x27;es-ES&#x27;, { style: &#x27;currency&#x27;, currency: &#x27;EUR&#x27; }).format(
+      this.videojuegosFiltrados().reduce(
+        (total, juego) &#x3D;&gt; total + juego.precio * juego.stock,
+        0
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuegos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuegos</b></span>
+                        <a href="#videojuegos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;VideojuegoInforme[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuegosFiltrados"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuegosFiltrados</b></span>
+                        <a href="#videojuegosFiltrados"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    this.videojuegos().filter(
+      (juego) &#x3D;&gt;
+        (!this.filtroPlataforma() || juego.plataforma &#x3D;&#x3D;&#x3D; this.filtroPlataforma()) &amp;&amp;
+        (!this.filtroGenero() || juego.genero &#x3D;&#x3D;&#x3D; this.filtroGenero())
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="videojuegosService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>videojuegosService</b></span>
+                        <a href="#videojuegosService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(VideojuegosService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { UpperCasePipe } from &#x27;@angular/common&#x27;;
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal
+} from &#x27;@angular/core&#x27;;
+import { takeUntilDestroyed } from &#x27;@angular/core/rxjs-interop&#x27;;
+import {
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonContent,
+  IonCol,
+  IonGrid,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonMenuButton,
+  IonSpinner,
+  IonText,
+  IonRow,
+  IonTitle,
+  IonToolbar
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import { cash, cube, gameController, star } from &#x27;ionicons/icons&#x27;;
+import { forkJoin, from, of } from &#x27;rxjs&#x27;;
+import { catchError } from &#x27;rxjs/operators&#x27;;
+import {
+  VideojuegoInforme,
+  Videojuego
+} from &#x27;../../core/models/videojuego.model&#x27;;
+import { Actividad, FirestoreService } from &#x27;../../core/services/firestore.service&#x27;;
+import { VideojuegosService } from &#x27;../../core/services/videojuegos.service&#x27;;
+import { InformeGraficosComponent } from &#x27;../../shared/components/informe-graficos/informe-graficos.component&#x27;;
+import { StatCardComponent } from &#x27;../../shared/components/stat-card/stat-card.component&#x27;;
+
+type Plataforma &#x3D; Videojuego[&#x27;plataforma&#x27;];
+type Genero &#x3D; Videojuego[&#x27;genero&#x27;];
+
+const PLATAFORMAS: readonly Plataforma[] &#x3D; [&#x27;PC&#x27;, &#x27;PS5&#x27;, &#x27;Xbox&#x27;, &#x27;Switch&#x27;];
+const GENEROS: readonly Genero[] &#x3D; [&#x27;RPG&#x27;, &#x27;Accion&#x27;, &#x27;Deportes&#x27;, &#x27;Estrategia&#x27;, &#x27;Aventura&#x27;];
+
+/**
+ * Dashboard administrativo con métricas, gráficos e historial de auditoría.
+ */
+@Component({
+  selector: &#x27;app-dashboard&#x27;,
+  standalone: true,
+  imports: [
+    UpperCasePipe,
+    IonButton,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonContent,
+    IonCol,
+    IonGrid,
+    IonHeader,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonMenuButton,
+    IonSpinner,
+    IonText,
+    IonRow,
+    IonTitle,
+    IonToolbar,
+    InformeGraficosComponent,
+    StatCardComponent
+  ],
+  templateUrl: &#x27;./dashboard.page.html&#x27;,
+  styleUrls: [&#x27;./dashboard.page.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DashboardPage implements OnInit {
+  private readonly videojuegosService &#x3D; inject(VideojuegosService);
+  private readonly firestoreService &#x3D; inject(FirestoreService);
+  private readonly destroyRef &#x3D; inject(DestroyRef);
+
+  readonly videojuegos &#x3D; signal&lt;VideojuegoInforme[]&gt;([]);
+  readonly actividades &#x3D; signal&lt;Actividad[]&gt;([]);
+  readonly cargando &#x3D; signal(false);
+  readonly errorVideojuegos &#x3D; signal&lt;string | null&gt;(null);
+  readonly errorActividades &#x3D; signal&lt;string | null&gt;(null);
+  readonly filtroPlataforma &#x3D; signal&lt;Plataforma | &#x27;&#x27;&gt;(&#x27;&#x27;);
+  readonly filtroGenero &#x3D; signal&lt;Genero | &#x27;&#x27;&gt;(&#x27;&#x27;);
+  readonly plataformas &#x3D; PLATAFORMAS;
+  readonly generos &#x3D; GENEROS;
+
+  readonly videojuegosFiltrados &#x3D; computed(() &#x3D;&gt;
+    this.videojuegos().filter(
+      (juego) &#x3D;&gt;
+        (!this.filtroPlataforma() || juego.plataforma &#x3D;&#x3D;&#x3D; this.filtroPlataforma()) &amp;&amp;
+        (!this.filtroGenero() || juego.genero &#x3D;&#x3D;&#x3D; this.filtroGenero())
+    )
+  );
+  readonly totalJuegos &#x3D; computed(() &#x3D;&gt; this.videojuegosFiltrados().length);
+  readonly stockTotal &#x3D; computed(() &#x3D;&gt;
+    this.videojuegosFiltrados().reduce((total, juego) &#x3D;&gt; total + juego.stock, 0)
+  );
+  readonly valorInventario &#x3D; computed(() &#x3D;&gt;
+    new Intl.NumberFormat(&#x27;es-ES&#x27;, { style: &#x27;currency&#x27;, currency: &#x27;EUR&#x27; }).format(
+      this.videojuegosFiltrados().reduce(
+        (total, juego) &#x3D;&gt; total + juego.precio * juego.stock,
+        0
+      )
+    )
+  );
+  readonly valoracionMedia &#x3D; computed(() &#x3D;&gt; {
+    const valoraciones &#x3D; this.videojuegosFiltrados()
+      .map((juego) &#x3D;&gt; juego.valoracion)
+      .filter((valoracion): valoracion is number &#x3D;&gt; valoracion !&#x3D;&#x3D; null &amp;&amp; valoracion !&#x3D;&#x3D; undefined);
+    if (valoraciones.length &#x3D;&#x3D;&#x3D; 0) {
+      return &#x27;0,0 / 10&#x27;;
+    }
+    const media &#x3D; valoraciones.reduce((total, valoracion) &#x3D;&gt; total + valoracion, 0) / valoraciones.length;
+    return &#x60;${media.toLocaleString(&#x27;es-ES&#x27;, { maximumFractionDigits: 1 })} / 10&#x60;;
+  });
+
+  constructor() {
+    addIcons({ cash, cube, gameController, star });
+  }
+
+  ngOnInit(): void {
+    this.cargarDatos();
+  }
+
+  /**
+   * Carga en paralelo las fuentes del dashboard y conserva el error de cada una.
+   */
+  cargarDatos(): void {
+    this.cargando.set(true);
+    this.errorVideojuegos.set(null);
+    this.errorActividades.set(null);
+
+    forkJoin({
+      videojuegos: this.videojuegosService.obtenerParaInforme().pipe(
+        catchError((error: unknown) &#x3D;&gt; {
+          this.errorVideojuegos.set(
+            error instanceof Error ? error.message : &#x27;No se pudieron cargar los videojuegos.&#x27;
+          );
+          return of&lt;VideojuegoInforme[]&gt;([]);
+        })
+      ),
+      actividades: from(this.firestoreService.obtenerActividades()).pipe(
+        catchError((error: unknown) &#x3D;&gt; {
+          this.errorActividades.set(
+            error instanceof Error ? error.message : &#x27;No se pudieron cargar las actividades.&#x27;
+          );
+          return of&lt;Actividad[]&gt;([]);
+        })
+      )
+    })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (datos) &#x3D;&gt; {
+          this.videojuegos.set(datos.videojuegos);
+          this.actividades.set(datos.actividades);
+          this.cargando.set(false);
+        },
+        error: (error: unknown) &#x3D;&gt; {
+          console.error(&#x27;No se pudo completar la carga del dashboard.&#x27;, error);
+          this.cargando.set(false);
+        }
+      });
+  }
+
+  /**
+   * Cambia el filtro de plataforma usado por las tarjetas y los gráficos.
+   */
+  cambiarPlataforma(evento: Event): void {
+    const valor &#x3D; (evento.target as HTMLSelectElement).value;
+    this.filtroPlataforma.set(PLATAFORMAS.find((plataforma) &#x3D;&gt; plataforma &#x3D;&#x3D;&#x3D; valor) ?? &#x27;&#x27;);
+  }
+
+  /**
+   * Cambia el filtro de género usado por las tarjetas y los gráficos.
+   */
+  cambiarGenero(evento: Event): void {
+    const valor &#x3D; (evento.target as HTMLSelectElement).value;
+    this.filtroGenero.set(GENEROS.find((genero) &#x3D;&gt; genero &#x3D;&#x3D;&#x3D; valor) ?? &#x27;&#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      &lt;ion-menu-button aria-label&#x3D;&quot;Abrir menú de navegación&quot;&gt;&lt;/ion-menu-button&gt;
+    &lt;/ion-buttons&gt;
+    &lt;ion-title&gt;Dashboard&lt;/ion-title&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;ion-padding&quot; role&#x3D;&quot;region&quot; aria-label&#x3D;&quot;Informes del catálogo&quot;&gt;
+  &lt;ion-header collapse&#x3D;&quot;condense&quot;&gt;
+    &lt;ion-toolbar&gt;
+      &lt;ion-title size&#x3D;&quot;large&quot;&gt;Dashboard&lt;/ion-title&gt;
+    &lt;/ion-toolbar&gt;
+  &lt;/ion-header&gt;
+
+  @if (cargando()) {
+    &lt;div class&#x3D;&quot;ion-text-center ion-padding&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+      &lt;ion-spinner name&#x3D;&quot;crescent&quot; aria-label&#x3D;&quot;Cargando informes&quot;&gt;&lt;/ion-spinner&gt;
+      &lt;p&gt;Cargando videojuegos y actividades…&lt;/p&gt;
+    &lt;/div&gt;
+  }
+
+  @if (errorVideojuegos(); as mensajeVideojuegos) {
+    &lt;ion-card role&#x3D;&quot;alert&quot;&gt;
+      &lt;ion-card-content&gt;
+        &lt;ion-text color&#x3D;&quot;danger&quot; role&#x3D;&quot;alert&quot;&gt;
+          &lt;p&gt;Error al cargar los videojuegos: {{ mensajeVideojuegos }}&lt;/p&gt;
+        &lt;/ion-text&gt;
+        &lt;ion-button (click)&#x3D;&quot;cargarDatos()&quot;&gt;Reintentar&lt;/ion-button&gt;
+      &lt;/ion-card-content&gt;
+    &lt;/ion-card&gt;
+  }
+
+  @if (errorActividades(); as mensajeActividades) {
+    &lt;ion-card role&#x3D;&quot;alert&quot;&gt;
+      &lt;ion-card-content&gt;
+        &lt;ion-text color&#x3D;&quot;danger&quot; role&#x3D;&quot;alert&quot;&gt;
+          &lt;p&gt;Error al cargar las actividades: {{ mensajeActividades }}&lt;/p&gt;
+        &lt;/ion-text&gt;
+        &lt;ion-button (click)&#x3D;&quot;cargarDatos()&quot;&gt;Reintentar&lt;/ion-button&gt;
+      &lt;/ion-card-content&gt;
+    &lt;/ion-card&gt;
+  }
+
+  @if (!cargando() &amp;&amp; !errorVideojuegos()) {
+    &lt;section aria-label&#x3D;&quot;Filtros de informes&quot;&gt;
+    &lt;ion-grid&gt;
+      &lt;ion-row&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+          &lt;label&gt;
+            Plataforma
+            &lt;select [value]&#x3D;&quot;filtroPlataforma()&quot; (change)&#x3D;&quot;cambiarPlataforma($event)&quot;&gt;
+              &lt;option value&#x3D;&quot;&quot;&gt;Todas las plataformas&lt;/option&gt;
+              @for (plataforma of plataformas; track plataforma) {
+                &lt;option [value]&#x3D;&quot;plataforma&quot;&gt;{{ plataforma }}&lt;/option&gt;
+              }
+            &lt;/select&gt;
+          &lt;/label&gt;
+        &lt;/ion-col&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot;&gt;
+          &lt;label&gt;
+            Género
+            &lt;select [value]&#x3D;&quot;filtroGenero()&quot; (change)&#x3D;&quot;cambiarGenero($event)&quot;&gt;
+              &lt;option value&#x3D;&quot;&quot;&gt;Todos los géneros&lt;/option&gt;
+              @for (genero of generos; track genero) {
+                &lt;option [value]&#x3D;&quot;genero&quot;&gt;{{ genero }}&lt;/option&gt;
+              }
+            &lt;/select&gt;
+          &lt;/label&gt;
+        &lt;/ion-col&gt;
+      &lt;/ion-row&gt;
+      &lt;ion-row&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-card titulo&#x3D;&quot;Total de juegos&quot; [valor]&#x3D;&quot;totalJuegos()&quot; icono&#x3D;&quot;game-controller&quot; /&gt;
+        &lt;/ion-col&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-card titulo&#x3D;&quot;Stock total&quot; [valor]&#x3D;&quot;stockTotal()&quot; icono&#x3D;&quot;cube&quot; /&gt;
+        &lt;/ion-col&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-card titulo&#x3D;&quot;Valor del inventario&quot; [valor]&#x3D;&quot;valorInventario()&quot; icono&#x3D;&quot;cash&quot; /&gt;
+        &lt;/ion-col&gt;
+        &lt;ion-col size&#x3D;&quot;12&quot; size-md&#x3D;&quot;6&quot; size-lg&#x3D;&quot;3&quot;&gt;
+          &lt;app-stat-card titulo&#x3D;&quot;Valoración media&quot; [valor]&#x3D;&quot;valoracionMedia()&quot; icono&#x3D;&quot;star&quot; /&gt;
+        &lt;/ion-col&gt;
+      &lt;/ion-row&gt;
+    &lt;/ion-grid&gt;
+    &lt;/section&gt;
+
+    @defer (on idle) {
+      &lt;app-informe-graficos
+        [videojuegos]&#x3D;&quot;videojuegosFiltrados()&quot;
+        [actividades]&#x3D;&quot;actividades()&quot;
+      /&gt;
+    } @placeholder {
+      &lt;ion-card&gt;&lt;ion-card-content&gt;Preparando los gráficos…&lt;/ion-card-content&gt;&lt;/ion-card&gt;
+    }
+  }
+
+  &lt;ion-card&gt;
+    &lt;ion-card-header&gt;
+      &lt;ion-card-title&gt;Historial de actividades&lt;/ion-card-title&gt;
+    &lt;/ion-card-header&gt;
+    &lt;ion-card-content&gt;
+      @if (cargando()) {
+        &lt;div class&#x3D;&quot;ion-text-center&quot;&gt;
+          &lt;ion-spinner name&#x3D;&quot;crescent&quot; aria-label&#x3D;&quot;Cargando actividades&quot;&gt;&lt;/ion-spinner&gt;
+        &lt;/div&gt;
+      } @else if (errorActividades()) {
+        &lt;p&gt;El historial no está disponible hasta que se resuelva el error de Firestore.&lt;/p&gt;
+      } @else {
+        &lt;ion-list&gt;
+          @for (actividad of actividades(); track actividad.id) {
+            &lt;ion-item&gt;
+              &lt;ion-label&gt;
+                &lt;h2&gt;{{ actividad.tipo | uppercase }}&lt;/h2&gt;
+                &lt;p&gt;{{ actividad.detalle }}&lt;/p&gt;
+                @if (actividad.usuario) {
+                  &lt;p&gt;&lt;small&gt;Usuario: {{ actividad.usuario }}&lt;/small&gt;&lt;/p&gt;
+                }
+              &lt;/ion-label&gt;
+            &lt;/ion-item&gt;
+          } @empty {
+            &lt;ion-item&gt;&lt;ion-label&gt;No hay actividades registradas.&lt;/ion-label&gt;&lt;/ion-item&gt;
+          }
+        &lt;/ion-list&gt;
+      }
+    &lt;/ion-card-content&gt;
+  &lt;/ion-card&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./dashboard.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+ion-grid {
+  margin-bottom: 1rem;
+  max-width: 100%;
+}
+
+ion-row {
+  align-items: stretch;
+}
+
+ion-col {
+  min-width: 0;
+}
+
+ion-col app-stat-card {
+  height: 100%;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+select {
+  background: var(--ion-background-color, #fff);
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 0.4rem;
+  color: var(--ion-text-color);
+  font: inherit;
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: 0.5rem;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-buttons slot="start">      <ion-menu-button aria-label="Abrir menú de navegación"></ion-menu-button>    </ion-buttons>    <ion-title>Dashboard</ion-title>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="ion-padding" role="region" aria-label="Informes del catálogo">  <ion-header collapse="condense">    <ion-toolbar>      <ion-title size="large">Dashboard</ion-title>    </ion-toolbar>  </ion-header>  @if (cargando()) {    <div class="ion-text-center ion-padding" role="status" aria-live="polite">      <ion-spinner name="crescent" aria-label="Cargando informes"></ion-spinner>      <p>Cargando videojuegos y actividades…</p>    </div>  }  @if (errorVideojuegos(); as mensajeVideojuegos) {    <ion-card role="alert">      <ion-card-content>        <ion-text color="danger" role="alert">          <p>Error al cargar los videojuegos: {{ mensajeVideojuegos }}</p>        </ion-text>        <ion-button (click)="cargarDatos()">Reintentar</ion-button>      </ion-card-content>    </ion-card>  }  @if (errorActividades(); as mensajeActividades) {    <ion-card role="alert">      <ion-card-content>        <ion-text color="danger" role="alert">          <p>Error al cargar las actividades: {{ mensajeActividades }}</p>        </ion-text>        <ion-button (click)="cargarDatos()">Reintentar</ion-button>      </ion-card-content>    </ion-card>  }  @if (!cargando() && !errorVideojuegos()) {    <section aria-label="Filtros de informes">    <ion-grid>      <ion-row>        <ion-col size="12" size-md="6">          <label>            Plataforma            <select [value]="filtroPlataforma()" (change)="cambiarPlataforma($event)">              <option value="">Todas las plataformas</option>              @for (plataforma of plataformas; track plataforma) {                <option [value]="plataforma">{{ plataforma }}</option>              }            </select>          </label>        </ion-col>        <ion-col size="12" size-md="6">          <label>            Género            <select [value]="filtroGenero()" (change)="cambiarGenero($event)">              <option value="">Todos los géneros</option>              @for (genero of generos; track genero) {                <option [value]="genero">{{ genero }}</option>              }            </select>          </label>        </ion-col>      </ion-row>      <ion-row>        <ion-col size="12" size-md="6" size-lg="3">          <app-stat-card titulo="Total de juegos" [valor]="totalJuegos()" icono="game-controller" />        </ion-col>        <ion-col size="12" size-md="6" size-lg="3">          <app-stat-card titulo="Stock total" [valor]="stockTotal()" icono="cube" />        </ion-col>        <ion-col size="12" size-md="6" size-lg="3">          <app-stat-card titulo="Valor del inventario" [valor]="valorInventario()" icono="cash" />        </ion-col>        <ion-col size="12" size-md="6" size-lg="3">          <app-stat-card titulo="Valoración media" [valor]="valoracionMedia()" icono="star" />        </ion-col>      </ion-row>    </ion-grid>    </section>    @defer (on idle) {      <app-informe-graficos        [videojuegos]="videojuegosFiltrados()"        [actividades]="actividades()"      />    } @placeholder {      <ion-card><ion-card-content>Preparando los gráficos…</ion-card-content></ion-card>    }  }  <ion-card>    <ion-card-header>      <ion-card-title>Historial de actividades</ion-card-title>    </ion-card-header>    <ion-card-content>      @if (cargando()) {        <div class="ion-text-center">          <ion-spinner name="crescent" aria-label="Cargando actividades"></ion-spinner>        </div>      } @else if (errorActividades()) {        <p>El historial no está disponible hasta que se resuelva el error de Firestore.</p>      } @else {        <ion-list>          @for (actividad of actividades(); track actividad.id) {            <ion-item>              <ion-label>                <h2>{{ actividad.tipo | uppercase }}</h2>                <p>{{ actividad.detalle }}</p>                @if (actividad.usuario) {                  <p><small>Usuario: {{ actividad.usuario }}</small></p>                }              </ion-label>            </ion-item>          } @empty {            <ion-item><ion-label>No hay actividades registradas.</ion-label></ion-item>          }        </ion-list>      }    </ion-card-content>  </ion-card></ion-content></div>'
+    var COMPONENTS = [{'name': 'AcercaPage', 'selector': 'app-acerca'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AyudaPage', 'selector': 'app-ayuda'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'EstadoVacioComponent', 'selector': 'app-estado-vacio'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'InformeGraficosComponent', 'selector': 'app-informe-graficos'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'StatCardComponent', 'selector': 'app-stat-card'},{'name': 'VideojuegoDetallePage', 'selector': 'app-videojuego-detalle'},{'name': 'VideojuegoFormPage', 'selector': 'app-videojuego-form'},{'name': 'VideojuegosPage', 'selector': 'app-videojuegos'}];
+    var DIRECTIVES = [{'name': 'ResaltarDirective', 'selector': '[appResaltar]'}];
+    var ACTUAL_COMPONENT = {'name': 'DashboardPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DashboardPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

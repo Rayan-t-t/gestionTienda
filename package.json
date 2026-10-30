@@ -6,10 +6,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node scripts/generate-environment.mjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "pretest": "node scripts/generate-environment.mjs",
+    "test": "ng test --configuration ci --watch=false",
+    "lint": "ng lint",
+    "docs": "compodoc -p tsconfig.doc.json -d documentation",
+    "docs:serve": "compodoc -s -d documentation",
+    "vercel-build": "npm run test && npm run lint && npm run build && npm run docs"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +24,7 @@
     "@angular/forms": "22.2.3",
     "@angular/platform-browser": "22.2.3",
     "@angular/router": "22.2.3",
+    "@angular/service-worker": "22.2.3",
     "@capacitor/app": "8.1.2",
     "@capacitor/core": "8.5.3",
     "@capacitor/haptics": "8.0.2",

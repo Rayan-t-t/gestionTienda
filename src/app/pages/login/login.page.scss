@@ -1,8 +1,117 @@
-form {
-  max-width: 400px;
+.login-layout {
+  align-items: center;
+  display: grid;
   margin: 0 auto;
+  max-width: 70rem;
+  min-height: 100%;
+  width: 100%;
+}
+
+ion-grid {
+  margin: auto;
+  max-width: 64rem;
+  width: 100%;
+}
+
+.login-card {
+  background:
+    linear-gradient(145deg, rgb(var(--ion-color-primary-rgb) / 7%), transparent 48%),
+    var(--ion-card-background, var(--ion-background-color, #fff));
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.25rem 3.5rem rgb(15 23 42 / 12%);
+  margin: 1.5rem auto;
+  max-width: 31rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  width: 100%;
+}
+
+.login-identidad {
+  align-items: center;
+  color: var(--ion-color-primary);
+  display: flex;
+  font-size: 0.75rem;
+  font-weight: 750;
+  gap: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.marca-icono {
+  align-items: center;
+  background: var(--ion-color-primary);
+  border-radius: 0.8rem;
+  color: var(--ion-color-primary-contrast);
+  display: inline-flex;
+  font-size: 0.95rem;
+  height: 2.5rem;
+  justify-content: center;
+  letter-spacing: 0;
+  width: 2.5rem;
+}
+
+.marca-texto span {
+  color: var(--ion-color-tertiary);
+}
+
+.login-introduccion {
+  margin: 2rem 0 1.5rem;
+}
+
+.login-etiqueta {
+  color: var(--ion-color-primary);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.5rem;
+}
+
+.login-introduccion h1 {
+  color: var(--ion-text-color);
+  font-size: clamp(1.65rem, 5vw, 2rem);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.login-introduccion > p:last-child {
+  color: var(--ion-color-medium);
+  margin: 0.65rem 0 0;
+}
+
+form {
+  margin: 0 auto;
+  width: 100%;
+}
+
+form ion-item {
+  --background: transparent;
+  --border-color: var(--ion-color-light-shade);
+  --padding-start: 0;
+  margin-top: 0.45rem;
+}
+
+form ion-button {
+  --border-radius: 0.75rem;
+  --box-shadow: 0 0.5rem 1.15rem rgb(var(--ion-color-primary-rgb) / 22%);
+  font-weight: 700;
+  height: 3.1rem;
+}
+
+.login-pie {
+  border-top: 1px solid var(--ion-color-light-shade);
+  color: var(--ion-color-medium);
+  font-size: 0.8rem;
+  margin: 1.75rem 0 0;
+  padding-top: 1rem;
+  text-align: center;
 }
 
 ion-text {
   display: block;
+}
+
+@media (max-width: 30rem) {
+  .login-card {
+    border-radius: 1rem;
+    padding: 1.4rem 1.15rem;
+  }
 }
