@@ -4,7 +4,7 @@ Guía rápida para usar el gestor de videojuegos.
 
 ## Acceso
 
-Inicia sesión con tu correo y contraseña. Tu rol determina las opciones disponibles. Al terminar, usa «Cerrar sesión» en el menú.
+Inicia sesión con tu correo y contraseña. Tu rol determina las opciones disponibles. Usa la barra horizontal superior para cambiar de pantalla. Al terminar, pulsa «Cerrar sesión» junto a tu saludo.
 
 ## Catálogo
 
@@ -24,4 +24,4 @@ Usa «Exportar CSV» o «Exportar PDF» en el catálogo para descargar los resul
 
 ## Accesibilidad
 
-Usa Tab y Mayús+Tab para navegar, Enter o Espacio para activar controles y el enlace «Saltar al contenido» para omitir el menú. El foco es visible y se respeta la preferencia de movimiento reducido y el tema oscuro del dispositivo.
+Usa Tab y Mayús+Tab para navegar, Enter o Espacio para activar controles y el enlace «Saltar al contenido» para ir directamente al contenido principal. El foco es visible y se respeta la preferencia de movimiento reducido y el tema oscuro del dispositivo.

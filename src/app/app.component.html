@@ -2,13 +2,10 @@
   <a class="skip-link" href="#main-content" (click)="saltarAlContenido($event)">
     Saltar al contenido
   </a>
-  <ion-split-pane contentId="main-content" when="md">
-    <app-menu></app-menu>
-    <ion-router-outlet
-      id="main-content"
-      role="main"
-      tabindex="-1"
-      aria-label="Contenido principal"
-    ></ion-router-outlet>
-  </ion-split-pane>
+  <ion-router-outlet
+    id="main-content"
+    role="main"
+    tabindex="-1"
+    aria-label="Contenido principal"
+  ></ion-router-outlet>
 </ion-app>

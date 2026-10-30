@@ -7,6 +7,17 @@ interface ResumenGrafico {
   cantidad: number;
 }
 
+const COLORES_GRAFICO = [
+  '#4f9cf9',
+  '#f59e0b',
+  '#34d399',
+  '#c084fc',
+  '#fb7185',
+  '#22d3ee',
+  '#a3e635',
+  '#f472b6'
+];
+
 /**
  * Presenta los gráficos de videojuegos y actividad para el dashboard.
  */
@@ -25,8 +36,8 @@ export class InformeGraficosComponent {
   private readonly vistaLista = signal(false);
   private revision = 0;
   private graficoGenero: ChartInstance<'doughnut', number[], string> | null = null;
-  private graficoPlataforma: ChartInstance<'bar', number[], string> | null = null;
-  private graficoActividad: ChartInstance<'bar', number[], string> | null = null;
+  private graficoPlataforma: ChartInstance<'doughnut', number[], string> | null = null;
+  private graficoActividad: ChartInstance<'doughnut', number[], string> | null = null;
 
   readonly videojuegos = input.required<readonly VideojuegoInforme[]>();
   readonly actividades = input.required<readonly { tipo: string }[]>();
@@ -75,10 +86,6 @@ export class InformeGraficosComponent {
     chartJs.Chart.register(
       chartJs.DoughnutController,
       chartJs.ArcElement,
-      chartJs.BarController,
-      chartJs.BarElement,
-      chartJs.CategoryScale,
-      chartJs.LinearScale,
       chartJs.Tooltip,
       chartJs.Legend
     );
@@ -87,27 +94,42 @@ export class InformeGraficosComponent {
       type: 'doughnut',
       data: {
         labels: porGenero.map((elemento) => elemento.clave),
-        datasets: [{ label: 'Juegos', data: porGenero.map((elemento) => elemento.cantidad) }]
+        datasets: [{
+          label: 'Juegos',
+          data: porGenero.map((elemento) => elemento.cantidad),
+          backgroundColor: COLORES_GRAFICO,
+          borderWidth: 2
+        }]
       },
       options: { responsive: true, maintainAspectRatio: false }
     });
     this.graficoPlataforma = new chartJs.Chart(canvasPlataforma, {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: porPlataforma.map((elemento) => elemento.clave),
-        datasets: [{ label: 'Stock', data: porPlataforma.map((elemento) => elemento.cantidad) }]
+        datasets: [{
+          label: 'Stock',
+          data: porPlataforma.map((elemento) => elemento.cantidad),
+          backgroundColor: COLORES_GRAFICO,
+          borderWidth: 2
+        }]
       },
-      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+      options: { responsive: true, maintainAspectRatio: false }
     });
     this.graficoActividad = new chartJs.Chart(canvasActividad, {
-      type: 'bar',
+      type: 'doughnut',
       data: {
         labels: porActividad.map((elemento) => elemento.clave),
         datasets: [
-          { label: 'Actividades', data: porActividad.map((elemento) => elemento.cantidad) }
+          {
+            label: 'Actividades',
+            data: porActividad.map((elemento) => elemento.cantidad),
+            backgroundColor: COLORES_GRAFICO,
+            borderWidth: 2
+          }
         ]
       },
-      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+      options: { responsive: true, maintainAspectRatio: false }
     });
   }
 

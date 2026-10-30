@@ -11,7 +11,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   IonButton,
-  IonButtons,
   IonCard,
   IonCardContent,
   IonCardHeader,
@@ -23,7 +22,6 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonMenuButton,
   IonSpinner,
   IonText,
   IonRow,
@@ -42,6 +40,8 @@ import { Actividad, FirestoreService } from '../../core/services/firestore.servi
 import { VideojuegosService } from '../../core/services/videojuegos.service';
 import { InformeGraficosComponent } from '../../shared/components/informe-graficos/informe-graficos.component';
 import { StatCardComponent } from '../../shared/components/stat-card/stat-card.component';
+import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
+import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 
 type Plataforma = Videojuego['plataforma'];
 type Genero = Videojuego['genero'];
@@ -58,7 +58,6 @@ const GENEROS: readonly Genero[] = ['RPG', 'Accion', 'Deportes', 'Estrategia', '
   imports: [
     UpperCasePipe,
     IonButton,
-    IonButtons,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -70,14 +69,15 @@ const GENEROS: readonly Genero[] = ['RPG', 'Accion', 'Deportes', 'Estrategia', '
     IonItem,
     IonLabel,
     IonList,
-    IonMenuButton,
     IonSpinner,
     IonText,
     IonRow,
     IonTitle,
     IonToolbar,
     InformeGraficosComponent,
-    StatCardComponent
+    StatCardComponent,
+    ControlSesionComponent,
+    NavegacionPrincipalComponent
   ],
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],

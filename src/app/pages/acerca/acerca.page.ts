@@ -5,13 +5,13 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonButtons,
-  IonMenuButton,
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonCardContent
 } from '@ionic/angular';
+import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
+import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 
 /**
  * Página Acerca de la aplicación.
@@ -25,12 +25,12 @@ import {
     IonToolbar,
     IonTitle,
     IonContent,
-    IonButtons,
-    IonMenuButton,
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent
+    IonCardContent,
+    ControlSesionComponent,
+    NavegacionPrincipalComponent
   ],
   templateUrl: './acerca.page.html',
   styleUrls: ['./acerca.page.scss'],

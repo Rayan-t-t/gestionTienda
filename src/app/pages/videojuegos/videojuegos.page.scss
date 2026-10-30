@@ -42,13 +42,40 @@ ion-col {
   gap: 0.5rem;
 }
 
-app-data-table {
+.busqueda-catalogo {
   background: var(--ion-card-background, var(--ion-background-color, #fff));
   border: 1px solid var(--ion-color-light-shade);
   border-radius: 1rem;
   box-shadow: 0 0.35rem 1.2rem rgb(15 23 42 / 5%);
+  margin: 0 0 1rem;
+  padding: 0.65rem 1rem 0.25rem;
+}
+
+.busqueda-catalogo label {
+  color: var(--ion-color-medium-shade);
   display: block;
-  padding: clamp(0.75rem, 2vw, 1.25rem);
+  font-size: 0.85rem;
+  font-weight: 650;
+  padding-inline-start: 0.75rem;
+}
+
+.busqueda-catalogo ion-searchbar {
+  --background: transparent;
+  --box-shadow: none;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.catalogo-grid {
+  padding: 0;
+}
+
+.catalogo-grid ion-col {
+  display: flex;
+}
+
+.catalogo-grid app-videojuego-card {
+  flex: 1;
 }
 
 ion-fab-button {

@@ -21,6 +21,8 @@ import {
   IonRow,
   IonToolbar
 } from '@ionic/angular';
+import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
+import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 import { Videojuego } from '../../core/models/videojuego.model';
 import { AuthService } from '../../core/services/auth.service';
 import { VideojuegosService } from '../../core/services/videojuegos.service';
@@ -50,7 +52,9 @@ import { VideojuegosService } from '../../core/services/videojuegos.service';
     IonText,
     IonTitle,
     IonRow,
-    IonToolbar
+    IonToolbar,
+    ControlSesionComponent,
+    NavegacionPrincipalComponent
   ],
   templateUrl: './videojuego-detalle.page.html',
   styleUrls: ['./videojuego-detalle.page.scss'],
@@ -65,7 +69,7 @@ export class VideojuegoDetallePage implements OnInit {
   readonly videojuego = signal<Videojuego | null>(null);
   readonly cargando = signal(false);
   readonly errorMensaje = signal<string | null>(null);
-  readonly esAdministrador = this.authService.esAdministrador;
+  readonly puedeGestionar = this.authService.puedeGestionar;
   readonly requisitos = computed(() => {
     const requisitos = this.videojuego()?.requisitos;
     return requisitos

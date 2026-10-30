@@ -48,6 +48,7 @@ describe('AuthService', () => {
     expect(inicioSesionCompletado).toBe(true);
     expect(service.usuarioActual()?.role).toBe('admin');
     expect(service.esAdministrador()).toBe(true);
+    expect(service.puedeGestionar()).toBe(true);
     expect(service.estaAutenticado()).toBe(true);
     expect(JSON.parse(sessionStorage.getItem('usuario') ?? '{}').email).toBe(
       'admin@example.test'
@@ -70,6 +71,26 @@ describe('AuthService', () => {
     expect(servicioConTokenCaducado.usuarioActual()).not.toBeNull();
     expect(servicioConTokenCaducado.estaAutenticado()).toBe(false);
     expect(servicioConTokenCaducado.esAdministrador()).toBe(false);
+    expect(servicioConTokenCaducado.puedeGestionar()).toBe(false);
+  });
+
+  it('reserva las funciones de gestión a administradores cuando el modo demo está desactivado', () => {
+    sessionStorage.setItem(
+      'usuario',
+      JSON.stringify({
+        id: 'usuario-demo',
+        email: 'usuario@example.test',
+        role: 'user',
+        access_token: crearToken(Math.floor(Date.now() / 1000) + 3600),
+        refresh_token: 'refresh-token'
+      })
+    );
+
+    service = TestBed.inject(AuthService);
+
+    expect(service.estaAutenticado()).toBe(true);
+    expect(service.esAdministrador()).toBe(false);
+    expect(service.puedeGestionar()).toBe(false);
   });
 });
 

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, defer, finalize, map, shareReplay, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Usuario } from '../models/usuario.model';
+import { MODO_DEMO_GESTION } from '../config/acceso.config';
 
 /**
  * Servicio de sesión basado en la API REST de Supabase Auth.
@@ -32,6 +33,11 @@ export class AuthService {
   /** Indica si la sesión vigente pertenece a un administrador. */
   readonly esAdministrador = computed(
     () => this.estaAutenticado() && this.usuarioActual()?.role === 'admin'
+  );
+
+  /** Permiso temporal de gestión para administradores o usuarios autenticados en demo. */
+  readonly puedeGestionar = computed(
+    () => this.estaAutenticado() && (MODO_DEMO_GESTION || this.esAdministrador())
   );
 
   constructor() {

@@ -36,7 +36,15 @@ export interface Requisitos {
  */
 export type VideojuegoListado = Pick<
   Videojuego,
-  'id' | 'titulo' | 'precio' | 'stock' | 'plataforma' | 'genero' | 'disponible'
+  | 'id'
+  | 'titulo'
+  | 'precio'
+  | 'stock'
+  | 'plataforma'
+  | 'genero'
+  | 'disponible'
+  | 'valoracion'
+  | 'portada_url'
 >;
 
 /**
