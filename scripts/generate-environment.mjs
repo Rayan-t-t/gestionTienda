@@ -20,6 +20,15 @@ if (existsSync(outputPath) && noValuesConfigured) {
   process.exit(0);
 }
 
+if (noValuesConfigured && existsSync(resolve('src/environments/environment.prod.ts'))) {
+  writeFileSync(outputPath, "export { environment } from './environment.prod';\n", {
+    encoding: 'utf8',
+    mode: 0o600
+  });
+  console.info('Se usa environment.prod.ts como configuración de respaldo.');
+  process.exit(0);
+}
+
 const missingVariables = Object.entries(environmentVariables)
   .filter(([, value]) => !value)
   .map(([key]) => key);

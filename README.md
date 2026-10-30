@@ -37,7 +37,7 @@ Para generar el archivo desde variables de entorno, define:
 - `FIREBASE_MESSAGING_SENDER_ID`
 - `FIREBASE_APP_ID`
 
-`npm run build` genera `environment.ts` antes del build. Si ya existe un archivo local y no se han definido variables, el script lo conserva. Si se configura alguna variable, deben estar definidas todas para generar un archivo completo. En GitHub Actions se usan valores de ejemplo; en Vercel configura los valores reales como variables de entorno del proyecto.
+`npm run build` genera `environment.ts` antes del build. Si ya existe un archivo local y no se han definido variables, el script lo conserva. Si no existen variables y falta el archivo local, usa `environment.prod.ts` como configuración de respaldo. Si se configura alguna variable, deben estar definidas todas para generar un archivo completo desde el entorno. En GitHub Actions se usan valores de ejemplo; en Vercel configura los valores de Production, Preview y Development como variables de entorno del proyecto.
 
 ## Base de datos Supabase
 
