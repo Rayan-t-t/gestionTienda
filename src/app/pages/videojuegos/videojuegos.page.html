@@ -47,33 +47,28 @@
             />
           </div>
         } @else {
-          @defer (on idle) {
-            <ion-grid class="catalogo-grid">
-              <ion-row>
-                @for (videojuego of videojuegos(); track videojuego.id) {
-                  <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
-                    <app-videojuego-card
-                      [videojuego]="videojuego"
-                      [mostrarAcciones]="puedeGestionar()"
-                      [permitirCompra]="true"
-                      (seleccionado)="abrirDetalle($event)"
-                      (anadirAlCarrito)="anadirAlCarrito($event)"
-                      (editar)="editarVideojuego($event)"
-                      (eliminar)="confirmarEliminacion($event)"
-                    />
-                  </ion-col>
-                } @empty {
-                  <ion-col size="12">
-                    <app-estado-vacio mensaje="No hay videojuegos que mostrar." />
-                  </ion-col>
-                }
-              </ion-row>
-            </ion-grid>
-          } @placeholder {
-            <div class="ion-padding ion-text-center" role="status" aria-live="polite">
-              Preparando el catálogo…
-            </div>
-          }
+          <ion-grid class="catalogo-grid">
+            <ion-row>
+              @for (videojuego of videojuegos(); track videojuego.id; let indice = $index) {
+                <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+                  <app-videojuego-card
+                    [videojuego]="videojuego"
+                    [prioritaria]="indice < 2"
+                    [mostrarAcciones]="puedeGestionar()"
+                    [permitirCompra]="true"
+                    (seleccionado)="abrirDetalle($event)"
+                    (anadirAlCarrito)="anadirAlCarrito($event)"
+                    (editar)="editarVideojuego($event)"
+                    (eliminar)="confirmarEliminacion($event)"
+                  />
+                </ion-col>
+              } @empty {
+                <ion-col size="12">
+                  <app-estado-vacio mensaje="No hay videojuegos que mostrar." />
+                </ion-col>
+              }
+            </ion-row>
+          </ion-grid>
 
           <div class="ion-padding ion-text-center paginacion-servidor">
             <ion-button fill="outline" (click)="retrocederPagina()" [disabled]="offset() === 0">

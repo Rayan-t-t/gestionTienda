@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonBadge, IonButton, IonButtons, IonIcon } from '@ionic/angular';
+import { IonBadge } from '@ionic/angular/ion-badge';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonButtons } from '@ionic/angular/ion-buttons';
+import { IonIcon } from '@ionic/angular/ion-icon';
 import { addIcons } from 'ionicons';
 import { cartOutline } from 'ionicons/icons';
 import { AuthService } from '../../../core/services/auth.service';

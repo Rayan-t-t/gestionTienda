@@ -17,6 +17,8 @@ export class VideojuegoCardComponent {
   readonly videojuego = input.required<VideojuegoListado>();
   readonly mostrarAcciones = input(false);
   readonly permitirCompra = input(false);
+  /** Marca la portada como imagen prioritaria (LCP): se carga sin lazy y con fetchpriority alto. */
+  readonly prioritaria = input(false);
 
   readonly seleccionado = output<VideojuegoListado>();
   readonly editar = output<VideojuegoListado>();

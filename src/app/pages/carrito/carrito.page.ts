@@ -1,15 +1,13 @@
 import { DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import {
-  IonButton,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonRow,
-  IonTitle,
-  IonToolbar
-} from '@ionic/angular';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonCol } from '@ionic/angular/ion-col';
+import { IonContent } from '@ionic/angular/ion-content';
+import { IonGrid } from '@ionic/angular/ion-grid';
+import { IonHeader } from '@ionic/angular/ion-header';
+import { IonRow } from '@ionic/angular/ion-row';
+import { IonTitle } from '@ionic/angular/ion-title';
+import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';

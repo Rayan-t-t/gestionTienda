@@ -1,5 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular';
+import { IonHeader } from '@ionic/angular/ion-header';
+import { IonToolbar } from '@ionic/angular/ion-toolbar';
+import { IonTitle } from '@ionic/angular/ion-title';
+import { IonContent } from '@ionic/angular/ion-content';
+import { IonButton } from '@ionic/angular/ion-button';
 import { RouterLink } from '@angular/router';
 import { ControlSesionComponent } from '../shared/components/control-sesion/control-sesion.component';
 import { NavegacionPrincipalComponent } from '../shared/components/navegacion-principal/navegacion-principal.component';

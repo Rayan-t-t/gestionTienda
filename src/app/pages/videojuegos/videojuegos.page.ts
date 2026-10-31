@@ -1,22 +1,20 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import {
-  AlertController,
-  IonButton,
-  IonContent,
-  IonCol,
-  IonFab,
-  IonFabButton,
-  IonHeader,
-  IonIcon,
-  IonGrid,
-  IonRow,
-  IonSearchbar,
-  IonSpinner,
-  IonTitle,
-  IonToolbar
-} from '@ionic/angular';
+import { AlertController } from '@ionic/angular/alert-controller';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonContent } from '@ionic/angular/ion-content';
+import { IonCol } from '@ionic/angular/ion-col';
+import { IonFab } from '@ionic/angular/ion-fab';
+import { IonFabButton } from '@ionic/angular/ion-fab-button';
+import { IonHeader } from '@ionic/angular/ion-header';
+import { IonIcon } from '@ionic/angular/ion-icon';
+import { IonGrid } from '@ionic/angular/ion-grid';
+import { IonRow } from '@ionic/angular/ion-row';
+import { IonSearchbar } from '@ionic/angular/ion-searchbar';
+import { IonSpinner } from '@ionic/angular/ion-spinner';
+import { IonTitle } from '@ionic/angular/ion-title';
+import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';

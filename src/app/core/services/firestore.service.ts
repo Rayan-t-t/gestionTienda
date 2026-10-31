@@ -1,15 +1,4 @@
-import { getApp, getApps, initializeApp } from 'firebase/app';
-import {
-  addDoc,
-  collection,
-  Firestore,
-  getDocs,
-  getFirestore,
-  limit,
-  orderBy,
-  query,
-  Timestamp,
-} from 'firebase/firestore';
+import type { Firestore, Timestamp } from 'firebase/firestore';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
@@ -35,11 +24,21 @@ export interface Actividad extends Omit<NuevaActividad, 'fecha'> {
   providedIn: 'root'
 })
 export class FirestoreService {
-  private readonly db: Firestore;
+  private dbPromise: Promise<Firestore> | null = null;
 
-  constructor() {
-    const app = getApps().length > 0 ? getApp() : initializeApp(environment.firebaseConfig);
-    this.db = getFirestore(app);
+  /**
+   * Carga Firebase bajo demanda para que no entre en el bundle del catálogo.
+   */
+  private obtenerDb(): Promise<Firestore> {
+    this.dbPromise ??= (async () => {
+      const [{ getApp, getApps, initializeApp }, { getFirestore }] = await Promise.all([
+        import('firebase/app'),
+        import('firebase/firestore')
+      ]);
+      const app = getApps().length > 0 ? getApp() : initializeApp(environment.firebaseConfig);
+      return getFirestore(app);
+    })();
+    return this.dbPromise;
   }
 
   /**
@@ -47,7 +46,11 @@ export class FirestoreService {
    */
   async registrarActividad(actividad: NuevaActividad): Promise<void> {
     try {
-      await addDoc(collection(this.db, 'actividad'), actividad);
+      const [db, { addDoc, collection }] = await Promise.all([
+        this.obtenerDb(),
+        import('firebase/firestore')
+      ]);
+      await addDoc(collection(db, 'actividad'), actividad);
     } catch (error) {
       console.error('No se pudo registrar la actividad en Firestore.', error);
       throw error;
@@ -59,8 +62,12 @@ export class FirestoreService {
    */
   async obtenerActividades(limite = 500): Promise<Actividad[]> {
     try {
+      const [db, { collection, getDocs, limit, orderBy, query }] = await Promise.all([
+        this.obtenerDb(),
+        import('firebase/firestore')
+      ]);
       const consulta = query(
-        collection(this.db, 'actividad'),
+        collection(db, 'actividad'),
         orderBy('fecha', 'desc'),
         limit(Math.max(1, Math.floor(limite)))
       );

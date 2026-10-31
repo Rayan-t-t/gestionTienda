@@ -2,25 +2,23 @@ import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnIni
 import { NgOptimizedImage } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonSpinner,
-  IonText,
-  IonTitle,
-  IonRow,
-  IonToolbar
-} from '@ionic/angular';
+import { IonBackButton } from '@ionic/angular/ion-back-button';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonButtons } from '@ionic/angular/ion-buttons';
+import { IonCard } from '@ionic/angular/ion-card';
+import { IonCardContent } from '@ionic/angular/ion-card-content';
+import { IonCardHeader } from '@ionic/angular/ion-card-header';
+import { IonCardSubtitle } from '@ionic/angular/ion-card-subtitle';
+import { IonCardTitle } from '@ionic/angular/ion-card-title';
+import { IonCol } from '@ionic/angular/ion-col';
+import { IonContent } from '@ionic/angular/ion-content';
+import { IonGrid } from '@ionic/angular/ion-grid';
+import { IonHeader } from '@ionic/angular/ion-header';
+import { IonSpinner } from '@ionic/angular/ion-spinner';
+import { IonText } from '@ionic/angular/ion-text';
+import { IonTitle } from '@ionic/angular/ion-title';
+import { IonRow } from '@ionic/angular/ion-row';
+import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
 import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 import { Videojuego } from '../../core/models/videojuego.model';

@@ -7,27 +7,25 @@ import {
   Validators
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonHeader,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonSelect,
-  IonSelectOption,
-  IonSpinner,
-  IonText,
-  IonTextarea,
-  IonTitle,
-  IonToggle,
-  IonRow,
-  IonToolbar
-} from '@ionic/angular';
+import { IonBackButton } from '@ionic/angular/ion-back-button';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonButtons } from '@ionic/angular/ion-buttons';
+import { IonCol } from '@ionic/angular/ion-col';
+import { IonContent } from '@ionic/angular/ion-content';
+import { IonGrid } from '@ionic/angular/ion-grid';
+import { IonHeader } from '@ionic/angular/ion-header';
+import { IonInput } from '@ionic/angular/ion-input';
+import { IonItem } from '@ionic/angular/ion-item';
+import { IonLabel } from '@ionic/angular/ion-label';
+import { IonSelect } from '@ionic/angular/ion-select';
+import { IonSelectOption } from '@ionic/angular/ion-select-option';
+import { IonSpinner } from '@ionic/angular/ion-spinner';
+import { IonText } from '@ionic/angular/ion-text';
+import { IonTextarea } from '@ionic/angular/ion-textarea';
+import { IonTitle } from '@ionic/angular/ion-title';
+import { IonToggle } from '@ionic/angular/ion-toggle';
+import { IonRow } from '@ionic/angular/ion-row';
+import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
 import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 import { crearValidadorSku } from '../../core/validators/sku-disponible.validator';

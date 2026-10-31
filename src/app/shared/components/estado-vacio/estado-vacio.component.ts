@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { IonButton, IonCard, IonCardContent } from '@ionic/angular';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonCard } from '@ionic/angular/ion-card';
+import { IonCardContent } from '@ionic/angular/ion-card-content';
 
 /**
  * Presenta un estado vacío con una acción opcional.

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { IonCard, IonCardContent, IonIcon } from '@ionic/angular';
+import { IonCard } from '@ionic/angular/ion-card';
+import { IonCardContent } from '@ionic/angular/ion-card-content';
+import { IonIcon } from '@ionic/angular/ion-icon';
 
 /**
  * Tarjeta compacta para mostrar una métrica y su tendencia.

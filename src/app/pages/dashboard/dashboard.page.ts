@@ -9,25 +9,23 @@ import {
   signal
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonCol,
-  IonGrid,
-  IonHeader,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonSpinner,
-  IonText,
-  IonRow,
-  IonTitle,
-  IonToolbar
-} from '@ionic/angular';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonCard } from '@ionic/angular/ion-card';
+import { IonCardContent } from '@ionic/angular/ion-card-content';
+import { IonCardHeader } from '@ionic/angular/ion-card-header';
+import { IonCardTitle } from '@ionic/angular/ion-card-title';
+import { IonContent } from '@ionic/angular/ion-content';
+import { IonCol } from '@ionic/angular/ion-col';
+import { IonGrid } from '@ionic/angular/ion-grid';
+import { IonHeader } from '@ionic/angular/ion-header';
+import { IonItem } from '@ionic/angular/ion-item';
+import { IonLabel } from '@ionic/angular/ion-label';
+import { IonList } from '@ionic/angular/ion-list';
+import { IonSpinner } from '@ionic/angular/ion-spinner';
+import { IonText } from '@ionic/angular/ion-text';
+import { IonRow } from '@ionic/angular/ion-row';
+import { IonTitle } from '@ionic/angular/ion-title';
+import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { addIcons } from 'ionicons';
 import { cash, cube, gameController, star } from 'ionicons/icons';
 import { forkJoin, from, of } from 'rxjs';

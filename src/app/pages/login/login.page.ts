@@ -2,17 +2,15 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  IonButton,
-  IonCol,
-  IonContent,
-  IonGrid,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonText,
-  IonRow
-} from '@ionic/angular';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonCol } from '@ionic/angular/ion-col';
+import { IonContent } from '@ionic/angular/ion-content';
+import { IonGrid } from '@ionic/angular/ion-grid';
+import { IonInput } from '@ionic/angular/ion-input';
+import { IonItem } from '@ionic/angular/ion-item';
+import { IonLabel } from '@ionic/angular/ion-label';
+import { IonText } from '@ionic/angular/ion-text';
+import { IonRow } from '@ionic/angular/ion-row';
 import { AuthService } from '../../core/services/auth.service';
 import { FirestoreService } from '../../core/services/firestore.service';
 

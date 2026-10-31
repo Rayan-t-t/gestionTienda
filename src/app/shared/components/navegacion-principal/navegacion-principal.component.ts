@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonButton, IonToolbar } from '@ionic/angular';
+import { IonButton } from '@ionic/angular/ion-button';
+import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { AuthService } from '../../../core/services/auth.service';
 
 /**
