@@ -4,7 +4,7 @@ Guía rápida para usar el gestor de videojuegos.
 
 ## Acceso
 
-Inicia sesión con tu correo y contraseña. Tu rol determina las opciones disponibles. Usa el botón «Carrito», junto a tu saludo, para revisar tus productos y «Cerrar sesión» para salir.
+Inicia sesión con tu correo y contraseña. Tu rol determina las opciones disponibles. Usa el botón «Carrito», junto a tu saludo, para revihaz sar tus productos y «Cerrar sesión» para salir.
 
 ## Catálogo
 
