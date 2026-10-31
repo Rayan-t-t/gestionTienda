@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IonBackButton } from '@ionic/angular/ion-back-button';
@@ -19,6 +18,7 @@ import { IonText } from '@ionic/angular/ion-text';
 import { IonTitle } from '@ionic/angular/ion-title';
 import { IonRow } from '@ionic/angular/ion-row';
 import { IonToolbar } from '@ionic/angular/ion-toolbar';
+import { GaleriaMultimediaComponent } from '../../shared/components/galeria-multimedia/galeria-multimedia.component';
 import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
 import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 import { Videojuego } from '../../core/models/videojuego.model';
@@ -32,7 +32,6 @@ import { VideojuegosService } from '../../core/services/videojuegos.service';
   selector: 'app-videojuego-detalle',
   standalone: true,
   imports: [
-    NgOptimizedImage,
     RouterLink,
     IonBackButton,
     IonButton,
@@ -52,6 +51,7 @@ import { VideojuegosService } from '../../core/services/videojuegos.service';
     IonRow,
     IonToolbar,
     ControlSesionComponent,
+    GaleriaMultimediaComponent,
     NavegacionPrincipalComponent
   ],
   templateUrl: './videojuego-detalle.page.html',

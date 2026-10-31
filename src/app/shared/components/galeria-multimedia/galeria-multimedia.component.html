@@ -1,0 +1,45 @@
+<div
+  class="galeria"
+  role="region"
+  aria-roledescription="carrusel"
+  [attr.aria-label]="'Portada y tráiler de ' + titulo()"
+  (keydown)="teclaPulsada($event)"
+  (touchstart)="empezarToque($event)"
+  (touchend)="terminarToque($event)"
+>
+  <div class="diapositiva" role="group" aria-roledescription="diapositiva" [attr.aria-label]="indice() + 1 + ' de ' + totalDiapositivas()">
+    @if (indice() === 0) {
+      <img
+        [ngSrc]="portadaUrl() || 'assets/shapes.svg'"
+        [alt]="'Portada de ' + titulo()"
+        width="640"
+        height="360"
+        priority
+      />
+    } @else if (reproduciendo() && urlVideo(); as video) {
+      <iframe
+        [src]="video"
+        [title]="'Tráiler de ' + titulo()"
+        allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    } @else if (miniaturaTrailer(); as miniatura) {
+      <img [ngSrc]="miniatura" [alt]="'Miniatura del tráiler de ' + titulo()" width="480" height="270" />
+      <button type="button" class="reproducir" (click)="reproducir()" [attr.aria-label]="'Reproducir el tráiler de ' + titulo()">
+        <ion-icon name="play" aria-hidden="true"></ion-icon>
+      </button>
+    }
+  </div>
+
+  @if (totalDiapositivas() > 1) {
+    <button type="button" class="flecha izquierda" (click)="anterior()" aria-label="Diapositiva anterior">
+      <ion-icon name="chevron-back" aria-hidden="true"></ion-icon>
+    </button>
+    <button type="button" class="flecha derecha" (click)="siguiente()" aria-label="Diapositiva siguiente">
+      <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+    </button>
+    <span class="contador" aria-hidden="true">{{ indice() + 1 }} / {{ totalDiapositivas() }}</span>
+    <span class="solo-lectores" role="status" aria-live="polite">{{ descripcionActual() }}</span>
+  }
+</div>

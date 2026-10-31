@@ -18,6 +18,8 @@ export interface Videojuego {
   etiquetas?: string[] | null;
   requisitos?: Requisitos | null;
   portada_url?: string | null;
+  /** URL del tráiler (YouTube). */
+  url?: string | null;
 }
 
 /**

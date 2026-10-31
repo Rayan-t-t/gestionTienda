@@ -25,12 +25,10 @@
     </div>
   } @else if (videojuego(); as juego) {
     <ion-card>
-      <img
-        [ngSrc]="juego.portada_url || 'assets/shapes.svg'"
-        [alt]="'Portada de ' + juego.titulo"
-        width="640"
-        height="360"
-        loading="lazy"
+      <app-galeria-multimedia
+        [titulo]="juego.titulo"
+        [portadaUrl]="juego.portada_url"
+        [trailerUrl]="juego.url"
       />
       <ion-card-header>
         <ion-card-title>{{ juego.titulo }}</ion-card-title>

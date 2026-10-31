@@ -29,6 +29,7 @@ import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { ControlSesionComponent } from '../../shared/components/control-sesion/control-sesion.component';
 import { NavegacionPrincipalComponent } from '../../shared/components/navegacion-principal/navegacion-principal.component';
 import { crearValidadorSku } from '../../core/validators/sku-disponible.validator';
+import { validadorUrlYoutube } from '../../core/validators/url-youtube.validator';
 import { AuthService } from '../../core/services/auth.service';
 import { FirestoreService } from '../../core/services/firestore.service';
 import { Requisitos, Videojuego } from '../../core/models/videojuego.model';
@@ -47,6 +48,7 @@ type VideojuegoFormControls = {
   genero: FormControl<Videojuego['genero']>;
   etiquetas: FormControl<string>;
   portada_url: FormControl<string>;
+  url: FormControl<string>;
   so: FormControl<string>;
   procesador: FormControl<string>;
   ram: FormControl<string>;
@@ -149,6 +151,7 @@ export class VideojuegoFormPage implements OnInit {
     }),
     etiquetas: new FormControl('', { nonNullable: true }),
     portada_url: new FormControl('', { nonNullable: true }),
+    url: new FormControl('', { nonNullable: true, validators: [validadorUrlYoutube()] }),
     so: new FormControl('', { nonNullable: true }),
     procesador: new FormControl('', { nonNullable: true }),
     ram: new FormControl('', { nonNullable: true }),
@@ -239,6 +242,7 @@ export class VideojuegoFormPage implements OnInit {
             genero: videojuego.genero,
             etiquetas: videojuego.etiquetas?.join(', ') ?? '',
             portada_url: videojuego.portada_url ?? '',
+            url: videojuego.url ?? '',
             so: videojuego.requisitos?.so ?? '',
             procesador: videojuego.requisitos?.procesador ?? '',
             ram: videojuego.requisitos?.ram ?? '',
@@ -284,7 +288,8 @@ export class VideojuegoFormPage implements OnInit {
         .map((etiqueta) => etiqueta.trim())
         .filter((etiqueta) => etiqueta.length > 0),
       requisitos: hayRequisitos ? requisitos : null,
-      portada_url: valores.portada_url.trim() || null
+      portada_url: valores.portada_url.trim() || null,
+      url: valores.url.trim() || null
     };
   }
 
