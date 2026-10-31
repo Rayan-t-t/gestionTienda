@@ -1,6 +1,6 @@
-# Gestor de videojuegos
+# Vértice Games
 
-Aplicación Ionic + Angular standalone para gestionar el catálogo de una tienda de videojuegos. Proyecto de Desarrollo de Interfaces (DAM).
+Aplicación Ionic + Angular standalone para gestionar el catálogo de la tienda de videojuegos Vértice Games. Proyecto de Desarrollo de Interfaces (DAM).
 
 ## Stack
 

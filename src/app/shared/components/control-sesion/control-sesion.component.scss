@@ -18,9 +18,19 @@
 }
 
 ion-button {
+  --color: var(--ion-color-primary-contrast);
   flex: 0 0 auto;
   font-weight: 650;
   text-transform: none;
+}
+
+.boton-tema {
+  --padding-start: 0.5rem;
+  --padding-end: 0.5rem;
+}
+
+.boton-tema ion-icon {
+  font-size: 1.3rem;
 }
 
 .boton-carrito ion-badge {
@@ -42,7 +52,8 @@ ion-button {
     font-size: 0.75rem;
   }
 
-  .boton-carrito {
+  .boton-carrito,
+  .boton-tema {
     --padding-start: 0.25rem;
     --padding-end: 0.25rem;
   }

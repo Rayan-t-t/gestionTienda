@@ -1,6 +1,6 @@
 # Contexto del proyecto
 
-- Aplicación Ionic + Angular para gestionar una tienda de videojuegos. Proyecto de Desarrollo de Interfaces (DAM).
+- Aplicación Ionic + Angular para gestionar la tienda de videojuegos Vértice Games. Proyecto de Desarrollo de Interfaces (DAM).
 - Usar componentes standalone, signals, `ChangeDetectionStrategy.OnPush` y carga diferida con `loadComponent`.
 - Escribir el código y los comentarios JSDoc en español.
 - Mantener TypeScript estricto; está prohibido usar `any`.

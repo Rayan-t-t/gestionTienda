@@ -5,7 +5,7 @@
 
 .juego-card {
   background: var(--ion-card-background, #1c2028);
-  border: 1px solid rgb(255 255 255 / 8%);
+  border: 1px solid var(--app-borde, rgb(255 255 255 / 8%));
   border-radius: 0.8rem;
   box-shadow: 0 0.4rem 1.3rem rgb(0 0 0 / 16%);
   height: 100%;
@@ -126,7 +126,7 @@
 }
 
 .acciones {
-  border-top: 1px solid rgb(255 255 255 / 8%);
+  border-top: 1px solid var(--app-borde, rgb(255 255 255 / 8%));
   display: flex;
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;

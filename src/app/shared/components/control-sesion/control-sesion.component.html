@@ -1,10 +1,22 @@
 @if (estaAutenticado()) {
   <ion-buttons class="control-sesion">
+    <ion-button
+      class="boton-tema"
+      fill="clear"
+      (click)="alternarTema()"
+      [attr.aria-label]="temaOscuro() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'"
+      [attr.title]="temaOscuro() ? 'Modo claro' : 'Modo oscuro'"
+    >
+      <ion-icon
+        slot="icon-only"
+        [name]="temaOscuro() ? 'sunny-outline' : 'moon-outline'"
+        aria-hidden="true"
+      ></ion-icon>
+    </ion-button>
     <span class="saludo">Hola, {{ nombreUsuario() }}</span>
     <ion-button
       class="boton-carrito"
       fill="clear"
-      color="light"
       (click)="abrirCarrito()"
       [attr.aria-label]="'Carrito, ' + cantidadCarrito() + ' productos'"
     >
@@ -12,7 +24,7 @@
       <span class="texto-carrito">Carrito</span>
       <ion-badge color="warning">{{ cantidadCarrito() }}</ion-badge>
     </ion-button>
-    <ion-button fill="clear" color="light" (click)="cerrarSesion()" aria-label="Cerrar sesión">
+    <ion-button fill="clear" (click)="cerrarSesion()" aria-label="Cerrar sesión">
       Cerrar sesión
     </ion-button>
   </ion-buttons>

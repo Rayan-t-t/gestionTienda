@@ -1,6 +1,6 @@
 # Manual de usuario
 
-Guía rápida para usar el gestor de videojuegos.
+Guía rápida para usar Vértice Games.
 
 ## Acceso
 
