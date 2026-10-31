@@ -1,0 +1,64 @@
+<article class="juego-card">
+  <button
+    type="button"
+    class="juego-enlace"
+    (click)="seleccionado.emit(videojuego())"
+    [attr.aria-label]="'Ver detalles de ' + videojuego().titulo"
+  >
+    <div class="portada-contenedor">
+      <img
+        [ngSrc]="videojuego().portada_url || 'assets/shapes.svg'"
+        [alt]="'Portada de ' + videojuego().titulo"
+        width="640"
+        height="360"
+        loading="lazy"
+      />
+      <span class="plataforma">{{ videojuego().plataforma }}</span>
+    </div>
+    <span class="informacion">
+      <span class="titulo">{{ videojuego().titulo }}</span>
+      <span class="genero">{{ videojuego().genero }}</span>
+      @if (videojuego().valoracion !== null && videojuego().valoracion !== undefined) {
+        <span class="valoracion" [attr.aria-label]="'Valoración ' + videojuego().valoracion + ' de 10'">
+          ★ {{ videojuego().valoracion }}/10
+        </span>
+      }
+      <span class="pie-tarjeta">
+        <span class="precio">{{ videojuego().precio | number: '1.2-2' }} €</span>
+        <span
+          class="disponibilidad"
+          [class.no-disponible]="!videojuego().disponible || videojuego().stock < 1"
+        >
+          @if (videojuego().disponible && videojuego().stock > 0) {
+            En stock · {{ videojuego().stock }}
+          } @else {
+            Agotado
+          }
+        </span>
+      </span>
+    </span>
+  </button>
+
+  @if (permitirCompra() || mostrarAcciones()) {
+    <div class="acciones">
+      @if (permitirCompra() && videojuego().disponible && videojuego().stock > 0) {
+        <button class="anadir-carrito" type="button" (click)="anadirAlCarrito.emit(videojuego())">
+          Añadir al carrito
+        </button>
+      }
+      @if (mostrarAcciones()) {
+        <button type="button" (click)="editar.emit(videojuego())">
+          Editar
+        </button>
+        <button
+          type="button"
+          class="eliminar"
+          (click)="eliminar.emit(videojuego())"
+          [attr.aria-label]="'Eliminar ' + videojuego().titulo"
+        >
+          Eliminar
+        </button>
+      }
+    </div>
+  }
+</article>

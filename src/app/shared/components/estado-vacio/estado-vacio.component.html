@@ -1,0 +1,8 @@
+<ion-card>
+  <ion-card-content class="contenido">
+    <p>{{ mensaje() }}</p>
+    @if (textoAccion(); as texto) {
+      <ion-button (click)="accion.emit()">{{ texto }}</ion-button>
+    }
+  </ion-card-content>
+</ion-card>

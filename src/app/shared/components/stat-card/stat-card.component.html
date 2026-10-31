@@ -1,0 +1,12 @@
+<ion-card>
+  <button type="button" class="contenido" (click)="pulsado.emit()" [attr.aria-label]="titulo()">
+    <ion-card-content>
+      <ion-icon [name]="icono()" aria-hidden="true"></ion-icon>
+      <span class="titulo">{{ titulo() }}</span>
+      <strong class="valor">{{ valor() }}</strong>
+      @if (tendencia(); as valorTendencia) {
+        <span class="tendencia">{{ valorTendencia }}</span>
+      }
+    </ion-card-content>
+  </button>
+</ion-card>

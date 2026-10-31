@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Carrito</ion-title>
+    <app-control-sesion slot="end" />
+  </ion-toolbar>
+  <app-navegacion-principal />
+</ion-header>
+
+<ion-content class="ion-padding" role="region" aria-label="Carrito de compra">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-lg="9">
+        <h1>Tu carrito</h1>
+
+        @if (errorMensaje(); as mensaje) {
+          <p class="mensaje error" role="alert">{{ mensaje }}</p>
+        }
+        @if (exitoMensaje(); as mensaje) {
+          <p class="mensaje exito" role="status" aria-live="polite">{{ mensaje }}</p>
+        }
+
+        @if (articulos().length === 0) {
+          <section class="carrito-vacio">
+            <p>Tu carrito está vacío.</p>
+            <ion-button routerLink="/videojuegos">Volver al catálogo</ion-button>
+          </section>
+        } @else {
+          <div class="lista-articulos">
+            @for (articulo of articulos(); track articulo.id) {
+              <article class="articulo">
+                <img
+                  [ngSrc]="articulo.portada_url || 'assets/shapes.svg'"
+                  [alt]="'Portada de ' + articulo.titulo"
+                  width="160"
+                  height="90"
+                  loading="lazy"
+                />
+                <div class="detalles">
+                  <h2>{{ articulo.titulo }}</h2>
+                  <p>{{ articulo.plataforma }} · {{ articulo.genero }}</p>
+                  <p>{{ articulo.precio | number: '1.2-2' }} € por unidad</p>
+                </div>
+                <div class="controles">
+                  <div class="cantidad" [attr.aria-label]="'Cantidad: ' + articulo.cantidad">
+                    <ion-button
+                      fill="outline"
+                      size="small"
+                      [disabled]="procesando() || articulo.cantidad <= 1"
+                      [attr.aria-label]="'Reducir cantidad de ' + articulo.titulo"
+                      (click)="cambiarCantidad(articulo.id, articulo.cantidad - 1)"
+                    >
+                      −
+                    </ion-button>
+                    <span>{{ articulo.cantidad }}</span>
+                    <ion-button
+                      fill="outline"
+                      size="small"
+                      [disabled]="procesando() || articulo.cantidad >= articulo.stock"
+                      [attr.aria-label]="'Aumentar cantidad de ' + articulo.titulo"
+                      (click)="cambiarCantidad(articulo.id, articulo.cantidad + 1)"
+                    >
+                      +
+                    </ion-button>
+                  </div>
+                  <strong>{{ articulo.precio * articulo.cantidad | number: '1.2-2' }} €</strong>
+                  <ion-button
+                    fill="clear"
+                    color="danger"
+                    [disabled]="procesando()"
+                    [attr.aria-label]="'Quitar ' + articulo.titulo + ' del carrito'"
+                    (click)="quitarArticulo(articulo.id)"
+                  >
+                    Quitar
+                  </ion-button>
+                </div>
+              </article>
+            }
+          </div>
+
+          <section class="resumen">
+            <p>La finalización es una simulación: no se realizará ningún pago.</p>
+            <p class="total">Total: {{ importeTotal() | number: '1.2-2' }} €</p>
+            <ion-button
+              expand="block"
+              [disabled]="procesando() || articulos().length === 0"
+              (click)="finalizarPedido()"
+            >
+              {{ procesando() ? 'Procesando pedido…' : 'Finalizar pedido' }}
+            </ion-button>
+          </section>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,66 @@
+.acerca-contenido {
+  margin: clamp(1rem, 5vh, 3.5rem) auto;
+  max-width: 54rem;
+}
+
+.acerca-portada {
+  align-items: center;
+  background:
+    radial-gradient(circle at 85% 20%, rgb(255 255 255 / 13%), transparent 28%),
+    linear-gradient(125deg, var(--ion-color-primary-shade), var(--ion-color-tertiary));
+  border-radius: 1.25rem 1.25rem 0 0;
+  color: #fff;
+  display: flex;
+  gap: 1rem;
+  min-height: 9rem;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.acerca-simbolo {
+  align-items: center;
+  background: rgb(255 255 255 / 16%);
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 1rem;
+  display: inline-flex;
+  font-size: 1.4rem;
+  font-weight: 800;
+  height: 3.5rem;
+  justify-content: center;
+  width: 3.5rem;
+}
+
+.acerca-portada p {
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.acerca-contenido ion-card {
+  border-radius: 0 0 1.25rem 1.25rem;
+  margin: 0;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+ion-card {
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1.25rem;
+  box-shadow: 0 0.75rem 2rem rgb(15 23 42 / 7%);
+  padding: clamp(0.4rem, 2vw, 1.2rem);
+}
+
+ion-card-title {
+  font-size: clamp(1.35rem, 4vw, 1.8rem);
+  font-weight: 750;
+}
+
+ion-card-content {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+ion-card-content li {
+  margin-block: 0.4rem;
+}

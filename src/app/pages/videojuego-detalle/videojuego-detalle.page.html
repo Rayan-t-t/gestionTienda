@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/videojuegos" text="Volver al catálogo" aria-label="Volver al catálogo"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle del videojuego</ion-title>
+    <app-control-sesion slot="end" />
+  </ion-toolbar>
+  <app-navegacion-principal />
+</ion-header>
+
+<ion-content class="ion-padding" role="region" aria-label="Detalle del videojuego">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="10" offset-md="1" size-lg="8" offset-lg="2">
+  @if (cargando()) {
+    <div class="ion-text-center ion-padding" role="status" aria-live="polite">
+      <ion-spinner name="crescent" aria-label="Cargando detalles"></ion-spinner>
+      <p>Cargando videojuego…</p>
+    </div>
+  } @else if (errorMensaje(); as mensaje) {
+    <div class="ion-text-center" role="status" aria-live="polite">
+      <ion-text color="danger"><p>{{ mensaje }}</p></ion-text>
+      <ion-button (click)="cargarVideojuego()">Reintentar</ion-button>
+    </div>
+  } @else if (videojuego(); as juego) {
+    <ion-card>
+      <img
+        [ngSrc]="juego.portada_url || 'assets/shapes.svg'"
+        [alt]="'Portada de ' + juego.titulo"
+        width="640"
+        height="360"
+        loading="lazy"
+      />
+      <ion-card-header>
+        <ion-card-title>{{ juego.titulo }}</ion-card-title>
+        <ion-card-subtitle>{{ juego.plataforma }} — {{ juego.genero }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        @if (juego.id !== undefined) {
+          <p><strong>ID:</strong> {{ juego.id }}</p>
+        }
+        @if (juego.created_at) {
+          <p><strong>Fecha de creación:</strong> {{ juego.created_at }}</p>
+        }
+        <p><strong>Código SKU:</strong> {{ juego.codigo_sku }}</p>
+        <p><strong>Precio:</strong> {{ juego.precio }} €</p>
+        <p><strong>Stock:</strong> {{ juego.stock }} unidades</p>
+        <p><strong>Disponible:</strong> {{ juego.disponible ? 'Sí' : 'No' }}</p>
+        @if (juego.valoracion !== null && juego.valoracion !== undefined) {
+          <p><strong>Valoración:</strong> {{ juego.valoracion }}/10</p>
+        }
+        @if (juego.fecha_lanzamiento) {
+          <p><strong>Fecha de lanzamiento:</strong> {{ juego.fecha_lanzamiento }}</p>
+        }
+        @if (juego.descripcion) {
+          <p><strong>Descripción:</strong></p>
+          <p>{{ juego.descripcion }}</p>
+        }
+        @if (juego.etiquetas?.length) {
+          <p><strong>Etiquetas:</strong> {{ juego.etiquetas.join(', ') }}</p>
+        }
+        @if (requisitos().length > 0) {
+          <p><strong>Requisitos:</strong></p>
+          <ul>
+            @for (requisito of requisitos(); track requisito[0]) {
+              <li>{{ requisito[0] }}: {{ requisito[1] }}</li>
+            }
+          </ul>
+        }
+        @if (puedeGestionar()) {
+          <ion-button
+            [routerLink]="['/videojuegos/editar', juego.id]"
+            expand="block"
+            class="ion-margin-top"
+          >
+            Editar videojuego
+          </ion-button>
+        }
+        <ion-button routerLink="/videojuegos" expand="block" fill="outline">
+          Volver al listado
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

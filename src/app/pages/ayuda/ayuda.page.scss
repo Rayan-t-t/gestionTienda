@@ -1,0 +1,59 @@
+ion-grid {
+  margin: clamp(1rem, 4vh, 2.5rem) auto;
+  max-width: 84rem;
+}
+
+.cabecera-ayuda {
+  padding: 0 0.75rem 1rem;
+}
+
+.cabecera-ayuda h1 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 780;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.cabecera-ayuda > p:last-child {
+  color: var(--ion-color-medium);
+  font-size: 1.05rem;
+  margin-top: 0.6rem;
+}
+
+.eyebrow {
+  color: var(--ion-color-primary);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.45rem;
+}
+
+.tarjeta-ayuda {
+  border: 1px solid var(--ion-color-light-shade);
+  border-radius: 1rem;
+  box-shadow: 0 0.4rem 1.4rem rgb(15 23 42 / 6%);
+  height: calc(100% - 1rem);
+  margin: 0.5rem;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.tarjeta-ayuda ion-card-header {
+  padding-bottom: 0.5rem;
+}
+
+.tarjeta-ayuda ion-card-title {
+  font-size: 1.05rem;
+  font-weight: 720;
+}
+
+.tarjeta-ayuda ion-card-content {
+  color: var(--ion-color-medium-shade);
+  line-height: 1.65;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .tarjeta-ayuda:hover {
+    box-shadow: 0 0.8rem 1.8rem rgb(15 23 42 / 10%);
+    transform: translateY(-2px);
+  }
+}

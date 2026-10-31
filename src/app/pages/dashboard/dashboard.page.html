@@ -1,0 +1,129 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Dashboard</ion-title>
+    <app-control-sesion slot="end" />
+  </ion-toolbar>
+  <app-navegacion-principal />
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" role="region" aria-label="Informes del catálogo">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Dashboard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @if (cargando()) {
+    <div class="ion-text-center ion-padding" role="status" aria-live="polite">
+      <ion-spinner name="crescent" aria-label="Cargando informes"></ion-spinner>
+      <p>Cargando videojuegos y actividades…</p>
+    </div>
+  }
+
+  @if (errorVideojuegos(); as mensajeVideojuegos) {
+    <ion-card role="alert">
+      <ion-card-content>
+        <ion-text color="danger" role="alert">
+          <p>Error al cargar los videojuegos: {{ mensajeVideojuegos }}</p>
+        </ion-text>
+        <ion-button (click)="cargarDatos()">Reintentar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (errorActividades(); as mensajeActividades) {
+    <ion-card role="alert">
+      <ion-card-content>
+        <ion-text color="danger" role="alert">
+          <p>Error al cargar las actividades: {{ mensajeActividades }}</p>
+        </ion-text>
+        <ion-button (click)="cargarDatos()">Reintentar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (!cargando() && !errorVideojuegos()) {
+    <section aria-label="Filtros de informes">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <label>
+            Plataforma
+            <select [value]="filtroPlataforma()" (change)="cambiarPlataforma($event)">
+              <option value="">Todas las plataformas</option>
+              @for (plataforma of plataformas; track plataforma) {
+                <option [value]="plataforma">{{ plataforma }}</option>
+              }
+            </select>
+          </label>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <label>
+            Género
+            <select [value]="filtroGenero()" (change)="cambiarGenero($event)">
+              <option value="">Todos los géneros</option>
+              @for (genero of generos; track genero) {
+                <option [value]="genero">{{ genero }}</option>
+              }
+            </select>
+          </label>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Total de juegos" [valor]="totalJuegos()" icono="game-controller" />
+        </ion-col>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Stock total" [valor]="stockTotal()" icono="cube" />
+        </ion-col>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Valor del inventario" [valor]="valorInventario()" icono="cash" />
+        </ion-col>
+        <ion-col size="12" size-md="6" size-lg="3">
+          <app-stat-card titulo="Valoración media" [valor]="valoracionMedia()" icono="star" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </section>
+
+    @defer (on idle) {
+      <app-informe-graficos
+        [videojuegos]="videojuegosFiltrados()"
+        [actividades]="actividades()"
+      />
+    } @placeholder {
+      <ion-card><ion-card-content>Preparando los gráficos…</ion-card-content></ion-card>
+    }
+  }
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Historial de actividades</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      @if (cargando()) {
+        <div class="ion-text-center">
+          <ion-spinner name="crescent" aria-label="Cargando actividades"></ion-spinner>
+        </div>
+      } @else if (errorActividades()) {
+        <p>El historial no está disponible hasta que se resuelva el error de Firestore.</p>
+      } @else {
+        <ion-list>
+          @for (actividad of actividadesRecientes(); track actividad.id) {
+            <ion-item>
+              <ion-label>
+                <h2>{{ actividad.tipo | uppercase }}</h2>
+                <p>{{ actividad.detalle }}</p>
+                @if (actividad.usuario) {
+                  <p><small>Usuario: {{ actividad.usuario }}</small></p>
+                }
+              </ion-label>
+            </ion-item>
+          } @empty {
+            <ion-item><ion-label>No hay actividades registradas.</ion-label></ion-item>
+          }
+        </ion-list>
+      }
+    </ion-card-content>
+  </ion-card>
+</ion-content>

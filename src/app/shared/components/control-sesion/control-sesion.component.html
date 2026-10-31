@@ -1,0 +1,19 @@
+@if (estaAutenticado()) {
+  <ion-buttons class="control-sesion">
+    <span class="saludo">Hola, {{ nombreUsuario() }}</span>
+    <ion-button
+      class="boton-carrito"
+      fill="clear"
+      color="light"
+      (click)="abrirCarrito()"
+      [attr.aria-label]="'Carrito, ' + cantidadCarrito() + ' productos'"
+    >
+      <ion-icon slot="start" name="cart-outline" aria-hidden="true"></ion-icon>
+      <span class="texto-carrito">Carrito</span>
+      <ion-badge color="warning">{{ cantidadCarrito() }}</ion-badge>
+    </ion-button>
+    <ion-button fill="clear" color="light" (click)="cerrarSesion()" aria-label="Cerrar sesión">
+      Cerrar sesión
+    </ion-button>
+  </ion-buttons>
+}

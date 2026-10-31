@@ -1,0 +1,1755 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>gestionTienda documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">gestionTienda documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DataTableComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/data-table/data-table.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Tabla genérica con búsqueda, ordenación y paginación en cliente.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-data-table</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./data-table.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./data-table.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#busqueda" >busqueda</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#columnaOrden" >columnaOrden</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#datosFiltrados" >datosFiltrados</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#datosOrdenados" >datosOrdenados</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#datosPagina" >datosPagina</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ordenAscendente" >ordenAscendente</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#pagina" >pagina</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#paginasTotales" >paginasTotales</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cambiarBusqueda" >cambiarBusqueda</a>
+                            </li>
+                            <li>
+                                <a href="#cambiarPagina" >cambiarPagina</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#comparar" >comparar</a>
+                            </li>
+                            <li>
+                                <a href="#estadoOrden" >estadoOrden</a>
+                            </li>
+                            <li>
+                                <a href="#identificador" >identificador</a>
+                            </li>
+                            <li>
+                                <a href="#ordenar" >ordenar</a>
+                            </li>
+                            <li>
+                                <a href="#valorCelda" >valorCelda</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cargando" >cargando</a>
+                            </li>
+                            <li>
+                                <a href="#columnas" >columnas</a>
+                            </li>
+                            <li>
+                                <a href="#datos" >datos</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarAcciones" >mostrarAcciones</a>
+                            </li>
+                            <li>
+                                <a href="#tamanoPagina" >tamanoPagina</a>
+                            </li>
+                            <li>
+                                <a href="#textoVacio" >textoVacio</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#busquedaCambiada" >busquedaCambiada</a>
+                            </li>
+                            <li>
+                                <a href="#editar" >editar</a>
+                            </li>
+                            <li>
+                                <a href="#eliminar" >eliminar</a>
+                            </li>
+                            <li>
+                                <a href="#filaSeleccionada" >filaSeleccionada</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cargando"></a>
+                        <b>cargando</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:26</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="columnas"></a>
+                        <b>columnas</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ColumnaTabla.html" target="_self" >readonly ColumnaTabla[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:23</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="datos"></a>
+                        <b>datos</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>readonly T[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:24</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mostrarAcciones"></a>
+                        <b>mostrarAcciones</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:27</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tamanoPagina"></a>
+                        <b>tamanoPagina</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>10</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="textoVacio"></a>
+                        <b>textoVacio</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;No hay datos para mostrar.&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:25</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="busquedaCambiada"></a>
+                        <b>busquedaCambiada</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:33</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="editar"></a>
+                        <b>editar</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>T</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:31</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="eliminar"></a>
+                        <b>eliminar</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>T</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filaSeleccionada"></a>
+                        <b>filaSeleccionada</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>T</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:30</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarBusqueda"></a>
+                    <span class="name">
+                        <span ><b>cambiarBusqueda</b></span>
+                        <a href="#cambiarBusqueda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cambiarBusqueda(evento: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Emite el texto de búsqueda y reinicia la paginación.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>evento</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarPagina"></a>
+                    <span class="name">
+                        <span ><b>cambiarPagina</b></span>
+                        <a href="#cambiarPagina"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cambiarPagina(delta: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Avanza o retrocede una página de resultados.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>delta</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="comparar"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>comparar</b></span>
+                        <a href="#comparar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>comparar(a: unknown, b: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>a</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>b</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="estadoOrden"></a>
+                    <span class="name">
+                        <span ><b>estadoOrden</b></span>
+                        <a href="#estadoOrden"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>estadoOrden(columna: <a href="../interfaces/ColumnaTabla.html" target="_self">ColumnaTabla</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Indica el estado accesible de ordenación de una columna.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>columna</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ColumnaTabla.html" target="_self" >ColumnaTabla</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>&quot;ascending&quot; | &quot;descending&quot; | &quot;none&quot;</code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="identificador"></a>
+                    <span class="name">
+                        <span ><b>identificador</b></span>
+                        <a href="#identificador"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>identificador(fila: T)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:131</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene el identificador estable de una fila para el control flow.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fila</td>
+                                            <td>
+                                                        <code>T</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ordenar"></a>
+                    <span class="name">
+                        <span ><b>ordenar</b></span>
+                        <a href="#ordenar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ordenar(columna: <a href="../interfaces/ColumnaTabla.html" target="_self">ColumnaTabla</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Ordena por la columna seleccionada alternando la dirección.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>columna</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ColumnaTabla.html" target="_self" >ColumnaTabla</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="valorCelda"></a>
+                    <span class="name">
+                        <span ><b>valorCelda</b></span>
+                        <a href="#valorCelda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>valorCelda(fila: T, clave: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Devuelve el valor de una celda como texto seguro.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fila</td>
+                                            <td>
+                                                        <code>T</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>clave</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="busqueda"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>busqueda</b></span>
+                        <a href="#busqueda"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="columnaOrden"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>columnaOrden</b></span>
+                        <a href="#columnaOrden"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datosFiltrados"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>datosFiltrados</b></span>
+                        <a href="#datosFiltrados"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const termino &#x3D; this.busqueda().trim().toLocaleLowerCase();
+    const filas &#x3D; this.datos();
+    if (!termino) {
+      return filas;
+    }
+
+    return filas.filter((fila) &#x3D;&gt;
+      this.columnas().some((columna) &#x3D;&gt;
+        this.valorCelda(fila, columna.clave).toLocaleLowerCase().includes(termino)
+      )
+    );
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datosOrdenados"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>datosOrdenados</b></span>
+                        <a href="#datosOrdenados"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const columna &#x3D; this.columnaOrden();
+    if (!columna) {
+      return this.datosFiltrados();
+    }
+
+    const direccion &#x3D; this.ordenAscendente() ? 1 : -1;
+    return [...this.datosFiltrados()].sort(
+      (a, b) &#x3D;&gt; this.comparar(Reflect.get(a, columna), Reflect.get(b, columna)) * direccion
+    );
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datosPagina"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>datosPagina</b></span>
+                        <a href="#datosPagina"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const tamano &#x3D; Math.max(1, Math.floor(this.tamanoPagina()));
+    const inicio &#x3D; this.pagina() * tamano;
+    return this.datosOrdenados().slice(inicio, inicio + tamano);
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ordenAscendente"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ordenAscendente</b></span>
+                        <a href="#ordenAscendente"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pagina"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>pagina</b></span>
+                        <a href="#pagina"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginasTotales"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>paginasTotales</b></span>
+                        <a href="#paginasTotales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    Math.max(1, Math.ceil(this.datosOrdenados().length / Math.max(1, this.tamanoPagina())))
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/shared/components/data-table/data-table.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, computed, input, output, signal } from &#x27;@angular/core&#x27;;
+
+/**
+ * Define una columna visible de la tabla de datos.
+ */
+export interface ColumnaTabla {
+  clave: string;
+  etiqueta: string;
+  ordenable?: boolean;
+}
+
+/**
+ * Tabla genérica con búsqueda, ordenación y paginación en cliente.
+ */
+@Component({
+  selector: &#x27;app-data-table&#x27;,
+  standalone: true,
+  templateUrl: &#x27;./data-table.component.html&#x27;,
+  styleUrl: &#x27;./data-table.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DataTableComponent&lt;T extends object&gt; {
+  readonly columnas &#x3D; input.required&lt;readonly ColumnaTabla[]&gt;();
+  readonly datos &#x3D; input.required&lt;readonly T[]&gt;();
+  readonly textoVacio &#x3D; input(&#x27;No hay datos para mostrar.&#x27;);
+  readonly cargando &#x3D; input(false);
+  readonly mostrarAcciones &#x3D; input(false);
+  readonly tamanoPagina &#x3D; input(10);
+
+  readonly filaSeleccionada &#x3D; output&lt;T&gt;();
+  readonly editar &#x3D; output&lt;T&gt;();
+  readonly eliminar &#x3D; output&lt;T&gt;();
+  readonly busquedaCambiada &#x3D; output&lt;string&gt;();
+
+  readonly busqueda &#x3D; signal(&#x27;&#x27;);
+  readonly pagina &#x3D; signal(0);
+  readonly columnaOrden &#x3D; signal&lt;string | null&gt;(null);
+  readonly ordenAscendente &#x3D; signal(true);
+
+  readonly datosFiltrados &#x3D; computed(() &#x3D;&gt; {
+    const termino &#x3D; this.busqueda().trim().toLocaleLowerCase();
+    const filas &#x3D; this.datos();
+    if (!termino) {
+      return filas;
+    }
+
+    return filas.filter((fila) &#x3D;&gt;
+      this.columnas().some((columna) &#x3D;&gt;
+        this.valorCelda(fila, columna.clave).toLocaleLowerCase().includes(termino)
+      )
+    );
+  });
+
+  readonly datosOrdenados &#x3D; computed(() &#x3D;&gt; {
+    const columna &#x3D; this.columnaOrden();
+    if (!columna) {
+      return this.datosFiltrados();
+    }
+
+    const direccion &#x3D; this.ordenAscendente() ? 1 : -1;
+    return [...this.datosFiltrados()].sort(
+      (a, b) &#x3D;&gt; this.comparar(Reflect.get(a, columna), Reflect.get(b, columna)) * direccion
+    );
+  });
+
+  readonly paginasTotales &#x3D; computed(() &#x3D;&gt;
+    Math.max(1, Math.ceil(this.datosOrdenados().length / Math.max(1, this.tamanoPagina())))
+  );
+
+  readonly datosPagina &#x3D; computed(() &#x3D;&gt; {
+    const tamano &#x3D; Math.max(1, Math.floor(this.tamanoPagina()));
+    const inicio &#x3D; this.pagina() * tamano;
+    return this.datosOrdenados().slice(inicio, inicio + tamano);
+  });
+
+  /**
+   * Emite el texto de búsqueda y reinicia la paginación.
+   */
+  cambiarBusqueda(evento: Event): void {
+    const elemento &#x3D; evento.target;
+    if (!(elemento instanceof HTMLInputElement)) {
+      return;
+    }
+    this.busqueda.set(elemento.value);
+    this.pagina.set(0);
+    this.busquedaCambiada.emit(elemento.value);
+  }
+
+  /**
+   * Ordena por la columna seleccionada alternando la dirección.
+   */
+  ordenar(columna: ColumnaTabla): void {
+    if (!columna.ordenable) {
+      return;
+    }
+    if (this.columnaOrden() &#x3D;&#x3D;&#x3D; columna.clave) {
+      this.ordenAscendente.update((ascendente) &#x3D;&gt; !ascendente);
+    } else {
+      this.columnaOrden.set(columna.clave);
+      this.ordenAscendente.set(true);
+    }
+    this.pagina.set(0);
+  }
+
+  /**
+   * Avanza o retrocede una página de resultados.
+   */
+  cambiarPagina(delta: number): void {
+    this.pagina.update((pagina) &#x3D;&gt;
+      Math.min(this.paginasTotales() - 1, Math.max(0, pagina + delta))
+    );
+  }
+
+  /**
+   * Devuelve el valor de una celda como texto seguro.
+   */
+  valorCelda(fila: T, clave: string): string {
+    const valor: unknown &#x3D; Reflect.get(fila, clave);
+    if (typeof valor &#x3D;&#x3D;&#x3D; &#x27;boolean&#x27;) {
+      return valor ? &#x27;Sí&#x27; : &#x27;No&#x27;;
+    }
+    if (valor &#x3D;&#x3D;&#x3D; null || valor &#x3D;&#x3D;&#x3D; undefined || valor &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return &#x27;—&#x27;;
+    }
+    return String(valor);
+  }
+
+  /**
+   * Obtiene el identificador estable de una fila para el control flow.
+   */
+  identificador(fila: T): unknown {
+    return Reflect.get(fila, &#x27;id&#x27;);
+  }
+
+  /**
+   * Indica el estado accesible de ordenación de una columna.
+   */
+  estadoOrden(columna: ColumnaTabla): &#x27;ascending&#x27; | &#x27;descending&#x27; | &#x27;none&#x27; {
+    if (this.columnaOrden() !&#x3D;&#x3D; columna.clave) {
+      return &#x27;none&#x27;;
+    }
+    return this.ordenAscendente() ? &#x27;ascending&#x27; : &#x27;descending&#x27;;
+  }
+
+  private comparar(a: unknown, b: unknown): number {
+    if (typeof a &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; typeof b &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+      return a - b;
+    }
+    return String(a ?? &#x27;&#x27;).localeCompare(String(b ?? &#x27;&#x27;), undefined, {
+      numeric: true,
+      sensitivity: &#x27;base&#x27;
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;tabla-contenedor&quot;&gt;
+  &lt;label class&#x3D;&quot;buscador&quot;&gt;
+    &lt;span&gt;Buscar&lt;/span&gt;
+    &lt;input
+      type&#x3D;&quot;search&quot;
+      [value]&#x3D;&quot;busqueda()&quot;
+      (input)&#x3D;&quot;cambiarBusqueda($event)&quot;
+      aria-label&#x3D;&quot;Buscar en la tabla&quot;
+    /&gt;
+  &lt;/label&gt;
+
+  @if (cargando()) {
+    &lt;p class&#x3D;&quot;estado&quot; role&#x3D;&quot;status&quot;&gt;Cargando datos…&lt;/p&gt;
+  } @else {
+    &lt;table&gt;
+      &lt;caption&gt;Datos del catálogo&lt;/caption&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          @for (columna of columnas(); track columna.clave) {
+            &lt;th scope&#x3D;&quot;col&quot; [attr.aria-sort]&#x3D;&quot;estadoOrden(columna)&quot;&gt;
+              @if (columna.ordenable) {
+                &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;ordenar&quot; (click)&#x3D;&quot;ordenar(columna)&quot;&gt;
+                  {{ columna.etiqueta }}
+                  @if (columnaOrden() &#x3D;&#x3D;&#x3D; columna.clave) {
+                    &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;{{ ordenAscendente() ? &#x27;▲&#x27; : &#x27;▼&#x27; }}&lt;/span&gt;
+                  }
+                &lt;/button&gt;
+              } @else {
+                {{ columna.etiqueta }}
+              }
+            &lt;/th&gt;
+          }
+          @if (mostrarAcciones()) {
+            &lt;th scope&#x3D;&quot;col&quot;&gt;Acciones&lt;/th&gt;
+          }
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        @for (fila of datosPagina(); track identificador(fila)) {
+          &lt;tr
+            tabindex&#x3D;&quot;0&quot;
+            (click)&#x3D;&quot;filaSeleccionada.emit(fila)&quot;
+            (keydown.enter)&#x3D;&quot;filaSeleccionada.emit(fila)&quot;
+          &gt;
+            @for (columna of columnas(); track columna.clave) {
+              &lt;td&gt;{{ valorCelda(fila, columna.clave) }}&lt;/td&gt;
+            }
+            @if (mostrarAcciones()) {
+              &lt;td class&#x3D;&quot;acciones&quot;&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;$event.stopPropagation(); editar.emit(fila)&quot;
+                  (keydown.enter)&#x3D;&quot;$event.stopPropagation()&quot;
+                  [attr.aria-label]&#x3D;&quot;&#x27;Editar &#x27; + valorCelda(fila, columnas()[0]?.clave ?? &#x27;&#x27;)&quot;
+                &gt;
+                  Editar
+                &lt;/button&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  class&#x3D;&quot;peligro&quot;
+                  (click)&#x3D;&quot;$event.stopPropagation(); eliminar.emit(fila)&quot;
+                  (keydown.enter)&#x3D;&quot;$event.stopPropagation()&quot;
+                  [attr.aria-label]&#x3D;&quot;&#x27;Eliminar &#x27; + valorCelda(fila, columnas()[0]?.clave ?? &#x27;&#x27;)&quot;
+                &gt;
+                  Eliminar
+                &lt;/button&gt;
+              &lt;/td&gt;
+            }
+          &lt;/tr&gt;
+        } @empty {
+          &lt;tr&gt;
+            &lt;td [attr.colspan]&#x3D;&quot;columnas().length + (mostrarAcciones() ? 1 : 0)&quot;&gt;
+              {{ textoVacio() }}
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        }
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;nav class&#x3D;&quot;paginacion&quot; aria-label&#x3D;&quot;Paginación de la tabla&quot;&gt;
+      &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;cambiarPagina(-1)&quot; [disabled]&#x3D;&quot;pagina() &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+        Anterior
+      &lt;/button&gt;
+      &lt;span&gt;Página {{ pagina() + 1 }} de {{ paginasTotales() }}&lt;/span&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;cambiarPagina(1)&quot;
+        [disabled]&#x3D;&quot;pagina() + 1 &gt;&#x3D; paginasTotales()&quot;
+      &gt;
+        Siguiente
+      &lt;/button&gt;
+    &lt;/nav&gt;
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="tabla-contenedor">  <label class="buscador">    <span>Buscar</span>    <input      type="search"      [value]="busqueda()"      (input)="cambiarBusqueda($event)"      aria-label="Buscar en la tabla"    />  </label>  @if (cargando()) {    <p class="estado" role="status">Cargando datos…</p>  } @else {    <table>      <caption>Datos del catálogo</caption>      <thead>        <tr>          @for (columna of columnas(); track columna.clave) {            <th scope="col" [attr.aria-sort]="estadoOrden(columna)">              @if (columna.ordenable) {                <button type="button" class="ordenar" (click)="ordenar(columna)">                  {{ columna.etiqueta }}                  @if (columnaOrden() === columna.clave) {                    <span aria-hidden="true">{{ ordenAscendente() ? \'▲\' : \'▼\' }}</span>                  }                </button>              } @else {                {{ columna.etiqueta }}              }            </th>          }          @if (mostrarAcciones()) {            <th scope="col">Acciones</th>          }        </tr>      </thead>      <tbody>        @for (fila of datosPagina(); track identificador(fila)) {          <tr            tabindex="0"            (click)="filaSeleccionada.emit(fila)"            (keydown.enter)="filaSeleccionada.emit(fila)"          >            @for (columna of columnas(); track columna.clave) {              <td>{{ valorCelda(fila, columna.clave) }}</td>            }            @if (mostrarAcciones()) {              <td class="acciones">                <button                  type="button"                  (click)="$event.stopPropagation(); editar.emit(fila)"                  (keydown.enter)="$event.stopPropagation()"                  [attr.aria-label]="\'Editar \' + valorCelda(fila, columnas()[0]?.clave ?? \'\')"                >                  Editar                </button>                <button                  type="button"                  class="peligro"                  (click)="$event.stopPropagation(); eliminar.emit(fila)"                  (keydown.enter)="$event.stopPropagation()"                  [attr.aria-label]="\'Eliminar \' + valorCelda(fila, columnas()[0]?.clave ?? \'\')"                >                  Eliminar                </button>              </td>            }          </tr>        } @empty {          <tr>            <td [attr.colspan]="columnas().length + (mostrarAcciones() ? 1 : 0)">              {{ textoVacio() }}            </td>          </tr>        }      </tbody>    </table>    <nav class="paginacion" aria-label="Paginación de la tabla">      <button type="button" (click)="cambiarPagina(-1)" [disabled]="pagina() === 0">        Anterior      </button>      <span>Página {{ pagina() + 1 }} de {{ paginasTotales() }}</span>      <button        type="button"        (click)="cambiarPagina(1)"        [disabled]="pagina() + 1 >= paginasTotales()"      >        Siguiente      </button>    </nav>  }</div></div>'
+    var COMPONENTS = [{'name': 'AcercaPage', 'selector': 'app-acerca'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AyudaPage', 'selector': 'app-ayuda'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'EstadoVacioComponent', 'selector': 'app-estado-vacio'},{'name': 'HomePage', 'selector': 'app-home'},{'name': 'InformeGraficosComponent', 'selector': 'app-informe-graficos'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'StatCardComponent', 'selector': 'app-stat-card'},{'name': 'VideojuegoDetallePage', 'selector': 'app-videojuego-detalle'},{'name': 'VideojuegoFormPage', 'selector': 'app-videojuego-form'},{'name': 'VideojuegosPage', 'selector': 'app-videojuegos'}];
+    var DIRECTIVES = [{'name': 'ResaltarDirective', 'selector': '[appResaltar]'}];
+    var ACTUAL_COMPONENT = {'name': 'DataTableComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DataTableComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
