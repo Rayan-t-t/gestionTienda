@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AlertController } from '@ionic/angular/alert-controller';
 import { IonButton } from '@ionic/angular/ion-button';
 import { IonContent } from '@ionic/angular/ion-content';
@@ -49,6 +49,7 @@ import { VideojuegoCardComponent } from '../../shared/components/videojuego-card
     IonSpinner,
     IonTitle,
     IonToolbar,
+    RouterLink,
     EstadoVacioComponent,
     ControlSesionComponent,
     NavegacionPrincipalComponent,

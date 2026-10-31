@@ -28,8 +28,7 @@ import { IonTitle } from '@ionic/angular/ion-title';
 import { IonToolbar } from '@ionic/angular/ion-toolbar';
 import { addIcons } from 'ionicons';
 import { cash, cube, gameController, star } from 'ionicons/icons';
-import { forkJoin, from, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { from } from 'rxjs';
 import {
   VideojuegoInforme,
   Videojuego
@@ -89,7 +88,8 @@ export class DashboardPage implements OnInit {
   readonly videojuegos = signal<VideojuegoInforme[]>([]);
   readonly actividades = signal<Actividad[]>([]);
   readonly actividadesRecientes = computed(() => this.actividades().slice(0, 200));
-  readonly cargando = signal(false);
+  readonly cargandoVideojuegos = signal(false);
+  readonly cargandoActividades = signal(false);
   readonly errorVideojuegos = signal<string | null>(null);
   readonly errorActividades = signal<string | null>(null);
   readonly filtroPlataforma = signal<Plataforma | ''>('');
@@ -136,41 +136,57 @@ export class DashboardPage implements OnInit {
   }
 
   /**
-   * Carga en paralelo las fuentes del dashboard y conserva el error de cada una.
+   * Lanza en paralelo las dos fuentes. Cada una pinta su parte en cuanto llega,
+   * sin esperar a la otra.
    */
   cargarDatos(): void {
-    this.cargando.set(true);
-    this.errorVideojuegos.set(null);
-    this.errorActividades.set(null);
+    this.cargarVideojuegos();
+    this.cargarActividades();
+  }
 
-    forkJoin({
-      videojuegos: this.videojuegosService.obtenerParaInforme().pipe(
-        catchError((error: unknown) => {
-          this.errorVideojuegos.set(
-            error instanceof Error ? error.message : 'No se pudieron cargar los videojuegos.'
-          );
-          return of<VideojuegoInforme[]>([]);
-        })
-      ),
-      actividades: from(this.firestoreService.obtenerActividades(500)).pipe(
-        catchError((error: unknown) => {
-          this.errorActividades.set(
-            error instanceof Error ? error.message : 'No se pudieron cargar las actividades.'
-          );
-          return of<Actividad[]>([]);
-        })
-      )
-    })
+  /**
+   * Carga los videojuegos (Supabase) para las tarjetas y los gráficos del catálogo.
+   */
+  cargarVideojuegos(): void {
+    this.cargandoVideojuegos.set(true);
+    this.errorVideojuegos.set(null);
+
+    this.videojuegosService
+      .obtenerParaInforme()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (datos) => {
-          this.videojuegos.set(datos.videojuegos);
-          this.actividades.set(datos.actividades);
-          this.cargando.set(false);
+          this.videojuegos.set(datos);
+          this.cargandoVideojuegos.set(false);
         },
         error: (error: unknown) => {
-          console.error('No se pudo completar la carga del dashboard.', error);
-          this.cargando.set(false);
+          this.errorVideojuegos.set(
+            error instanceof Error ? error.message : 'No se pudieron cargar los videojuegos.'
+          );
+          this.cargandoVideojuegos.set(false);
+        }
+      });
+  }
+
+  /**
+   * Carga el historial de actividades (Firestore) de forma independiente.
+   */
+  cargarActividades(): void {
+    this.cargandoActividades.set(true);
+    this.errorActividades.set(null);
+
+    from(this.firestoreService.obtenerActividades(500))
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (datos) => {
+          this.actividades.set(datos);
+          this.cargandoActividades.set(false);
+        },
+        error: (error: unknown) => {
+          this.errorActividades.set(
+            error instanceof Error ? error.message : 'No se pudieron cargar las actividades.'
+          );
+          this.cargandoActividades.set(false);
         }
       });
   }

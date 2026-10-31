@@ -13,20 +13,13 @@
     </ion-toolbar>
   </ion-header>
 
-  @if (cargando()) {
-    <div class="ion-text-center ion-padding" role="status" aria-live="polite">
-      <ion-spinner name="crescent" aria-label="Cargando informes"></ion-spinner>
-      <p>Cargando videojuegos y actividades…</p>
-    </div>
-  }
-
   @if (errorVideojuegos(); as mensajeVideojuegos) {
     <ion-card role="alert">
       <ion-card-content>
         <ion-text color="danger" role="alert">
           <p>Error al cargar los videojuegos: {{ mensajeVideojuegos }}</p>
         </ion-text>
-        <ion-button (click)="cargarDatos()">Reintentar</ion-button>
+        <ion-button (click)="cargarVideojuegos()">Reintentar</ion-button>
       </ion-card-content>
     </ion-card>
   }
@@ -37,19 +30,19 @@
         <ion-text color="danger" role="alert">
           <p>Error al cargar las actividades: {{ mensajeActividades }}</p>
         </ion-text>
-        <ion-button (click)="cargarDatos()">Reintentar</ion-button>
+        <ion-button (click)="cargarActividades()">Reintentar</ion-button>
       </ion-card-content>
     </ion-card>
   }
 
-  @if (!cargando() && !errorVideojuegos()) {
+  @if (!errorVideojuegos()) {
     <section aria-label="Filtros de informes">
     <ion-grid>
       <ion-row>
         <ion-col size="12" size-md="6">
           <label>
             Plataforma
-            <select [value]="filtroPlataforma()" (change)="cambiarPlataforma($event)">
+            <select [value]="filtroPlataforma()" [disabled]="cargandoVideojuegos()" (change)="cambiarPlataforma($event)">
               <option value="">Todas las plataformas</option>
               @for (plataforma of plataformas; track plataforma) {
                 <option [value]="plataforma">{{ plataforma }}</option>
@@ -60,7 +53,7 @@
         <ion-col size="12" size-md="6">
           <label>
             Género
-            <select [value]="filtroGenero()" (change)="cambiarGenero($event)">
+            <select [value]="filtroGenero()" [disabled]="cargandoVideojuegos()" (change)="cambiarGenero($event)">
               <option value="">Todos los géneros</option>
               @for (genero of generos; track genero) {
                 <option [value]="genero">{{ genero }}</option>
@@ -71,16 +64,16 @@
       </ion-row>
       <ion-row>
         <ion-col size="12" size-md="6" size-lg="3">
-          <app-stat-card titulo="Total de juegos" [valor]="totalJuegos()" icono="game-controller" />
+          <app-stat-card titulo="Total de juegos" [valor]="cargandoVideojuegos() ? '…' : totalJuegos()" icono="game-controller" />
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="3">
-          <app-stat-card titulo="Stock total" [valor]="stockTotal()" icono="cube" />
+          <app-stat-card titulo="Stock total" [valor]="cargandoVideojuegos() ? '…' : stockTotal()" icono="cube" />
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="3">
-          <app-stat-card titulo="Valor del inventario" [valor]="valorInventario()" icono="cash" />
+          <app-stat-card titulo="Valor del inventario" [valor]="cargandoVideojuegos() ? '…' : valorInventario()" icono="cash" />
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="3">
-          <app-stat-card titulo="Valoración media" [valor]="valoracionMedia()" icono="star" />
+          <app-stat-card titulo="Valoración media" [valor]="cargandoVideojuegos() ? '…' : valoracionMedia()" icono="star" />
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -90,6 +83,7 @@
       <app-informe-graficos
         [videojuegos]="videojuegosFiltrados()"
         [actividades]="actividades()"
+        [cargandoActividades]="cargandoActividades()"
       />
     } @placeholder {
       <ion-card><ion-card-content>Preparando los gráficos…</ion-card-content></ion-card>
@@ -101,7 +95,7 @@
       <ion-card-title>Historial de actividades</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      @if (cargando()) {
+      @if (cargandoActividades()) {
         <div class="ion-text-center">
           <ion-spinner name="crescent" aria-label="Cargando actividades"></ion-spinner>
         </div>

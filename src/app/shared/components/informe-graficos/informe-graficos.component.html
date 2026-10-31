@@ -47,7 +47,7 @@
 
   <article>
     <h3>Actividad por tipo</h3>
-    @if (resumenActividad().length === 0) {
+    @if (!cargandoActividades() && resumenActividad().length === 0) {
       <p class="sin-actividad">No hay actividades registradas para mostrar.</p>
     }
     <div class="lienzo">
@@ -92,6 +92,8 @@
           <dd>{{ ultimaActividad() }}</dd>
         </div>
       </dl>
+    } @else if (cargandoActividades()) {
+      <p class="sin-actividad">Cargando actividades…</p>
     } @else {
       <p class="sin-actividad">Todavía no hay actividades registradas.</p>
     }

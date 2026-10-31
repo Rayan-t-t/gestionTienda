@@ -44,6 +44,7 @@ export class InformeGraficosComponent {
 
   readonly videojuegos = input.required<readonly VideojuegoInforme[]>();
   readonly actividades = input.required<readonly Actividad[]>();
+  readonly cargandoActividades = input(false);
 
   readonly resumenGenero = computed(() => this.contar(this.videojuegos().map((juego) => juego.genero)));
   readonly resumenPlataforma = computed(() =>
